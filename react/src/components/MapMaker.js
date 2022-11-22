@@ -1,11 +1,16 @@
-import { useEffect, useState } from "react";
-import image from "../images/environment-sprites.png";
+import { useEffect, useState } from 'react';
+import './mapMaker.css';
 
 function MapMaker(){
   const [x, setX] = useState(0);
   const [y, setY] = useState(0);
   const [previewX, setPreviewX] = useState(33);
   const [previewY, setPreviewY] = useState(63);
+  const [layer, setLayer] = useState(1);
+  const [nada, refresh] = useState([]);
+  const [deleteTile, setDeleteTile] = useState(false);
+  const [addCollider, setAddCollider] = useState(false);
+  const [colliderValue, setColliderValue] = useState(5);
 
   useEffect(() => {
     window.addEventListener("keydown", handleInput);
@@ -14,92 +19,82 @@ function MapMaker(){
   }, [])
 
   function handleInput(e){
-    if(e.key === "ArrowRight") return setX(prev=>prev - 16);
-    if(e.key === "ArrowLeft") return setX(prev=>prev + 16);
-    if(e.key === "ArrowUp") return setY(prev=>prev + 16);
-    if(e.key === "ArrowDown") setY(prev=>prev - 16);
+    if(e.key == "ArrowRight")           return setX(prev=>prev - 16);
+    if(e.key == "ArrowLeft")            return setX(prev=>prev + 16);
+    if(e.key == "ArrowUp")              return setY(prev=>prev + 16);
+    if(e.key == "ArrowDown")            return setY(prev=>prev - 16);
+    if(e.key == "w" && previewY >= 0)   return setPreviewY(prev=>prev - 1);
+    if(e.key == "s"&& previewY <= 209)  return setPreviewY(prev=>prev + 1);
+    if(e.key == "a" && previewX >=0)    return setPreviewX(prev=>prev - 1);
+    if(e.key == "d" && previewX <= 119) return setPreviewX(prev=>prev + 1);
+    if(e.key == "q"){
+      setDeleteTile(prev=>!prev);
+      setAddCollider(false);
+      setLayer(2);
+    }
+    if(e.key == "e"){
+      setAddCollider(prev=>!prev);
+      setDeleteTile(false);
+    }
+    if(e.code == "Numpad1") return setColliderValue(1);
+    if(e.code == "Numpad2") return setColliderValue(2);
+    if(e.code == "Numpad3") return setColliderValue(3);
+    if(e.code == "Numpad4") return setColliderValue(4);
+    if(e.code == "Numpad5") return setColliderValue(5);
+    if(e.code == "Numpad6") return setColliderValue(6);
+    if(e.code == "Numpad7") return setColliderValue(7);
+    if(e.code == "Numpad8") return setColliderValue(8);
+    if(e.code == "Numpad9") return setColliderValue(9);
+
+    if(e.key == "1")                    return setLayer(1);
+    if(e.key == "2")                    return setLayer(2);
   }
 
   const movingMap = {
-    position: "absolute",
-    display: "grid",
     left: `${x}px`,
-    top: `${y}px`,
-    gridTemplateColumns: "repeat(40, 48px)",
-    gridTemplateRows: "repeat(23, 48px)",
-    justifyItems: "center",
-    alignItems: "center",
-    overflow: "hidden",
-    transition: "all 0.3s"
-  }
-  const mapMaker = {
-    position: "absolute",
-    right: "0px",
-    bottom: "0px",
-    width: "240px",
-    height: "310px"
-  }
-  const mapMakerContainer = {
-    width: "240px",
-    height: "240px",
-    background: "rgb(0,0,0,0.5)"
+    top: `${y}px`
   }
   const mapMakerPreview = {
-    position: "absolute",
-    width: "16px",
-    height: "16px",
-    top: "80px",
-    left: "80px",
-    padding: "32px",
-    backgroundImage: `url(${image})`,
-    transform: "scale(3)",
-    backgroundPosition: `${(previewX - 2) * -16}px ${(previewY - 2) * -16}px`,
-    overflow: "visible"
-  }
-  const mapMakerBorder  = {
-    position: "absolute",
-    width: "16px",
-    height: "16px",
-    left: "31px",
-    top: "31px",
-    border: "solid black 1px"
-  }
-  const parentStyle = {
-    position: "absolute",
-    left: "0%",
-    top: "0%",
-    width: "100%",
-    height: "100%",
-    background: "black",
-    overflow: "hidden",
+    backgroundPosition: `${(previewX - 2) * -16}px ${(previewY - 2) * -16}px`
   }
   function childStyle(x, y) {
     const obj = {
-    margin: "0%",
-    width: "16px",
-    height: "16px",
-    transform: "scale(3)",
-    backgroundImage: `url(${image})`,
-    backgroundPosition: `${x * -16}px ${y * -16}px`}
+      backgroundPosition: `${x * -16}px ${y * -16}px`}
     return obj
   }
   function secondChildStyle(x, y) {
     const obj = {
-    margin: "0%",
-    width: "100%",
-    height: "100%",
-    backgroundImage: `url(${image})`,
-    backgroundPosition: `${x * -16}px ${y * -16}px`}
+      backgroundPosition: `${x * -16}px ${y * -16}px`}
     return obj
   }
+  const deleteTileStyle = {
+    display: "inline-block",
+    margin: "0px",
+    width: "45%",
+    height: "20px",
+    background: `${deleteTile ? "red" : ""}`
+  }
+  const addColliderStyle = {
+    display: "inline-block",
+    margin: "0px",
+    width: "45%",
+    height: "20px",
+    background: `${addCollider ? "green" : ""}`
+}
+
 
   function changeTile(index){
-    // mapCoords[index] = [previewX, previewY];
-    const newArray = coords;
-    newArray[index] = [previewX, previewY];
-    setCoords(newArray);
-    const refresh = 0 + x;
-    setX(refresh);
+    if(addCollider){
+      const newColliders = colliders;
+      newColliders[index] = colliderValue;
+      setColliders(newColliders)
+    }
+    else{
+      const newArray = (layer == 1) ? coords : coords2;
+      newArray[index] = deleteTile ? 0 : [previewX, previewY];
+      layer == 1 ? setCoords(newArray) : setCoords2(newArray);
+    }
+    refresh([]);
   }
 
   function changeX(e){
@@ -107,21 +102,7 @@ function MapMaker(){
   }
   function changeY(e){
     setPreviewY(e.target.valueAsNumber)
-    console.log(previewX, previewY)
   }
-  function left(){
-    setPreviewX(previewX - 1)
-  }
-  function right(){
-    setPreviewX(previewX + 1)
-  }
-  function up(){
-    setPreviewY(previewY - 1)
-  }
-  function down(){
-    setPreviewY(previewY + 1)
-  }
-
   
 
   const mapCoords =  [[32,62],[33,62],[34,62],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],
@@ -149,7 +130,7 @@ function MapMaker(){
   [33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63],[33,63]]
   const [coords, setCoords] = useState(mapCoords)
 
-  const mapCoords2ndLayer = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+  const mapCoords2 = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,[115,77],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,[99,79],[100,79],[101,79],0,[99,79],[100,79],[101,79],0,[99,79],[100,79],[101,79],0,[99,79],[100,79],[101,79],0,[99,79],[100,79],[101,79],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -173,23 +154,32 @@ function MapMaker(){
     0,0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,[99,80],[100,80],[101,80],0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
     0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
   ]
+  const [coords2, setCoords2] = useState(mapCoords2)
+
+  const mapColliders = []
+  const [colliders, setColliders] = useState(mapColliders)
 
 
-  return <div style={parentStyle}>
-    <div style={movingMap}>
-      {coords.map((item, index) => <div key={index} style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
-        {mapCoords2ndLayer[index] == 0 ? "" : <div style={secondChildStyle(mapCoords2ndLayer[index][0], mapCoords2ndLayer[index][1])}></div>}
+  return <div className="parentStyle">
+    <div className="movingMap" style={movingMap}>
+      {coords.map((item, index) => <div key={index} className="childStyle" style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
+        {coords2[index] == 0 ? "" : <div className="secondChildStyle" style={secondChildStyle(coords2[index][0], coords2[index][1])}></div>}
+        {/* {colliders[index] == 0 ? "" : <div className="collider" style={colliderStyle(colliders[index][0], colliders[index][1])}></div>} */}
       </div>)}
     </div>
-    <div style={mapMaker}>
-      <div style={mapMakerContainer}>
-        <div style={mapMakerPreview}>
-          <div style={mapMakerBorder}></div>
+    <div className="mapMaker">
+      <div className="mapMakerContainer">
+        <div className="mapMakerPreview" style={mapMakerPreview}>
+          <div className="mapMakerBorder"></div>
         </div>
       </div>
-      <input type="number" value={previewX} onChange={changeX} style={{width: "100px"}}/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button onClick={up}>{"↑"}</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-      <input type="number" value={previewY} onChange={changeY} style={{width: "100px"}}/><button onClick={left}>{"<"}</button><button onClick={down}>{"↓"}</button><button onClick={right}>{">"}</button>
-      <div style={{width: "100%", height: "100%"}}>{`${JSON.stringify(coords)}`}</div>
+      <input type="number" value={previewX} min="0" max="119" onChange={changeX} style={{width: "100px"}}/>
+      <input type="number" value={previewY} min="0" max="209" onChange={changeY} style={{width: "100px"}}/>
+      <div style={{width: "100%", height: "20px", overflow: "hidden"}}>{`const mapCoords = ${JSON.stringify(coords)};`}</div>
+      <div style={{width: "100%", height: "20px", overflow: "hidden"}}>{`const mapCoords2 = ${JSON.stringify(coords2)};`}</div>
+      <div style={{width: "100%", height: "20px", overflow: "hidden"}}>{`const mapColliders = ${JSON.stringify(colliders)};`}</div>
+      <div style={deleteTileStyle}>{`Layer ${layer}`}</div>
+      <div style={addColliderStyle}>{`Collider ${colliderValue}`}</div>
     </div>
   </div>
 }

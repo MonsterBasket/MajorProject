@@ -7,8 +7,8 @@ import World from "./World"
 function App() {
   return (
     <div className="App">
-      {/* <MapMaker /> */}
-      <World />
+      <MapMaker />
+      {/* <World /> */}
       <Hud />
     </div>
   );

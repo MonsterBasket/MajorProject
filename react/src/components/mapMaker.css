@@ -1,0 +1,66 @@
+:root{
+  --imgUrl: url("../images/environment-sprites.png");
+}
+.movingMap{
+  position: absolute;
+  display: grid;
+  grid-template-columns: repeat(40, 48px);
+  grid-template-rows: repeat(23, 48px);
+  justify-items: center;
+  align-items: center;
+  overflow: hidden;
+  transition: all 0.3s
+}
+.mapMaker{
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  width: 240px;
+  height: 350px
+}
+.mapMakerContainer{
+  width: 240px;
+  height: 240px;
+  background: rgb(0,0,0,0.5)
+}
+.mapMakerPreview{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: 80px;
+  left: 80px;
+  padding: 32px;
+  background-image: var(--imgUrl);
+  transform: scale(3);
+  overflow: visible
+}
+.mapMakerBorder{
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 31px;
+  top: 31px;
+  border: solid black 1px
+}
+.parentStyle{
+  position: absolute;
+  left: 0%;
+  top: 0%;
+  width: 100%;
+  height: 100%;
+  background: black;
+  overflow: hidden;
+}
+.childStyle{
+  margin: 0%;
+  width: 16px;
+  height: 16px;
+  transform: scale(3);
+  background-image: var(--imgUrl);
+}
+.secondChildStyle{
+  margin: 0%;
+  width: 100%;
+  height: 100%;
+  background-image: var(--imgUrl);
+}
