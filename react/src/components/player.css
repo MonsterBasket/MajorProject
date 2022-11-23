@@ -3,10 +3,113 @@
 }
 #player{
   position: absolute;
-  left: 50px;
+  box-sizing: border-box;
+  top: 0px;
+  left: 0px;
   width: 16px;
-  height: 16px;
-  transform: scale(3);
+  height: 32px;
   background-image: var(--playerUrl);
   background-position: calc(1 * -16px) calc(9 * -16px);
+  animation-duration: 0.7s;
+  animation-timing-function: steps(6);
+  animation-iteration-count: infinite;
+}
+/*---- walk ---*/
+@keyframes walkLeft {
+  0%, 16.69%    {background-position: calc(11 * -16px) calc(7 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(12 * -16px) calc(7 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(13 * -16px) calc(7 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(14 * -16px) calc(7 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(15 * -16px) calc(7 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(16 * -16px) calc(7 * -16px + 8px);}
+}
+@keyframes walkRight {
+  0%, 16.69%    {background-position: calc(11 * -16px) calc(3 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(12 * -16px) calc(3 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(13 * -16px) calc(3 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(14 * -16px) calc(3 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(15 * -16px) calc(3 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(16 * -16px) calc(3 * -16px + 8px);}
+}
+@keyframes walkDown {
+  0%, 16.69%    {background-position: calc(11 * -16px) calc(5 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(12 * -16px) calc(5 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(13 * -16px) calc(5 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(14 * -16px) calc(5 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(15 * -16px) calc(5 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(16 * -16px) calc(5 * -16px + 8px);}
+}
+@keyframes walkUp {
+  0%, 16.69%    {background-position: calc(11 * -16px) calc(1 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(12 * -16px) calc(1 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(13 * -16px) calc(1 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(14 * -16px) calc(1 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(15 * -16px) calc(1 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(16 * -16px) calc(1 * -16px + 8px);}
+}
+/* ------- Attack -----------*/
+@keyframes attackLeft {
+  0%, 16.69%    {background-position: calc(1 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  16.7%, 33.39% {background-position: calc(3 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  33.4%, 50.09% {background-position: calc(5 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  50.1%, 66.79% {background-position: calc(7 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  66.8%, 83.49% {background-position: calc(7 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  83.5%, 100%   {background-position: calc(7 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+}
+@keyframes attackRight {
+  0%, 16.69%    {background-position: calc(1 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  16.7%, 33.39% {background-position: calc(3 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  33.4%, 50.09% {background-position: calc(5 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  50.1%, 66.79% {background-position: calc(7 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  66.8%, 83.49% {background-position: calc(7 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  83.5%, 100%   {background-position: calc(7 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+}
+@keyframes attackDown {
+  0%, 16.69%    {background-position: calc(1 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  16.7%, 33.39% {background-position: calc(3 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  33.4%, 50.09% {background-position: calc(5 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  50.1%, 66.79% {background-position: calc(7 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  66.8%, 83.49% {background-position: calc(7 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  83.5%, 100%   {background-position: calc(7 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+}
+@keyframes attackUp {
+  0%, 16.69%    {background-position: calc(1 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  16.7%, 33.39% {background-position: calc(3 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  33.4%, 50.09% {background-position: calc(5 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  50.1%, 66.79% {background-position: calc(7 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  66.8%, 83.49% {background-position: calc(7 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  83.5%, 100%   {background-position: calc(7 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+}
+/*---- idle ---*/
+@keyframes idleLeft {
+  0%, 16.69%    {background-position: calc(21 * -16px) calc(7 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(22 * -16px) calc(7 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(23 * -16px) calc(7 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(24 * -16px) calc(7 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(25 * -16px) calc(7 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(26 * -16px) calc(7 * -16px + 8px);}
+}
+@keyframes idleRight {
+  0%, 16.69%    {background-position: calc(21 * -16px) calc(3 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(22 * -16px) calc(3 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(23 * -16px) calc(3 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(24 * -16px) calc(3 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(25 * -16px) calc(3 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(26 * -16px) calc(3 * -16px + 8px);}
+}
+@keyframes idleDown {
+  0%, 16.69%    {background-position: calc(21 * -16px) calc(5 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(22 * -16px) calc(5 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(23 * -16px) calc(5 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(24 * -16px) calc(5 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(25 * -16px) calc(5 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(26 * -16px) calc(5 * -16px + 8px);}
+}
+@keyframes idleUp {
+  0%, 16.69%    {background-position: calc(21 * -16px) calc(1 * -16px + 8px);}
+  16.7%, 33.39% {background-position: calc(22 * -16px) calc(1 * -16px + 8px);}
+  33.4%, 50.09% {background-position: calc(23 * -16px) calc(1 * -16px + 8px);}
+  50.1%, 66.79% {background-position: calc(24 * -16px) calc(1 * -16px + 8px);}
+  66.8%, 83.49% {background-position: calc(25 * -16px) calc(1 * -16px + 8px);}
+  83.5%, 100%   {background-position: calc(26 * -16px) calc(1 * -16px + 8px);}
 }
