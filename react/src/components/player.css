@@ -1,0 +1,12 @@
+:root{
+  --playerUrl: url("../images/main-character.png")
+}
+#player{
+  position: absolute;
+  left: 50px;
+  width: 16px;
+  height: 16px;
+  transform: scale(3);
+  background-image: var(--playerUrl);
+  background-position: calc(1 * -16px) calc(9 * -16px);
+}
