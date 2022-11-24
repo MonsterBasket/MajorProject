@@ -1,78 +1,97 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import handleInput from "./handleInput";
 import selectAnimation from "./selectAnimation"
 
 let pathCounter = 0;
 let myKeys = [];
-let maxSpeed = 1.5;
+let maxSpeed = 0.5;
 let velocity = [0,0];
-
-function makePath(waitTime, setWaitTime, patrol, target, setTarget, randomPath){
-  debugger;
-  let nextPathTime = Math.random(5000, 10000)
-  if(waitTime > 0) {
-    setTimeout(makePath, waitTime);
-    setWaitTime(0);
-    return;
-  }
-  if(randomPath){
-    setTarget([Math.random(patrol[0][0], patrol[0][1]), Math.random(patrol[1][0], patrol[1][1])])
-    console.log("patrol" - patrol[0][0])
-    setWaitTime(Math.random(3000, 6000))
-  }
-  else{
-    setTarget(patrol[pathCounter])
-    pathCounter++;
-    if(pathCounter > patrol.length) pathCounter = 0;
-    if(target[2]) nextPathTime = target[2]
-  }
-  setTimeout(makePath, target[2] || nextPathTime)
-}
+let cancelTimer = "";
 
 function Enemy({type, posInit, patrol, randomPath}){
-  const [pos, setPos] = useState(posInit)
+  // const [pos, setPos] = useState(posInit)
   const [velocityState, setVel] = useState([0,0])
-  const [lastDirection, setDirection] = useState("KeyS")
-  const [target, setTarget] = useState(posInit);
-  const [waitTime, setWaitTime] = useState(0);
+  // const [lastDirection, setDirection] = useState("KeyS")
+  // const [target, setTarget] = useState(posInit);
+  const target = useRef(posInit);
+  const pos = useRef(posInit);
+  const lastDirection = useRef("KeyS")
+
 
   useEffect(() => {
     gameLoop();
-    makePath(waitTime, setWaitTime, patrol, target, setTarget, randomPath);
+    makePath();
   }, [])
 
   function gameLoop(){
     handleInput(myKeys, velocity, maxSpeed)
-    if(pos[0] != target[0] && [pos][1] != target[1]) walk()
-    if(velocity[0] || velocity[1]) setPos(velocity)
+    if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
+    if(velocity[0] || velocity[1]){
+      const posX = pos.current[0] + velocity[0]
+      const posY = pos.current[1] + velocity[1]
+      pos.current = [posX, posY]
+    }
     setVel(velocity)
     requestAnimationFrame(gameLoop);
   }
 
+  function randomTarget(){
+    const targetX = Math.random() * (patrol[1][0] - patrol[0][0]) + patrol[0][0]
+    const targetY = Math.random() * (patrol[1][1] - patrol[0][1]) + patrol[0][1]
+    return [targetX, targetY]
+  }
+
+  function makePath(){
+    let nextPathTime = Math.random() * (10000 - 5000) + 5000
+    if(randomPath){
+      target.current = randomTarget()
+      clearTimeout(cancelTimer)
+      cancelTimer = setTimeout(makePath, nextPathTime)
+    }
+    else{
+      target.current = patrol[pathCounter]
+      pathCounter++;
+      if(pathCounter > patrol.length) pathCounter = 0;
+      if(target.current[2]) nextPathTime = target.current[2]
+      clearTimeout(cancelTimer)
+      cancelTimer = setTimeout(makePath, target.current[2] || nextPathTime)
+    }
+  }
+  
   function walk(){
-    if(target[0] - pos[0] < 5) myKeys["KeyD"] = true;
-    else {
-      myKeys["KeyD"] = false;
-      setDirection("KeyD")
+    let horizontal = target.current[0] - pos.current[0]
+    let vertical = target.current[1] - pos.current[1]
+    if(horizontal < -15){
+      myKeys["KeyA"] = true;
     }
-    if(pos[0] - target[0] < 5) myKeys["KeyA"] = true;
-    else {
+    else if(myKeys["KeyA"] == true) {
       myKeys["KeyA"] = false;
-    setDirection("KeyA")
+      lastDirection.current = "KeyA"
     }
-    if(target[1] - pos[1] < 5) myKeys["KeyW"] = true;
-    else {
+    if(horizontal > 15){
+      myKeys["KeyD"] = true;
+    }
+    else if(myKeys["KeyD"] == true) {
+      myKeys["KeyD"] = false;
+      lastDirection.current = "KeyD"
+    }
+    if(vertical < -15){
+      myKeys["KeyW"] = true;
+    }
+    else if(myKeys["KeyW"] == true) {
       myKeys["KeyW"] = false;
-    setDirection("KeyW")
+      lastDirection.current = "KeyW"
     }
-    if(pos[1] - target[1] < 5) myKeys["KeyS"] = true;
-    else {
+    if(vertical > 15){
+      myKeys["KeyS"] = true;
+    }
+    else if(myKeys["KeyS"] == true) {
       myKeys["KeyS"] = false;
-    setDirection("KeyS")
+      lastDirection.current = "KeyS"
     }
   }
 
-  const style = selectAnimation(pos, velocityState, lastDirection);
+  const style = selectAnimation(pos.current, velocityState, lastDirection.current);
 
   return <div className={`${type} character`} style={style}></div>
 }
