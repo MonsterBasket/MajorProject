@@ -1,4 +1,3 @@
-import logo from '../logo.svg';
 import '../App.css';
 import Hud from "./Hud"
 import MapMaker from "./MapMaker"
