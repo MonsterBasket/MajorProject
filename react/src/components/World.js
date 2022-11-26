@@ -58,6 +58,7 @@ function World(){
     </div>
     <div>
       <Enemy type="skeleton" posInit={[200,500]} patrol={[[100,300],[400,600]]} randomPath={true}/>
+      <Enemy type="skeleton" posInit={[600,400]} patrol={[[600,400, 5],[600,500,3],[400,400,5],[400,500,3]]}/>
       <Player pos={[x,y]} velocity={velocity} lastDirection={lastDirection}/>
     </div>
   </div>

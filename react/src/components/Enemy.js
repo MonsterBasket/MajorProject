@@ -2,13 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import handleInput from "./handleInput";
 import selectAnimation from "./selectAnimation"
 
-let pathCounter = 0;
-let myKeys = [];
-let maxSpeed = 0.5;
-let velocity = [0,0];
-let cancelTimer = "";
-
-function Enemy({type, posInit, patrol, randomPath}){
+function Enemy({type, posInit, patrol, randomPath=false}){
   // const [pos, setPos] = useState(posInit)
   const [velocityState, setVel] = useState([0,0])
   // const [lastDirection, setDirection] = useState("KeyS")
@@ -16,6 +10,12 @@ function Enemy({type, posInit, patrol, randomPath}){
   const target = useRef(posInit);
   const pos = useRef(posInit);
   const lastDirection = useRef("KeyS")
+  let pathCounter = 0;
+  let myKeys = [];
+  let maxSpeed = 0.5;
+  let velocity = [0,0];
+  let cancelTimer = "";
+
 
 
   useEffect(() => {
@@ -51,10 +51,10 @@ function Enemy({type, posInit, patrol, randomPath}){
     else{
       target.current = patrol[pathCounter]
       pathCounter++;
-      if(pathCounter > patrol.length) pathCounter = 0;
-      if(target.current[2]) nextPathTime = target.current[2]
+      if(pathCounter >= patrol.length) pathCounter = 0;
+      // if(target.current[2]) nextPathTime = target.current[2]
       clearTimeout(cancelTimer)
-      cancelTimer = setTimeout(makePath, target.current[2] || nextPathTime)
+      cancelTimer = setTimeout(makePath, target.current[2] * 1000 || nextPathTime)
     }
   }
   
