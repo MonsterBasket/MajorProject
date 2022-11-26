@@ -1,4 +1,4 @@
-function selectAnimation(pos, velocity, lastDirection){
+function selectAnimation(pos, velocity, lastDirection = "KeyS"){
   // console.log(velocity)
   const obj = {
     transform: `translate(${pos[0]}px, ${pos[1]}px) scale(3)`,

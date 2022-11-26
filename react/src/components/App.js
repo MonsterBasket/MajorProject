@@ -8,7 +8,7 @@ function App() {
     <div className="App">
       {/* <MapMaker /> */}
       <World />
-      <Hud />
+      {/* <Hud /> */}
     </div>
   );
 }

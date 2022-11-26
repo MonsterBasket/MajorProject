@@ -61,28 +61,28 @@ function Enemy({type, posInit, patrol, randomPath=false}){
   function walk(){
     let horizontal = target.current[0] - pos.current[0]
     let vertical = target.current[1] - pos.current[1]
-    if(horizontal < -15){
+    if(horizontal < -5){
       myKeys["KeyA"] = true;
     }
     else if(myKeys["KeyA"] == true) {
       myKeys["KeyA"] = false;
       lastDirection.current = "KeyA"
     }
-    if(horizontal > 15){
+    if(horizontal > 5){
       myKeys["KeyD"] = true;
     }
     else if(myKeys["KeyD"] == true) {
       myKeys["KeyD"] = false;
       lastDirection.current = "KeyD"
     }
-    if(vertical < -15){
+    if(vertical < -5){
       myKeys["KeyW"] = true;
     }
     else if(myKeys["KeyW"] == true) {
       myKeys["KeyW"] = false;
       lastDirection.current = "KeyW"
     }
-    if(vertical > 15){
+    if(vertical > 5){
       myKeys["KeyS"] = true;
     }
     else if(myKeys["KeyS"] == true) {

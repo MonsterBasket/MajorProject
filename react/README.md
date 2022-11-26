@@ -68,3 +68,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 ### `npm run build` fails to minify
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+
+------------------------------------
+
+Known Bugs:
+  Character animations are occasionally glitchy
+  - This seems to be only when changing from one animation from another
+  - I suspect it has something to do with how the css animation translates from one animation to the next, possibly if it's midway between to frames.
+  - possible solution: is there a reset/stop/clear animation option?
+
+  Sprite sheet is not perfect
+  - Trees at top all have hard painted shadows, rather than the 50% opacity shadows that the larger trees and stumps and all other objects have.

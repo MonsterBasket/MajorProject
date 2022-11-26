@@ -9,7 +9,7 @@
   left: 0px;
   width: 16px;
   height: 32px;
-  background-position: calc(1 * -16px) calc(9 * -16px);
+  z-index: 1;
   animation-duration: 0.7s;
   animation-timing-function: steps(6);
   animation-iteration-count: infinite;

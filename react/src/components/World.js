@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import './map.css';
 import './player.css';
-import World0101 from "./maps/World0101"
+import WorldTiler from "./WorldTiler"
+import map0101 from "./maps/map0101"
 import Player from "./Player"
 import Enemy from "./Enemy"
 import handleInput from "./handleInput";
@@ -9,9 +10,9 @@ import handleInput from "./handleInput";
 let velocity = [0,0];
 
 function World(){
-  const [x, setX] = useState(0);
-  const [y, setY] = useState(0);
-  const [lastDirection, setDirection] = useState("");
+  const [x, setX] = useState(window.innerWidth / 2);
+  const [y, setY] = useState(window.innerHeight / 2);
+  const [lastDirection, setDirection] = useState("KeyS"); //sets initial animation to "idleDown"
   let myKeys = [];
   const maxSpeed = 3;
   const mapSize = [40,23]; //I'll extract this from individual map details later
@@ -44,23 +45,19 @@ function World(){
   }
 
   const worldMover = {
-    left: `${0}px`,
-    top: `${0}px`
-  }
-  const mapGrid = {
-    gridTemplateColumns: `repeat(${mapSize[0]}, 48px)`,
-    gridTemplateRows: `repeat(${mapSize[1]}, 48px)`
+    left: `clamp(${window.innerWidth - (mapSize[0] * 48)}px, ${-x + window.innerWidth / 2}px, 0px)`,
+    top: `clamp(${window.innerHeight - (mapSize[1] * 48)}px, ${-y + window.innerHeight / 2}px, 0px)`
   }
 
+  const coords = map0101();
+
   return <div id="world" style={worldMover}>
-    <div className="mapGrid" style={mapGrid}>
-        <World0101 />
-    </div>
-    <div>
-      <Enemy type="skeleton" posInit={[200,500]} patrol={[[100,300],[400,600]]} randomPath={true}/>
-      <Enemy type="skeleton" posInit={[600,400]} patrol={[[600,400, 5],[600,500,3],[400,400,5],[400,500,3]]}/>
-      <Player pos={[x,y]} velocity={velocity} lastDirection={lastDirection}/>
-    </div>
+      <WorldTiler coords={coords}>
+        <Enemy type="skeleton" posInit={[1000,500]} patrol={[[100,100],[1800,900]]} randomPath={true}/>
+        <Enemy type="skeleton" posInit={[600,400]} patrol={[[600,400, 5],[600,500,3],[400,400,5],[400,500,3]]}/>
+        <Player pos={[x, y]} velocity={velocity} lastDirection={lastDirection}/>
+      </WorldTiler>
+    <div style={{position: "absolute", color: "white"}}>X: {x} - mapSize[0]: {mapSize[0] * 48}</div>
   </div>
 }
 
