@@ -3,10 +3,7 @@ import handleInput from "../helpers/handleInput";
 import selectAnimation from "../helpers/selectAnimation"
 
 function Enemy({type, posInit, patrol, randomPath=false}){
-  // const [pos, setPos] = useState(posInit)
   const [velocityState, setVel] = useState([0,0])
-  // const [lastDirection, setDirection] = useState("KeyS")
-  // const [target, setTarget] = useState(posInit);
   const target = useRef(posInit);
   const pos = useRef(posInit);
   const lastDirection = useRef("KeyS")
@@ -15,8 +12,6 @@ function Enemy({type, posInit, patrol, randomPath=false}){
   let maxSpeed = 0.5;
   let velocity = [0,0];
   let cancelTimer = "";
-
-
 
   useEffect(() => {
     gameLoop();
@@ -42,7 +37,7 @@ function Enemy({type, posInit, patrol, randomPath=false}){
   }
 
   function makePath(){
-    let nextPathTime = Math.random() * (10000 - 5000) + 5000
+    let nextPathTime = Math.random() * (10000 - 5000) + 5000 //5-10 seconds
     if(randomPath){
       target.current = randomTarget()
       clearTimeout(cancelTimer)
@@ -52,9 +47,9 @@ function Enemy({type, posInit, patrol, randomPath=false}){
       target.current = patrol[pathCounter]
       pathCounter++;
       if(pathCounter >= patrol.length) pathCounter = 0;
-      // if(target.current[2]) nextPathTime = target.current[2]
+      if(target.current[2]) nextPathTime = target.current[2] * 1000
       clearTimeout(cancelTimer)
-      cancelTimer = setTimeout(makePath, target.current[2] * 1000 || nextPathTime)
+      cancelTimer = setTimeout(makePath, nextPathTime)
     }
   }
   
