@@ -7,7 +7,7 @@ function WorldTiler(props){
   function childStyle(x, y) {
     return { backgroundPosition: `${x * -16}px ${y * -16}px`}
   }
-  const mapGrid = {
+  const mapGrid = { //this will need to be passed in if I ever want different map sizes
     gridTemplateColumns: `repeat(40, 48px)`,
     gridTemplateRows: `repeat(23, 48px)`
   }

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import './map.css';
-import './player.css';
+import '../css/map.css';
+import '../css/player.css';
 import WorldTiler from "./WorldTiler"
-import map0101 from "./maps/map0101"
-import Player from "./Player"
-import Enemy from "./Enemy"
-import handleInput from "./handleInput";
+import map from "./maps"
+import Player from "../characters/Player"
+import Enemy from "../characters/Enemy"
+import handleInput from "../helpers/handleInput";
 
 let velocity = [0,0];
 
@@ -49,10 +49,8 @@ function World(){
     top: `clamp(${window.innerHeight - (mapSize[1] * 48)}px, ${-y + window.innerHeight / 2}px, 0px)`
   }
 
-  const coords = map0101();
-
   return <div id="world" style={worldMover}>
-      <WorldTiler coords={coords}>
+      <WorldTiler coords={map("0101")}>
         <Enemy type="skeleton" posInit={[1000,500]} patrol={[[100,100],[1800,900]]} randomPath={true}/>
         <Enemy type="skeleton" posInit={[600,400]} patrol={[[600,400, 5],[600,500,3],[400,400,5],[400,500,3]]}/>
         <Player pos={[x, y]} velocity={velocity} lastDirection={lastDirection}/>

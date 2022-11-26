@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import handleInput from "./handleInput";
-import selectAnimation from "./selectAnimation"
+import handleInput from "../helpers/handleInput";
+import selectAnimation from "../helpers/selectAnimation"
 
 function Enemy({type, posInit, patrol, randomPath=false}){
   // const [pos, setPos] = useState(posInit)

@@ -1,7 +1,7 @@
-import '../App.css';
-import Hud from "./Hud"
-import MapMaker from "./MapMaker"
-import World from "./World"
+import './App.css';
+import Hud from "./ui/Hud"
+import MapMaker from "./maps/MapMaker"
+import World from "./maps/World"
 
 function App() {
   return (
