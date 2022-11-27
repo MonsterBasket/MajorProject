@@ -72,7 +72,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ------------------------------------
 
 Known Bugs:
-  Performance is rubbish
+  Performance is rubbish - especially when near a zone
   - Probably have to change to Canvas to fix this
 
   Character animations are occasionally glitchy
@@ -83,4 +83,5 @@ Known Bugs:
   Sprite sheet is not perfect
   - Trees at top all have hard painted shadows, rather than the 50% opacity shadows that the larger trees and stumps and all other objects have.
 
-  If two adjoining screens both have monsters the positions will be copied from the previous screen
+  <!-- If two adjoining screens both have monsters the positions will be copied from the previous screen -->
+  - solved by giving them keys

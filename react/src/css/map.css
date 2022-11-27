@@ -1,5 +1,6 @@
 :root{
   --imgUrl: url("../images/environment-sprites.png");
+  --colliderUrl: url("../images/colliders.png");
 }
 .world{
   position: absolute;
@@ -35,7 +36,8 @@
   background-image: var(--imgUrl);
 }
 .collider{
-  opacity: 0%;
+  opacity: 50%;
+  background-image: var(--colliderUrl);
 }
 .mapGrid.highZ{
   z-index: 2;

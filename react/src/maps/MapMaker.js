@@ -145,7 +145,7 @@ function MapMaker(){
   const [colliders, setColliders] = useState(mapColliders)
 
 
-  return <div id="world" style={worldMover}>
+  return <div className="world" style={worldMover}>
     <div className="mapGrid" style={mapGrid}>
       {coords.map((item, index) => <div key={index} className={`childStyle${!showOpacity ? "" : layer == 1 ? " highlight" : " transparent"}`} style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
         {coords2[index] == 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer == 2 ? " highlight" : " transparent"}`} style={childStyle(coords2[index][0], coords2[index][1])}></div>}

@@ -17,6 +17,9 @@
 #player{
   background-image: var(--playerUrl);
 }
+.player{
+  background-image: var(--playerUrl);
+}
 .skeleton{
   background-image: var(--skeletonUrl);
 }

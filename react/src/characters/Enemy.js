@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import handleInput from "../helpers/handleInput";
 import selectAnimation from "../helpers/selectAnimation"
 
-function Enemy({type, posInit, patrol, randomPath=false}){
+function Enemy({type, currentMap, posInit, patrol, randomPath=false}){
   const [velocityState, setVel] = useState([0,0])
   const target = useRef(posInit);
   const pos = useRef(posInit);
@@ -23,7 +23,7 @@ function Enemy({type, posInit, patrol, randomPath=false}){
     now *= 0.01;
     const deltaTime = now - lastRender;
     lastRender = now;
-    handleInput(myKeys, velocity, maxSpeed, deltaTime);
+    handleInput(currentMap, myKeys, velocity, pos[0], pos[1], maxSpeed, deltaTime);
     if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
     if(velocity[0] || velocity[1]){
       const posX = pos.current[0] + velocity[0]
