@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import '../css/map.css';
 import '../css/player.css';
 import WorldTiler from "./WorldTiler";
@@ -18,17 +18,20 @@ function World(){
   const [lastDirection, setDirection] = useState("KeyS"); //sets initial animation to "idleDown"
   let myKeys = [];
   const maxSpeed = 3;
-  const mapSize = [40,23]; //I'll extract this from individual map details later
+  const mapSize = [40 * 48, 23 * 48]; //I'll extract this from individual map details later
   const [re, refresh] = useState([]);
-  let thisPage = "0101";
-  let nextPage = "0201";
-  let pageDirection = "";
+  let lastRender = 0;
+  const thisPage = useRef(10101);
+  const nextPage = useRef();
+  const pageDirection = useRef("");
+  const shift = useRef([0,0]);
+  const turning = useRef(false);
 
   useEffect(() => {
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp );
-    gameLoop();
-    return () => {
+    requestAnimationFrame(gameLoop);
+      return () => {
       window.removeEventListener("keydown", keyDown);
       window.removeEventListener("keyup", keyUp);
     };
@@ -42,18 +45,23 @@ function World(){
     setDirection(e.code);
   }
 
-  function gameLoop() { //runs every frame before render
-    handleInput(myKeys, velocity, maxSpeed);
+  function gameLoop(now) { //runs every frame before render
+    now *= 0.01;
+    const deltaTime = now - lastRender;
+    lastRender = now;
+    handleInput(myKeys, velocity, maxSpeed, deltaTime);
     if(velocity[0]) setX(prev => prev + velocity[0]);
     if(velocity[1]) setY(prev => prev + velocity[1]);
     if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);
-    pageLoader();
     requestAnimationFrame(gameLoop);
   }
 
+    useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
+
+
   const worldMover = { //clamps map position
-    left: `clamp(${window.innerWidth - (mapSize[0] * 48)}px, ${-x + window.innerWidth / 2}px, 0px)`,
-    top: `clamp(${window.innerHeight - (mapSize[1] * 48)}px, ${-y + window.innerHeight / 2}px, 0px)`
+    left: `clamp(${window.innerWidth - (mapSize[0])}px, ${-x + window.innerWidth / 2}px, 0px)`,
+    top: `clamp(${window.innerHeight - (mapSize[1])}px, ${-y + window.innerHeight / 2}px, 0px)`
   }
   const pageTurner = {
     left: newPageX,
@@ -61,100 +69,144 @@ function World(){
   }
 
   function pageLoader(page=""){
-    if(page) return nextPage = page;
-    if(!nextPage){
-      if(x > mapSize[0] * 48 - 100) pageDirection = "right";
-      else if(x < 100) pageDirection = "left";
-      else if(y < 100) pageDirection = "up";
-      else if(y > mapSize[1] * 48 - 100) pageDirection = "down";
-      return "" && newPage(pageDirection)
+    //if(page) return newPage(page);
+    console.log(pageDirection.current)
+    if(!nextPage.current){
+      if(x > mapSize[0] - 100) pageDirection.current = "right";
+      else if(x < 100) pageDirection.current = "left";
+      else if(y < 100) pageDirection.current = "up";
+      else if(y > mapSize[1] - 100) pageDirection.current = "down";
+      if(pageDirection.current) newPage(pageDirection.current)
     }
     else
-      if(pageDirection == "right"){
-        if(x < mapSize[0] * 48 - 100) pageDirection = "";
-        else if(x >= mapSize[0] * 48) return turnPage(pageDirection, nextPage)
+      if(pageDirection.current === "right"){
+        if(x < mapSize[0] - 100) {
+          pageDirection.current = "";
+          nextPage.current = "";
+          return
+        }
+        else if(x >= mapSize[0]) turnPage(pageDirection.current, nextPage.current)
       }
-      if(pageDirection == "left"){
-        if(x > 100) pageDirection = "";
-        else if(x <= 0) return turnPage(pageDirection, nextPage)
+      if(pageDirection.current === "left"){
+        if(x > 100) {
+          pageDirection.current = "";
+          nextPage.current = "";
+          return
+        }
+        else if(x <= 0) return turnPage(pageDirection.current, nextPage.current)
       }
-      if(pageDirection == "up"){
-        if(y > 100) pageDirection = "";
-        else if(y <= 0) return turnPage(pageDirection, nextPage)
+      if(pageDirection.current === "up"){
+        if(y > 100) {
+          pageDirection.current = "";
+          nextPage.current = "";
+          return
+        }
+        else if(y <= 0) return turnPage(pageDirection.current, nextPage.current)
       }
-      if(pageDirection == "down"){
-        if(y < mapSize[1] * 48 - 100) pageDirection = "";
-        else if(y >= mapSize[1] * 48) return turnPage(pageDirection, nextPage)
+      if(pageDirection.current === "down"){
+        if(y < mapSize[1] - 100) {
+          pageDirection.current = "";
+          nextPage.current = "";
+          return
+        }
+        else if(y >= mapSize[1]) return turnPage(pageDirection.current, nextPage.current)
       }
   }
 
-  function newPage(direction){
-    if(direction == "left") nextPage = (parseInt("1" + thisPage) - 1000 - 10000).toString;
-    if(direction == "right") nextPage = (parseInt("1" + thisPage) + 1000 - 10000).toString;
-    if(direction == "up") nextPage = (parseInt("1" + thisPage) - 100 - 10000).toString;
-    if(direction == "down") nextPage = (parseInt("1" + thisPage) + 100 - 10000).toString;
+  function newPage(direction = "up", page = ""){
+
+    if(direction === "left"){
+      nextPage.current = page || parseInt(thisPage.current) - 100;
+      shift.current = [-mapSize[0], 0]
+    }
+    else if(direction === "right"){
+      nextPage.current = page || parseInt(thisPage.current) + 100;
+      shift.current = [mapSize[0], 0]
+    }
+    else if(direction === "up"){
+      nextPage.current = page || parseInt(thisPage.current) - 1;
+      shift.current = [0, -mapSize[1]]
+    }
+    else if(direction === "down"){
+      nextPage.current = page || parseInt(thisPage.current) + 1;
+      shift.current = [0, mapSize[1]]
+    }
   }
 
   function turnPage(direction, page){
+    console.log(thisPage.current, nextPage.current)
     let horizontal = true;
     let multiplier = 1;
+    let prevVelocity = velocity;
+    velocity = [0,0];
+    turning.current = true;
     window.removeEventListener("keydown", keyDown);
-    if(direction == "left") multiplier = -1;
-    else if(direction == "down") horizontal = false;
-    else if(direction == "up"){
+    if(direction === "right") multiplier = -1;
+    else if(direction === "up") horizontal = false;
+    else if(direction === "down"){
       multiplier = -1;
       horizontal = false;
     }
 
     for (let i = 0; i < 30; i++) {
       setTimeout(_ => {
-        if(horizontal) setNewPageX(prev => prev + (mapSize[0] * 48 + 10) * multiplier)
-        else           setNewPageY(prev => prev + (mapSize[1] * 48 + 10) * multiplier)
-        if(i == 29) window.addEventListener("keydown", keyDown)
+        if(horizontal) {
+          setNewPageX(prev => prev + (mapSize[0] / 30) * multiplier)
+          // setX(prev => prev + (mapSize[0] / 30) * multiplier)
+          
+        }
+        else setNewPageY(prev => prev + (mapSize[1] / 30) * multiplier)
+        console.log("for loop: ", newPageX)
+        if(i >= 29) return recenterPage(page, prevVelocity)
       }, i*17)
     }
-    
-    if(direction == "left"){
-      direction = "right";
-      nextPage = thisPage;
-      thisPage = page;
+  }
+
+  function recenterPage(page, prevVelocity){
+    window.addEventListener("keydown", keyDown)
+    turning.current = false
+    velocity = prevVelocity
+    if(pageDirection.current === "left"){
+      pageDirection.current = "right";
+      nextPage.current = thisPage.current;
+      thisPage.current = page;
+      setX(mapSize[0] - 10);
+      setNewPageX(0);
+      }
+    else if(pageDirection.current === "right"){
+      pageDirection.current = "left";
+      nextPage.current = thisPage.current;
+      thisPage.current = page;
       setX(10);
       setNewPageX(0);
       }
-    else if(direction == "right"){
-      direction = "left";
-      nextPage = thisPage;
-      thisPage = page;
-      setX(mapSize[0] * 48 - 10);
-      setNewPageX(0);
+    else if(pageDirection.current === "up"){
+      pageDirection.current = "down";
+      nextPage.current = thisPage.current;
+      thisPage.current = page;
+      setY(mapSize[1] - 10);
+      setNewPageY(0);
       }
-    else if(direction == "up"){
-      direction = "down";
-      nextPage = thisPage;
-      thisPage = page;
-      setY(mapSize[1] * 48 - 10);
-      setNewPageX(0);
-      }
-    else if(direction == "down"){
-      direction = "right";
-      nextPage = thisPage;
-      thisPage = page;
+    else if(pageDirection.current === "down"){
+      pageDirection.current = "right";
+      nextPage.current = thisPage.current;
+      thisPage.current = page;
       setY(10);
-      setNewPageX(0);
-      }
+      setNewPageY(0);
     }
+  }
 
   return <div className="world" style={worldMover}>
     <div className="world" style={pageTurner}>
-      <WorldTiler coords={maps(thisPage)} />
-      {nextPage ? <WorldTiler coords={maps(nextPage)} /> : ""}
-        {mobs(thisPage)}
-        {nextPage ? mobs(nextPage) : ""}
+      <WorldTiler coords={maps(thisPage.current)} />
+      {nextPage.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
+        {mobs(thisPage.current)}
+        {nextPage.current ? mobs(nextPage.current, shift.current) : ""}
         <Player pos={[x, y]} velocity={velocity} lastDirection={lastDirection}/>
-      <SkyTiler coords={maps(thisPage)} />
-      {nextPage ? <SkyTiler coords={maps(nextPage)} /> : ""}
-      <div style={{position: "fixed", zIndex:"3", color: "white"}}>X: {x} - mapSize[0]: {mapSize[0] * 48}</div>
+      <SkyTiler coords={maps(thisPage.current)} />
+      {nextPage.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
     </div>
+    <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>X: {x}</div>
   </div>
 }
 

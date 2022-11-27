@@ -1,14 +1,16 @@
-function WorldTiler(props){
-  const mapCoords = props.coords[0];
-  const mapCoords2 = props.coords[1];
-  const mapColliders = props.coords[3];
+function WorldTiler({coords, shift=[0,0] }){
+  const mapCoords = coords[0];
+  const mapCoords2 = coords[1];
+  const mapColliders = coords[3];
 
   function childStyle(x, y) {
     return { backgroundPosition: `${x * -16}px ${y * -16}px`}
   }
   const mapGrid = { //this will need to be passed in if I ever want different map sizes
     gridTemplateColumns: `repeat(40, 48px)`,
-    gridTemplateRows: `repeat(23, 48px)`
+    gridTemplateRows: `repeat(23, 48px)`,
+    left: `${shift[0]}px`,
+    top: `${shift[1]}px`
   }
 
 

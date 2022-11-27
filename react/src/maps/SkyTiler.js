@@ -1,5 +1,5 @@
-function SkyTiler(props){
-  const mapCoords3 = props.coords[2];
+function SkyTiler({coords, shift=[0,0]}){
+  const mapCoords3 = coords[2];
 
 
   function childStyle(x, y) {
@@ -7,7 +7,9 @@ function SkyTiler(props){
   }
   const mapGrid = { //this will need to be passed in if I ever want different map sizes
     gridTemplateColumns: `repeat(40, 48px)`,
-    gridTemplateRows: `repeat(23, 48px)`
+    gridTemplateRows: `repeat(23, 48px)`,
+    left: `${shift[0]}px`,
+    top: `${shift[1]}px`
   }
 
   return <div className="mapGrid highZ" style={mapGrid}>

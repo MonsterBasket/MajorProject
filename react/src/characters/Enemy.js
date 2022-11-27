@@ -9,17 +9,21 @@ function Enemy({type, posInit, patrol, randomPath=false}){
   const lastDirection = useRef("KeyS")
   let pathCounter = 0;
   let myKeys = [];
+  let lastRender = 0;
   let maxSpeed = 0.5;
   let velocity = [0,0];
   let cancelTimer = "";
 
   useEffect(() => {
-    gameLoop();
+    requestAnimationFrame(gameLoop);
     makePath();
   }, [])
 
-  function gameLoop(){
-    handleInput(myKeys, velocity, maxSpeed)
+  function gameLoop(now){
+    now *= 0.01;
+    const deltaTime = now - lastRender;
+    lastRender = now;
+    handleInput(myKeys, velocity, maxSpeed, deltaTime);
     if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
     if(velocity[0] || velocity[1]){
       const posX = pos.current[0] + velocity[0]
