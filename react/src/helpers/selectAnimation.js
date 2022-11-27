@@ -14,9 +14,9 @@ function selectAnimation(pos, velocity, lastDirection = "KeyS"){
   }
   if(velocity[0] == 0 && velocity[1] == 0){
     if(lastDirection == "KeyW") obj.animationName = "idleUp";
-    if(lastDirection == "KeyS") obj.animationName = "idleDown";
-    if(lastDirection == "KeyA") obj.animationName = "idleLeft";
-    if(lastDirection == "KeyD") obj.animationName = "idleRight";
+    else if(lastDirection == "KeyS") obj.animationName = "idleDown";
+    else if(lastDirection == "KeyA") obj.animationName = "idleLeft";
+    else if(lastDirection == "KeyD") obj.animationName = "idleRight";
   }
   return obj
 }

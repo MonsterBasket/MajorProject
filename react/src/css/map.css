@@ -15,6 +15,9 @@
   /* overflow: hidden; */
   /* transition: all 0.3s */
 }
+.monsterLayer{
+  position: absolute;
+}
 .childStyle{
   margin: 0%;
   width: 16px;

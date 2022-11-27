@@ -72,6 +72,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ------------------------------------
 
 Known Bugs:
+  Performance is rubbish
+  - Probably have to change to Canvas to fix this
+
   Character animations are occasionally glitchy
   - This seems to be only when changing from one animation from another
   - I suspect it has something to do with how the css animation translates from one animation to the next, possibly if it's midway between to frames.
@@ -79,3 +82,5 @@ Known Bugs:
 
   Sprite sheet is not perfect
   - Trees at top all have hard painted shadows, rather than the 50% opacity shadows that the larger trees and stumps and all other objects have.
+
+  If two adjoining screens both have monsters the positions will be copied from the previous screen
