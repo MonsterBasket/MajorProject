@@ -8,20 +8,19 @@ import mobs from "./mobs";
 import maps from "./maps";
 import handleInput from "../helpers/handleInput";
 
-let velocity = [0,0];
 
 function World(){
   const [x, setX] = useState(window.innerWidth / 2);
   const [y, setY] = useState(window.innerHeight / 2);
-  let pos = [x,y]
+  const velocity = useRef([0,0]);
   const [newPageX, setNewPageX] = useState(0);
   const [newPageY, setNewPageY] = useState(0);
   const [lastDirection, setDirection] = useState("KeyS"); //sets initial animation to "idleDown"
-  let myKeys = [];
-  const maxSpeed = 3;
+  const myKeys = useRef([]);
+  const maxSpeed = 30;
   const mapSize = [40 * 48, 23 * 48]; //I'll extract this from individual map details later
   const [re, refresh] = useState([]);
-  let lastRender = 0;
+  const lastRender = useRef(0);
   const thisPage = useRef(10101);
   const nextPage = useRef();
   const pageDirection = useRef("");
@@ -32,35 +31,37 @@ function World(){
   useEffect(() => {
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp );
-    requestAnimationFrame(gameLoop);
       return () => {
       window.removeEventListener("keydown", keyDown);
       window.removeEventListener("keyup", keyUp);
     };
   }, [])
 
+  useEffect(() => {
+    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed))
+  })
+
+  useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
+
   function keyDown(e){
-    myKeys[e.code] = true;
+    myKeys.current[e.code] = true;
   }
   function keyUp(e){
-    myKeys[e.code] = false;
+    myKeys.current[e.code] = false;
     if(["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) setDirection(e.code);
   }
 
-  function gameLoop(now) { //runs every frame before render
+  function gameLoop(now, x, y, velocity, maxSpeed) { //runs every frame before render
     now *= 0.01;
-    const deltaTime = now - lastRender;
-    lastRender = now;
-    handleInput(thisPage.current, myKeys, velocity, pos[0], pos[1], maxSpeed, deltaTime);
-    if(velocity[0]) setX(prev => prev + velocity[0]);
-    if(velocity[1]) setY(prev => prev + velocity[1]);
-    pos[0] += velocity[0];
-    pos[1] += velocity[1];
-    if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);
-    requestAnimationFrame(gameLoop);
+    const deltaTime = now - lastRender.current;
+    lastRender.current = now;
+    if (true) {
+      handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed);
+      if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
+      if(velocity[1]) setY(prev => prev + velocity[1] * deltaTime);
+      if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);
+    }
   }
-  useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
-
 
   const worldMover = { //clamps map position
     left: `clamp(${window.innerWidth - (mapSize[0])}px, ${-x + window.innerWidth / 2}px, 0px)`,
@@ -143,10 +144,7 @@ function World(){
   function turnPage(){
     let horizontal = true;
     let multiplier = 1;
-    let prevVelocity = velocity;
-    velocity = [0,0];
     turning.current = true;
-    window.removeEventListener("keydown", keyDown);
     if(pageDirection.current === "right") multiplier = -1;
     else if(pageDirection.current === "up") horizontal = false;
     else if(pageDirection.current === "down"){
@@ -156,37 +154,35 @@ function World(){
 
     for (let i = 0; i < 30; i++) {
       setTimeout(_ => {
-        if(horizontal) setNewPageX(prev => prev + (mapSize[0] / 30) * multiplier)
-        else setNewPageY(prev => prev + (mapSize[1] / 30) * multiplier)
-        if(i >= 29) return recenterPage(prevVelocity)
+        if(horizontal) setNewPageX(prev => prev + (window.innerWidth / 30) * multiplier)
+        else setNewPageY(prev => prev + (window.innerHeight / 30) * multiplier)
+        if(i >= 29) return recenterPage()
       }, i*17)
     }
   }
 
-  function recenterPage(prevVelocity){
+  function recenterPage(){
     if(pageDirection.current === "left"){
       pageDirection.current = "right";
-      setX(mapSize[0] - 10);
+      setX(prev => prev + mapSize[0]);
       setNewPageX(0);
       }
     else if(pageDirection.current === "right"){
       pageDirection.current = "left";
-      setX(10);
+      setX(prev => prev - mapSize[0]);
       setNewPageX(0);
       }
     else if(pageDirection.current === "up"){
       pageDirection.current = "down";
-      setY(mapSize[1] - 10);
+      setY(prev => prev + mapSize[1]);
       setNewPageY(0);
       }
     else if(pageDirection.current === "down"){
       pageDirection.current = "right";
-      setY(10);
+      setY(prev => prev - mapSize[1]);
       setNewPageY(0);
     }
-    window.addEventListener("keydown", keyDown)
     turning.current = false
-    velocity = prevVelocity
     let tempPage = thisPage.current
     thisPage.current = nextPage.current;
     nextPage.current = tempPage;
@@ -196,13 +192,13 @@ function World(){
     <div className="world" style={pageTurner}>
       <WorldTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-        {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
-        {mobs(thisPage.current)}
-        <Player pos={[x, y]} velocity={velocity} lastDirection={lastDirection}/>
+        {/* {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
+        {mobs(thisPage.current)} */}
+        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection}/>
       <SkyTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
     </div>
-    <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>X: {x} - Y: {y}</div>
+    <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>Velocity:<br/>X: {velocity.current[0]}<br/>Y: {velocity.current[1]}<br/>pos:<br/>x: {(x+10) % 48}<br/>y: {(y+30) % 48}<br/>index:{(Math.floor((y + 30) / 48) * 40) + Math.ceil((x + 10) / 48) - 1}</div>
   </div>
 }
 

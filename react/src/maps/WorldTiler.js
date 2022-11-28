@@ -17,7 +17,7 @@ function WorldTiler({coords, shift=[0,0] }){
   return <div className="mapGrid" style={mapGrid}>
       {mapCoords.map((item, index) => <div key={index} className="childStyle" style={childStyle(item[0], item[1])}>
         {mapCoords2[index] == 0 ? "" : <div className="secondChildStyle" style={childStyle(mapCoords2[index][0], mapCoords2[index][1])}></div>}
-        {mapColliders[index] == 0 ? "" : <div className="collider secondChildStyle" style={childStyle(mapColliders[index][0], mapColliders[index][1])}></div>}
+        {mapColliders[index] == 0 ? "" : <div className="collider secondChildStyle" style={childStyle(mapColliders[index][0], mapColliders[index][1])}>{index}</div>}
       </div>)}
     </div>
 }

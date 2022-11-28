@@ -6,11 +6,13 @@ function Enemy({type, currentMap, posInit, patrol, randomPath=false}){
   const [velocityState, setVel] = useState([0,0])
   const target = useRef(posInit);
   const pos = useRef(posInit);
+  let posX = pos[0];
+  let posY = pos[1]
   const lastDirection = useRef("KeyS")
   let pathCounter = 0;
   let myKeys = [];
   let lastRender = 0;
-  let maxSpeed = 0.5;
+  let maxSpeed = 8;
   let velocity = [0,0];
   let cancelTimer = "";
 
@@ -23,14 +25,16 @@ function Enemy({type, currentMap, posInit, patrol, randomPath=false}){
     now *= 0.01;
     const deltaTime = now - lastRender;
     lastRender = now;
-    handleInput(currentMap, myKeys, velocity, pos[0], pos[1], maxSpeed, deltaTime);
-    if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
-    if(velocity[0] || velocity[1]){
-      const posX = pos.current[0] + velocity[0]
-      const posY = pos.current[1] + velocity[1]
-      pos.current = [posX, posY]
+    if (deltaTime){
+      handleInput(currentMap, myKeys, velocity, posX, posY, maxSpeed);
+      if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
+      if(velocity[0] || velocity[1]){
+        posX = pos.current[0] + velocity[0] * deltaTime
+        posY = pos.current[1] + velocity[1] * deltaTime
+        pos.current = [posX, posY]
+      }
+      setVel(velocity)
     }
-    setVel(velocity)
     requestAnimationFrame(gameLoop);
   }
 
@@ -57,31 +61,31 @@ function Enemy({type, currentMap, posInit, patrol, randomPath=false}){
     }
   }
   
-  function walk(){
+  function walk(){ //simulates keyboard input to walk to targets
     let horizontal = target.current[0] - pos.current[0]
     let vertical = target.current[1] - pos.current[1]
-    if(horizontal < -5){
+    if(horizontal < -maxSpeed){ //using maxSpeed so that they don't overshoot the mark when they're running.
       myKeys["KeyA"] = true;
     }
     else if(myKeys["KeyA"] == true) {
       myKeys["KeyA"] = false;
       lastDirection.current = "KeyA"
     }
-    if(horizontal > 5){
+    if(horizontal > maxSpeed){
       myKeys["KeyD"] = true;
     }
     else if(myKeys["KeyD"] == true) {
       myKeys["KeyD"] = false;
       lastDirection.current = "KeyD"
     }
-    if(vertical < -5){
+    if(vertical < -maxSpeed){
       myKeys["KeyW"] = true;
     }
     else if(myKeys["KeyW"] == true) {
       myKeys["KeyW"] = false;
       lastDirection.current = "KeyW"
     }
-    if(vertical > 5){
+    if(vertical > maxSpeed){
       myKeys["KeyS"] = true;
     }
     else if(myKeys["KeyS"] == true) {

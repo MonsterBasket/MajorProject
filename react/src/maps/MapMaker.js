@@ -132,7 +132,7 @@ function MapMaker(){
   }
 
   function copyCoords(){
-    navigator.clipboard.writeText(`    case "XXXX":\n      map = [\n        ${JSON.stringify(coords)},\n        ${JSON.stringify(coords2)},\n        ${JSON.stringify(coords3)},\n        ${JSON.stringify(colliders)}\n      ]\n    break;`)
+    navigator.clipboard.writeText(`    case "XXXX":\n      map = [\n        ${JSON.stringify(coords)},\n        ${JSON.stringify(coords2)},\n        ${JSON.stringify(coords3)},\n        ${JSON.stringify(colliders)}\n      ]\n    break;\n`)
   }
   const map = maps("TEST")
   const mapCoords = map[0];

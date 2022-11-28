@@ -1,7 +1,6 @@
-function selectAnimation(pos, velocity, lastDirection = "KeyS"){
-  // console.log(velocity)
+function selectAnimation(pos, velocity, lastDirection){
   const obj = {
-    transform: `translate(${pos[0]}px, ${pos[1]}px) scale(3)`,
+    transform: `translate(${pos[0]}px, ${pos[1]}px) scale(3)`
   }
   if(Math.abs(velocity[0]) > Math.abs(velocity[1])){
    obj.animationName = velocity[0] > 0 ? "walkRight" : "walkLeft";
