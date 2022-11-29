@@ -10,8 +10,8 @@ import handleInput from "../helpers/handleInput";
 
 
 function World(){
-  const [x, setX] = useState(window.innerWidth / 2);
-  const [y, setY] = useState(window.innerHeight / 2);
+  const [x, setX] = useState(400);
+  const [y, setY] = useState(400);
   const velocity = useRef([0,0]);
   const [newPageX, setNewPageX] = useState(0);
   const [newPageY, setNewPageY] = useState(0);
@@ -45,10 +45,10 @@ function World(){
 
   function keyDown(e){
     myKeys.current[e.code] = true;
+    if(["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) setDirection(e.code);
   }
   function keyUp(e){
     myKeys.current[e.code] = false;
-    if(["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) setDirection(e.code);
   }
 
   function gameLoop(now, x, y, velocity, maxSpeed) { //runs every frame before render
@@ -56,7 +56,7 @@ function World(){
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
     if (true) {
-      handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed);
+      velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed);
       if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
       if(velocity[1]) setY(prev => prev + velocity[1] * deltaTime);
       if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);

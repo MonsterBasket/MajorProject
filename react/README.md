@@ -75,10 +75,11 @@ Known Bugs:
   Performance is rubbish - especially when near a zone
   - Probably have to change to Canvas to fix this
 
-  Character animations are occasionally glitchy
+  <!-- Character animations are occasionally glitchy
   - This seems to be only when changing from one animation from another
   - I suspect it has something to do with how the css animation translates from one animation to the next, possibly if it's midway between to frames.
-  - possible solution: is there a reset/stop/clear animation option?
+  - possible solution: is there a reset/stop/clear animation option? -->
+  - solved with different step animation properties and keyframes.
 
   Sprite sheet is not perfect
   - Trees at top all have hard painted shadows, rather than the 50% opacity shadows that the larger trees and stumps and all other objects have.

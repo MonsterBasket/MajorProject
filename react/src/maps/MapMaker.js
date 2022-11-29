@@ -17,9 +17,11 @@ function MapMaker(){
   const [showOpacity, setShowOpacity] = useState(false);
   const [colliderValue, setColliderValue] = useState([["■"],[1,1]]);
   const mapSize = [40,23]
+  let shift = false;
 
   useEffect(() => {
     window.addEventListener("keydown", handleInput);
+    window.addEventListener("keyup", (e) => {if(e.key == "shift") shift = false;})
     return () => {window.removeEventListener("keydown", handleInput);};
   }, [])
 
@@ -40,16 +42,32 @@ function MapMaker(){
       setAddCollider(prev=>!prev);
       setDeleteTile(false);
     }
-    if(e.code == "Numpad1") return setColliderValue([["◣"],[0,2]]);
-    if(e.code == "Numpad2") return setColliderValue([["⬓"],[1,2]]);
-    if(e.code == "Numpad3") return setColliderValue([["◢"],[2,2]]);
-    if(e.code == "Numpad4") return setColliderValue([["◧"],[0,1]]);
-    if(e.code == "Numpad5") return setColliderValue([["■"],[1,1]]);
-    if(e.code == "Numpad6") return setColliderValue([["◨"],[2,1]]);
-    if(e.code == "Numpad7") return setColliderValue([["◤"],[0,0]]);
-    if(e.code == "Numpad8") return setColliderValue([["⬒"],[1,0]]);
-    if(e.code == "Numpad9") return setColliderValue([["◥"],[2,0]]);
-    if(e.code == "Numpad0") return setColliderValue([["X"],0]);
+    if(e.key == "shift") shift = true;
+    if(!shift){
+      if(e.code == "Numpad1") return setColliderValue([["◣"],[0,2]]);
+      if(e.code == "Numpad2") return setColliderValue([["⬓"],[1,2]]);
+      if(e.code == "Numpad3") return setColliderValue([["◢"],[2,2]]);
+      if(e.code == "Numpad4") return setColliderValue([["◧"],[0,1]]);
+      if(e.code == "Numpad5") return setColliderValue([["■"],[1,1]]);
+      if(e.code == "Numpad6") return setColliderValue([["◨"],[2,1]]);
+      if(e.code == "Numpad7") return setColliderValue([["◤"],[0,0]]);
+      if(e.code == "Numpad8") return setColliderValue([["⬒"],[1,0]]);
+      if(e.code == "Numpad9") return setColliderValue([["◥"],[2,0]]);
+      if(e.code == "NumpadDecimal") return setColliderValue([["•"],[1,3]]);      
+    }
+    else{ //shift held down
+      // if(e.code == "Numpad1") return setColliderValue([[""],[]]);
+      if(e.code == "Numpad2") return setColliderValue([["▼"],[2,3]]);
+      // if(e.code == "Numpad3") return setColliderValue([[""],[]]);
+      if(e.code == "Numpad4") return setColliderValue([["◄"],[0,3]]);
+      if(e.code == "Numpad5") return setColliderValue([["╬"],[3,1]]);
+      if(e.code == "Numpad6") return setColliderValue([["►"],[2,3]]);
+      // if(e.code == "Numpad7") return setColliderValue([[""],[]]);
+      if(e.code == "Numpad8") return setColliderValue([["▲"],[0,3]]);
+      // if(e.code == "Numpad9") return setColliderValue([[""],[]]);
+      // if(e.code == "Numpad0") return setColliderValue([[""],0]);
+    }
+    if(e.code == "Numpad0") return setColliderValue([["X"],0]); //whether shift is held or not
 
     if(e.key == "1") {
       setLayer(1);
