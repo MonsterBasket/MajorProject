@@ -1,0 +1,12 @@
+#home, #signup{
+  color: white;
+}
+#home h1{
+
+}
+#homeContainer{
+
+}
+#homeContainer span, #signup span{
+  color: red;
+}

@@ -86,3 +86,6 @@ Known Bugs:
 
   <!-- If two adjoining screens both have monsters the positions will be copied from the previous screen -->
   - solved by giving them keys
+
+  I broke the page turner
+  - I don't have time to look at it, but I'm pretty sure it's because there's no tile off the edge of the page, so detectColliders picks it up as being a collider.
