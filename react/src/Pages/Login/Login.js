@@ -1,10 +1,10 @@
 import { useState } from "react";
-import login from "../helpers/login"
-import '../css/home.css';
+import login from "../../utils/login/login"
+import './home.css';
 import { Link } from "react-router-dom";
-import Title from './subscreens/Title'
+import Title from '../../components/Pages/Title'
 
-function Home(){
+function Login(){
   const [form, setForm] = useState({
     username:"",
     password:"",
@@ -33,4 +33,4 @@ function Home(){
   </div>
 }
 
-export default Home;
+export default Login;

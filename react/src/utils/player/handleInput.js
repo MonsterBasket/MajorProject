@@ -1,4 +1,4 @@
-import detectColliders from "../helpers/detectColliders";
+import detectColliders from "./detectColliders";
 
 function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed){
 

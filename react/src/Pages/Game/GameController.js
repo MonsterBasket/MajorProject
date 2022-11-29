@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
-import '../css/map.css';
-import '../css/player.css';
-import WorldTiler from "./WorldTiler";
-import SkyTiler from "./SkyTiler";
-import Player from "../characters/Player";
-import mobs from "./mobs";
-import maps from "./maps";
-import handleInput from "../helpers/handleInput";
+import './map.css';
+import '../../components/Characters/player.css';
+import WorldTiler from "../../components/Maps/WorldTiler";
+import SkyTiler from "../../components/Maps/SkyTiler";
+import Player from "../../components/Characters/Player";
+import mobs from "../../utils/map/mobs";
+import maps from "../../utils/map/maps";
+import handleInput from "../../utils/player/handleInput";
 
 
 function World(){
@@ -203,8 +203,8 @@ function World(){
     <div className="world" style={pageTurner}>
       <WorldTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-        {/* {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
-        {mobs(thisPage.current)} */}
+        {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
+        {mobs(thisPage.current)}
         <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current}/>
       <SkyTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}

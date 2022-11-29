@@ -1,4 +1,4 @@
-import selectAnimation from "../helpers/selectAnimation"
+import selectAnimation from "../../utils/player/selectAnimation"
 
 function Player({pos, velocity, lastDirection}){
 

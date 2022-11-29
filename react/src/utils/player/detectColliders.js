@@ -1,4 +1,4 @@
-import maps from "../maps/maps";
+import maps from "../map/maps";
 
 function detectColliders(currentMap, x, y){
   const colliders = {

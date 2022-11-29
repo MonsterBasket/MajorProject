@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
-import '../css/map.css';
-import '../css/mapMaker.css';
-import colliderImage from '../images/colliders.png';
-import maps from "./maps"
+import '../Game/map.css';
+import './mapMaker.css';
+import colliderImage from '../../images/utils/colliders.png';
+import maps from "../../utils/map/maps"
 
 
 function MapMaker(){

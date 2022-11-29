@@ -1,4 +1,4 @@
-import Enemy from "../characters/Enemy";
+import Enemy from "../../components/Characters/Skeleton";
 
 function mobs(num, shift=[0,0]){
   const style = {

@@ -1,6 +1,6 @@
 :root{
-  --imgUrl: url("../images/environment-sprites.png");
-  --colliderUrl: url("../images/colliders.png");
+  --imgUrl: url("../../images/environment-sprites.png");
+  --colliderUrl: url("../../images/utils/colliders.png");
 }
 .world{
   position: absolute;
