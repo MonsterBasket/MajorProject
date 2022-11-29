@@ -1,6 +1,16 @@
 function selectAnimation(pos, velocity, lastDirection){
   const obj = {
-    transform: `translate(${pos[0]}px, ${pos[1]}px) scale(3)`
+    transform: `translate(${pos[0]}px, ${pos[1]}px) scale(3)`,
+    animationTimingFunction: "steps(5, end)"
+
+  }
+  if(lastDirection.substring(0, 5) === "Space"){
+    obj.animationTimingFunction = "steps(3, end)"
+    if(lastDirection.substring(6) === "KeyW") obj.animationName = "attackUp";
+    else if(lastDirection.substring(6) === "KeyS") obj.animationName = "attackDown";
+    else if(lastDirection.substring(6) === "KeyA") obj.animationName = "attackLeft";
+    else if(lastDirection.substring(6) === "KeyD") obj.animationName = "attackRight";
+    return obj
   }
   if(Math.abs(velocity[0]) > Math.abs(velocity[1]) || 
     (Math.abs(velocity[0]) > Math.abs(velocity[1] * 0.5) && (lastDirection == "KeyA" || lastDirection == "KeyD"))){

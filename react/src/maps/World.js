@@ -15,8 +15,8 @@ function World(){
   const velocity = useRef([0,0]);
   const [newPageX, setNewPageX] = useState(0);
   const [newPageY, setNewPageY] = useState(0);
-  const [lastDirection, setDirection] = useState("KeyS"); //sets initial animation to "idleDown"
-  const myKeys = useRef([]);
+  const lastDirection = useRef("KeyS"); //sets initial animation to "idleDown"
+  const myKeys = useRef({});
   const maxSpeed = 30;
   const mapSize = [40 * 48, 23 * 48]; //I'll extract this from individual map details later
   const [re, refresh] = useState([]);
@@ -27,6 +27,7 @@ function World(){
   const pageReady = useRef(false);
   const shift = useRef([0,0]);
   const turning = useRef(false);
+  const attacking = useRef(false);
 
   useEffect(() => {
     window.addEventListener("keydown", keyDown);
@@ -38,14 +39,24 @@ function World(){
   }, [])
 
   useEffect(() => {
-    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed))
+    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed, attacking))
   })
 
   useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
 
   function keyDown(e){
-    myKeys.current[e.code] = true;
-    if(["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) setDirection(e.code);
+    if (!attacking.current) myKeys.current[e.code] = true;
+    if (!attacking.current && ["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) lastDirection.current = e.code;
+    if (!attacking && e.code === "Space"){
+      attacking.current = true
+      myKeys.current = {}
+      myKeys.current["Space"] = true;
+      console.log(myKeys)
+      const keyHolder = lastDirection.current;
+      lastDirection.current = `Space ${lastDirection.current}`
+      setInterval(() => attacking.current = false, 500) // prevent input for 0.5 seconds
+      setInterval(() => lastDirection.current = keyHolder, 700) // allow animation to play for full 0.7 seconds if no input
+    }
   }
   function keyUp(e){
     myKeys.current[e.code] = false;
@@ -194,11 +205,11 @@ function World(){
       {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
         {/* {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
         {mobs(thisPage.current)} */}
-        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection}/>
+        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current}/>
       <SkyTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
     </div>
-    <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>Velocity:<br/>X: {velocity.current[0]}<br/>Y: {velocity.current[1]}<br/>pos:<br/>x: {(x+10) % 48}<br/>y: {(y+30) % 48}<br/>index:{(Math.floor((y + 30) / 48) * 40) + Math.ceil((x + 10) / 48) - 1}</div>
+    <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>velocity: {Math.floor(velocity.current[0])} - {Math.floor(velocity.current[1])}<br/>lastDirection: {lastDirection.current}<br/>Attacking: {`${attacking.current}`}</div>
   </div>
 }
 

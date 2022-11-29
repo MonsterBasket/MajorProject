@@ -1,9 +1,11 @@
 import detectColliders from "../helpers/detectColliders";
 
 function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed){
-  // console.log(x, y)
+
+  if(myKeys["Space"]) return [0,0] // completely escape and stop character movement if player is attacking - if I ever implement slippery surfaces this will need to change
+
   let tempVelocity = velocity;
-  // acceleration - had to merge some of the diagonal collider logic in here too
+  // acceleration
   const access = detectColliders(currentMap, x, y);
   if(myKeys["KeyA"] || myKeys["KeyD"] || myKeys["KeyS"] || myKeys["KeyW"]){
     if(myKeys["KeyA"] && tempVelocity[0] > -maxSpeed && access.left)  tempVelocity[0] -= 3;
@@ -15,8 +17,8 @@ function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed){
   // colliders
   // diagonal hard stops
   if(Math.abs(Math.abs(tempVelocity[0]) - Math.abs(tempVelocity[1])) < 5){ // check if x and y are roughly equivalent = going diagonal
-    if(tempVelocity[0] > 0 && ((tempVelocity[1] > 0 && !access.ddr) || (tempVelocity[1] < 0 && !access.dur))) tempVelocity = [0,0] // going right && ((going down && blocked) || (going up && blocked))
-    if(tempVelocity[0] < 0 && ((tempVelocity[1] > 0 && !access.ddl) || (tempVelocity[1] < 0 && !access.dul))) tempVelocity = [0,0] // going left  && ((going down && blocked) || (going up && blocked))
+    if(tempVelocity[0] > 0 && ((tempVelocity[1] > 0 && !access.ddr) || (tempVelocity[1] < 0 && !access.dur))) return [0,0] // going right && ((going down && blocked) || (going up && blocked))
+    if(tempVelocity[0] < 0 && ((tempVelocity[1] > 0 && !access.ddl) || (tempVelocity[1] < 0 && !access.dul))) return [0,0] // going left  && ((going down && blocked) || (going up && blocked))
   }
   
   //going right

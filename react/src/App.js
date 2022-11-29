@@ -7,7 +7,7 @@ function App() {
   return (
     <div className="App">
       {/* <MapMaker /> */}
-      <World />
+      {/* <World /> */}
       {/* <Hud /> */}
     </div>
   );

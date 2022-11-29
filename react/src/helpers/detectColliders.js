@@ -93,7 +93,6 @@ function detectColliders(currentMap, x, y){
   colliders.ddl = !check([[0,2]], onPos) 
   colliders.ddr = !check([[2,2]], onPos) 
 
-  console.log(colliders)
 return colliders;
 }
 
