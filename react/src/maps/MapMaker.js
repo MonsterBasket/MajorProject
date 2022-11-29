@@ -17,72 +17,72 @@ function MapMaker(){
   const [showOpacity, setShowOpacity] = useState(false);
   const [colliderValue, setColliderValue] = useState([["■"],[1,1]]);
   const mapSize = [40,23]
-  let shift = false;
+  let zed = false;
 
   useEffect(() => {
     window.addEventListener("keydown", handleInput);
-    window.addEventListener("keyup", (e) => {if(e.key == "shift") shift = false;})
+    window.addEventListener("keyup", (e) => {if(e.key === "z") zed = false;})
     return () => {window.removeEventListener("keydown", handleInput);};
   }, [])
 
   function handleInput(e){
-    if(e.key == "ArrowRight")           return setX(prev=>prev - 48);
-    if(e.key == "ArrowLeft")            return setX(prev=>prev + 48);
-    if(e.key == "ArrowUp")              return setY(prev=>prev + 48);
-    if(e.key == "ArrowDown")            return setY(prev=>prev - 48);
-    if(e.key == "w" && previewY >= 0)   return setPreviewY(prev=>prev - 1);
-    if(e.key == "s" && previewY <= 209) return setPreviewY(prev=>prev + 1);
-    if(e.key == "a" && previewX >=0)    return setPreviewX(prev=>prev - 1);
-    if(e.key == "d" && previewX <= 119) return setPreviewX(prev=>prev + 1);
-    if(e.key == "q"){
+    if(e.key === "ArrowRight")           return setX(prev=>prev - 48);
+    if(e.key === "ArrowLeft")            return setX(prev=>prev + 48);
+    if(e.key === "ArrowUp")              return setY(prev=>prev + 48);
+    if(e.key === "ArrowDown")            return setY(prev=>prev - 48);
+    if(e.key === "w" && previewY >= 0)   return setPreviewY(prev=>prev - 1);
+    if(e.key === "s" && previewY <= 209) return setPreviewY(prev=>prev + 1);
+    if(e.key === "a" && previewX >=0)    return setPreviewX(prev=>prev - 1);
+    if(e.key === "d" && previewX <= 119) return setPreviewX(prev=>prev + 1);
+    if(e.key === "q"){
       setDeleteTile(prev=>!prev);
       setAddCollider(false);
     }
-    if(e.key == "e"){
+    if(e.key === "e"){
       setAddCollider(prev=>!prev);
       setDeleteTile(false);
     }
-    if(e.key == "shift") shift = true;
-    if(!shift){
-      if(e.code == "Numpad1") return setColliderValue([["◣"],[0,2]]);
-      if(e.code == "Numpad2") return setColliderValue([["⬓"],[1,2]]);
-      if(e.code == "Numpad3") return setColliderValue([["◢"],[2,2]]);
-      if(e.code == "Numpad4") return setColliderValue([["◧"],[0,1]]);
-      if(e.code == "Numpad5") return setColliderValue([["■"],[1,1]]);
-      if(e.code == "Numpad6") return setColliderValue([["◨"],[2,1]]);
-      if(e.code == "Numpad7") return setColliderValue([["◤"],[0,0]]);
-      if(e.code == "Numpad8") return setColliderValue([["⬒"],[1,0]]);
-      if(e.code == "Numpad9") return setColliderValue([["◥"],[2,0]]);
-      if(e.code == "NumpadDecimal") return setColliderValue([["•"],[1,3]]);      
+    if(e.key === "z") zed = true;
+    if(!zed){
+      if(e.code === "Numpad1") return setColliderValue([["◣"],[0,2]]);
+      if(e.code === "Numpad2") return setColliderValue([["⬓"],[1,2]]);
+      if(e.code === "Numpad3") return setColliderValue([["◢"],[2,2]]);
+      if(e.code === "Numpad4") return setColliderValue([["◧"],[0,1]]);
+      if(e.code === "Numpad5") return setColliderValue([["■"],[1,1]]);
+      if(e.code === "Numpad6") return setColliderValue([["◨"],[2,1]]);
+      if(e.code === "Numpad7") return setColliderValue([["◤"],[0,0]]);
+      if(e.code === "Numpad8") return setColliderValue([["⬒"],[1,0]]);
+      if(e.code === "Numpad9") return setColliderValue([["◥"],[2,0]]);
+      if(e.code === "NumpadDecimal") return setColliderValue([["•"],[1,3]]);      
     }
     else{ //shift held down
-      // if(e.code == "Numpad1") return setColliderValue([[""],[]]);
-      if(e.code == "Numpad2") return setColliderValue([["▼"],[2,3]]);
-      // if(e.code == "Numpad3") return setColliderValue([[""],[]]);
-      if(e.code == "Numpad4") return setColliderValue([["◄"],[0,3]]);
-      if(e.code == "Numpad5") return setColliderValue([["╬"],[3,1]]);
-      if(e.code == "Numpad6") return setColliderValue([["►"],[2,3]]);
-      // if(e.code == "Numpad7") return setColliderValue([[""],[]]);
-      if(e.code == "Numpad8") return setColliderValue([["▲"],[0,3]]);
-      // if(e.code == "Numpad9") return setColliderValue([[""],[]]);
-      // if(e.code == "Numpad0") return setColliderValue([[""],0]);
+      // if(e.code === "Numpad1") return setColliderValue([[""],[]]);
+      if(e.code === "Numpad2") return setColliderValue([["▼"],[3,2]]);
+      // if(e.code === "Numpad3") return setColliderValue([[""],[]]);
+      if(e.code === "Numpad4") return setColliderValue([["◄"],[0,3]]);
+      if(e.code === "Numpad5") return setColliderValue([["╬"],[3,1]]);
+      if(e.code === "Numpad6") return setColliderValue([["►"],[2,3]]);
+      // if(e.code === "Numpad7") return setColliderValue([[""],[]]);
+      if(e.code === "Numpad8") return setColliderValue([["▲"],[3,0]]);
+      // if(e.code === "Numpad9") return setColliderValue([[""],[]]);
+      // if(e.code === "Numpad0") return setColliderValue([[""],0]);
     }
-    if(e.code == "Numpad0") return setColliderValue([["X"],0]); //whether shift is held or not
+    if(e.code === "Numpad0") return setColliderValue([["X"],0]); //whether shift is held or not
 
-    if(e.key == "1") {
+    if(e.key === "1") {
       setLayer(1);
       setAddCollider(false);
     }
-    if(e.key == "2"){
+    if(e.key === "2"){
       setLayer(2);
       setAddCollider(false);
     }
-    if(e.key == "3"){
+    if(e.key === "3"){
       setLayer(3);
       setAddCollider(false);
     }
 
-    if(e.key == "`") setShowOpacity(prev => !prev)
+    if(e.key === "`") setShowOpacity(prev => !prev)
   }
 
   const worldMover = {
@@ -133,11 +133,11 @@ function MapMaker(){
       setColliders(newColliders)
     }
     else{
-      const newArray = (layer == 1) ? coords : (layer == 2) ?  coords2 : coords3;
+      const newArray = (layer === 1) ? coords : (layer === 2) ?  coords2 : coords3;
       newArray[index] = deleteTile ? 0 : [previewX, previewY];
-      if(layer == 1) setCoords(newArray);
-      else if(layer == 2) setCoords2(newArray);
-      else if(layer == 3) setCoords3(newArray);
+      if(layer === 1) setCoords(newArray);
+      else if(layer === 2) setCoords2(newArray);
+      else if(layer === 3) setCoords3(newArray);
     }
     refresh([]);
   }
@@ -165,10 +165,10 @@ function MapMaker(){
 
   return <div className="world" style={worldMover}>
     <div className="mapGrid" style={mapGrid}>
-      {coords.map((item, index) => <div key={index} className={`childStyle${!showOpacity ? "" : layer == 1 ? " highlight" : " transparent"}`} style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
-        {coords2[index] == 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer == 2 ? " highlight" : " transparent"}`} style={childStyle(coords2[index][0], coords2[index][1])}></div>}
-        {coords3[index] == 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer == 3 ? " highlight" : " transparent"}`} style={childStyle(coords3[index][0], coords3[index][1])}></div>}
-        {colliders[index] == 0 ? "" : <div style={colliderStyle(colliders[index][0], colliders[index][1])}></div>}
+      {coords.map((item, index) => <div key={index} className={`childStyle${!showOpacity ? "" : layer === 1 ? " highlight" : " transparent"}`} style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
+        {coords2[index] === 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer === 2 ? " highlight" : " transparent"}`} style={childStyle(coords2[index][0], coords2[index][1])}></div>}
+        {coords3[index] === 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer === 3 ? " highlight" : " transparent"}`} style={childStyle(coords3[index][0], coords3[index][1])}></div>}
+        {colliders[index] === 0 ? "" : <div style={colliderStyle(colliders[index][0], colliders[index][1])}></div>}
       </div>)}
     </div>
     <div className="mapMaker">

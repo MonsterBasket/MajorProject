@@ -55,7 +55,7 @@ function World(){
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
-    if (true) {
+    if (deltaTime) {
       velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed);
       if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
       if(velocity[1]) setY(prev => prev + velocity[1] * deltaTime);

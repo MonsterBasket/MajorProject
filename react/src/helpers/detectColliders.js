@@ -56,17 +56,17 @@ function detectColliders(currentMap, x, y){
     colliders.rd  = !(check([[0,2],[0,1],[1,1],[0,0],[1,0],[0,3],[3,0]], dr)    && ((x + 10) % 48) > 33 && ((y + 30) % 48) > 33); // within 15 pixels of right  && within 15 pixels of bottom
 
   // sides of half sized
-  colliders.left  = !(check([[1,2]], left)  && ((y + 30) % 48) > 20) // ⬓ - greater than 20 pixels into top
-  colliders.right = !(check([[1,2]], right) && ((y + 30) % 48) > 20) // ⬓ - greater than 20 pixels into top
-  colliders.up    = !(check([[0,1]], up)    && ((x + 10) % 48) < 28) // ◧ - greater than 20 pixels into right
-  colliders.down  = !(check([[0,1]], down)  && ((x + 10) % 48) < 28) // ◧ - greater than 20 pixels into right
-  colliders.up    = !(check([[2,1]], up)    && ((x + 10) % 48) > 20) // ◨ - greater than 20 pixels into left
-  colliders.down  = !(check([[2,1]], down)  && ((x + 10) % 48) > 20) // ◨ - greater than 20 pixels into left
-  colliders.left  = !(check([[1,0]], left)  && ((y + 30) % 48) < 28) // ⬒ - greater than 20 pixels into bottom
-  colliders.right = !(check([[1,0]], right) && ((y + 30) % 48) < 28) // ⬒ - greater than 20 pixels into bottom
+  if(check([[1,2]], left)  && ((y + 30) % 48) > 20 && ((x + 10) % 48) < 15) colliders.left  = false; // ⬓ - greater than 20 pixels from top    and within 15 pixels from left
+  if(check([[1,2]], right) && ((y + 30) % 48) > 20 && ((x + 10) % 48) > 33) colliders.right = false; // ⬓ - greater than 20 pixels from top    and within 15 pixels from right
+  if(check([[0,1]], up)    && ((x + 10) % 48) < 28 && ((y + 30) % 48) < 15) colliders.up    = false; // ◧ - greater than 20 pixels from right  and within 15 pixels from up
+  if(check([[0,1]], down)  && ((x + 10) % 48) < 28 && ((y + 30) % 48) > 33) colliders.down  = false; // ◧ - greater than 20 pixels from right  and within 15 pixels from down
+  if(check([[2,1]], up)    && ((x + 10) % 48) > 20 && ((y + 30) % 48) < 15) colliders.up    = false; // ◨ - greater than 20 pixels from left   and within 15 pixels from up
+  if(check([[2,1]], down)  && ((x + 10) % 48) > 20 && ((y + 30) % 48) > 33) colliders.down  = false; // ◨ - greater than 20 pixels from left   and within 15 pixels from down
+  if(check([[1,0]], left)  && ((y + 30) % 48) < 28 && ((x + 10) % 48) < 15) colliders.left  = false; // ⬒ - greater than 20 pixels from bottom and within 15 pixels from left
+  if(check([[1,0]], right) && ((y + 30) % 48) < 28 && ((x + 10) % 48) > 33) colliders.right = false; // ⬒ - greater than 20 pixels from bottom and within 15 pixels from right
 
 
-  if(onPos) return colliders //ignore the rest of the code is current block is empty
+  if(!onPos) return colliders //ignore the rest of the code is current block is empty
 
   // escape (if you glitch onto a collider)
   colliders.block = !onPos || !check([[1,1]], onPos)
@@ -74,32 +74,26 @@ function detectColliders(currentMap, x, y){
   
   // post
   if(check([[1,3]], onPos)){
-    // between 5 and 15 pixels from top and within 15 from each side, prevent down movement
-    if(15 < ((x + 10) % 48) < 33){ // between 5 and 15 pixels from each side
-      colliders.down = !(5  < ((y + 30) % 48) < 15); //between 5 and 15 pixels from top
-      colliders.up   = !(33 < ((y + 30) % 48) < 43);
-    }
-    else if(15 < ((x + 30) % 48) < 33){
-      colliders.right = !(5  < ((x + 10) % 48) < 15);
-      colliders.left  = !(33 < ((x + 10) % 48) < 33);
+    if(15 < ((x + 10) % 48) < 33  &&  15 < ((y + 30) % 48) < 33){ // within center 18 pixels
+      (x + 10) % 48 > 24 ? colliders.left = false : colliders.right = false; // if closest to the left, stop right and vice versa
+      (y + 30) % 48 > 24 ? colliders.up   = false : colliders.down  = false;
     }
   }
 
   // half sized
-  colliders.down  = !(check([[1,2]], onPos) && ((y + 30) % 48) > 15) // ⬓ - greater than 15 pixels into top
-  colliders.left  = !(check([[0,1]], onPos) && ((x + 10) % 48) < 33) // ◧ - greater than 15 pixels into right
-  colliders.right = !(check([[2,1]], onPos) && ((x + 10) % 48) > 15) // ◨ - greater than 15 pixels into left
-  colliders.up    = !(check([[1,0]], onPos) && ((y + 30) % 48) < 15) // ⬒ - greater than 15 pixels into bottom
+  if(check([[1,2]], onPos) && ((y + 30) % 48) > 15) colliders.down  = false; // ⬓ - greater than 15 pixels into top
+  if(check([[0,1]], onPos) && ((x + 10) % 48) < 33) colliders.left  = false; // ◧ - greater than 15 pixels into right
+  if(check([[2,1]], onPos) && ((x + 10) % 48) > 15) colliders.right = false; // ◨ - greater than 15 pixels into left
+  if(check([[1,0]], onPos) && ((y + 30) % 48) < 33) colliders.up    = false; // ⬒ - greater than 15 pixels into bottom
 
 
   // diagonals
-  colliders.dul = !onPos || check([[0,0]], onPos) 
-  colliders.dur = !onPos || check([[2,0]], onPos) 
-  colliders.ddl = !onPos || check([[0,2]], onPos) 
-  colliders.ddr = !onPos || check([[2,2]], onPos) 
+  colliders.dul = !check([[0,0]], onPos) 
+  colliders.dur = !check([[2,0]], onPos) 
+  colliders.ddl = !check([[0,2]], onPos) 
+  colliders.ddr = !check([[2,2]], onPos) 
 
   console.log(colliders)
-  // debugger
 return colliders;
 }
 
@@ -115,7 +109,7 @@ export default detectColliders;
 // ⬓ = [1,2] = d
 // ◢ = [2,2] = dr
 // ◧ = [0,1] = l
-// ⯀ = [1,1] = whole
+// ⯀ = [1,1] = block
 // ◨ = [2,1] = r
 // ◤ = [0,0] = ul
 // ⬒ = [1,0] = u

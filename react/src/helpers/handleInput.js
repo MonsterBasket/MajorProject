@@ -13,61 +13,58 @@ function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed){
   }
 
   // colliders
-  // diagonal stops
+  // diagonal hard stops
   if(Math.abs(Math.abs(tempVelocity[0]) - Math.abs(tempVelocity[1])) < 5){ // check if x and y are roughly equivalent = going diagonal
-  // if(Math.abs(velocity[0]) > 5 && Math.abs(velocity[1]) > 5){ // check if x and y are both active = going diagonal
-    if(tempVelocity[0] > 0){ // going right
-      if(tempVelocity[1] > 0 && !access.ddr){ //going down
-        tempVelocity[0] = 0;
-        tempVelocity[1] = 0;
-      }
-      if(tempVelocity[1] < 0 && !access.dur){ //going up
-        tempVelocity[0] = 0;
-        tempVelocity[1] = 0;
-      }
-    }
-    if(tempVelocity[0] < 0){ //going left
-      if(tempVelocity[1] > 0 && !access.ddl){ //going down
-        tempVelocity[0] = 0;
-        tempVelocity[1] = 0;
-      }
-      if(tempVelocity[1] < 0 && !access.dul){ //going up
-        tempVelocity[0] = 0;
-        tempVelocity[1] = 0;
-      }  
-    }
+    if(tempVelocity[0] > 0 && ((tempVelocity[1] > 0 && !access.ddr) || (tempVelocity[1] < 0 && !access.dur))) tempVelocity = [0,0] // going right && ((going down && blocked) || (going up && blocked))
+    if(tempVelocity[0] < 0 && ((tempVelocity[1] > 0 && !access.ddl) || (tempVelocity[1] < 0 && !access.dul))) tempVelocity = [0,0] // going left  && ((going down && blocked) || (going up && blocked))
   }
-
-  if(tempVelocity[0] > 0){ //going right
+  
+  //going right
+  if(tempVelocity[0] > 0){
     if(!access.right) tempVelocity[0] = 0; //stop if hit collider directly
-    else if(myKeys["KeyD"]){
-      if(!access.dr && access.ur && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = -tempVelocity[0]; // push up if collider is diagonal
-      else if(!access.ur && access.dr && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = tempVelocity[0];
-    }
-  }
-  if(tempVelocity[0] < 0){ //going left
-    if(!access.left) tempVelocity[0] = 0;
-    else if(myKeys["KeyA"]){
-      if(!access.dl && access.ul && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = tempVelocity[0];
-      else if(!access.ul && access.dl && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = -tempVelocity[0];
-    }
-  }
-  if(tempVelocity[1] > 0){ //going down
-    if(!access.down) tempVelocity[1] = 0;
-    else if(myKeys["KeyS"]){
-      if(!access.dr && access.dl && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = -tempVelocity[1];
-      else if(!access.dl && access.dr && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = tempVelocity[1];
-    }
-  }
-  if(tempVelocity[1] < 0){ //going up
-    if(!access.up) tempVelocity[1] = 0;
-    else if(myKeys["KeyW"]){
-      if(!access.ul && access.ur && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = -tempVelocity[1];
-      else if(!access.ur && access.ul && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = tempVelocity[1];
-    }
+    else if((!access.rd && tempVelocity[1] > 0) || (!access.ru && tempVelocity[1] < 0)) tempVelocity[1] = 0; //prevent going up or down while going right if the next block doesn't allow it
+    // diagonal
+    if(!access.ddr && access.dur && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = -tempVelocity[0] * 1.05; // push up if collider is diagonal
+    else if(!access.dur && access.ddr && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = tempVelocity[0] * 1.05;
   }
 
-  // slowing and stopping
+  //going left
+  if(tempVelocity[0] < 0){
+    if(!access.left) tempVelocity[0] = 0;
+    else if((!access.ld && tempVelocity[1] > 0) || (!access.lu && tempVelocity[1] < 0)) tempVelocity[1] = 0;
+    // diagonal
+    if(!access.ddl && access.dul && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = tempVelocity[0] * 1.05;
+    else if(!access.dul && access.ddl && Math.abs(tempVelocity[0]) > Math.abs(tempVelocity[1])) tempVelocity[1] = -tempVelocity[0] * 1.05;
+  }
+
+  //going down
+  if(tempVelocity[1] > 0){
+    if(!access.down) tempVelocity[1] = 0;
+    else if((!access.dr && tempVelocity[0] > 0) || (!access.dl && tempVelocity[0] < 0)) tempVelocity[0] = 0;
+    // diagonal
+    if(!access.ddr && access.ddl && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = -tempVelocity[1] * 1.05;
+    else if(!access.ddl && access.ddr && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = tempVelocity[1] * 1.05;
+  }
+
+  //going up
+  if(tempVelocity[1] < 0){
+    if(!access.up) tempVelocity[1] = 0;
+    else if((!access.ur && tempVelocity[0] > 0) || (!access.ul && tempVelocity[0] < 0)) tempVelocity[0] = 0;
+    // diagonal
+    if(!access.dul && access.dur && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = -tempVelocity[1] * 1.05;
+    else if(!access.dur && access.dul && Math.abs(tempVelocity[1]) > Math.abs(tempVelocity[0])) tempVelocity[0] = tempVelocity[1] * 1.05;
+  }
+
+  // slow collider
+  if(!access.slow){ // all colliders take effect when false
+    maxSpeed = maxSpeed * 0.5; // reduces maxSpeed for the rest of the script
+    if(tempVelocity[0] >  maxSpeed) tempVelocity[0] = maxSpeed;
+    if(tempVelocity[0] < -maxSpeed) tempVelocity[0] = -maxSpeed;
+    if(tempVelocity[1] >  maxSpeed) tempVelocity[1] = maxSpeed;
+    if(tempVelocity[1] < -maxSpeed) tempVelocity[1] = -maxSpeed;
+  }
+
+  // slowing and stopping - no colliders, but maxSpeed is reduced from above statement if player is on a slow collider.
   if(Math.abs(tempVelocity[0]) > 0 && !myKeys["KeyA"] && !myKeys["KeyD"]){
     if(Math.abs(tempVelocity[0]) < 2.1) tempVelocity[0] = 0; // stopping - note that 2.1 has to be higher than the 2 in slowing below
     else if(myKeys["KeyW"] || myKeys["KeyS"]){ // slow faster if changing direction
@@ -90,7 +87,7 @@ function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed){
       if(tempVelocity[1] > 0) tempVelocity[1] -= 2;
     }
   }
-  return velocity;
+  return tempVelocity;
 }
 
 export default handleInput;
