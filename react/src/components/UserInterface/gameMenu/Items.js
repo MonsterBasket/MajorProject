@@ -7,14 +7,14 @@ function displayItems(){
   }
 }
 
-function Inventory(){
+function Items(){
 
-  return <div id="inventory">
-    <h2>Inventory</h2>
-      <div id="inventorySlots"> {/* css grid, 5 rows of 10 */}
+  return <div id="items">
+    <h2>Items</h2>
+      <div id="itemSlots"> {/* css grid, 5 rows of 10 */}
         {displayItems()}
       </div>
     </div>
 }
 
-export default Inventory;
+export default Items;

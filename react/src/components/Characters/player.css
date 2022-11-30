@@ -43,20 +43,20 @@
 }
 /* ------- Attack -----------*/
 @keyframes attackLeft {
-  from {background-position: calc(1 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
-  to   {background-position: calc(7 * -16px + 8px) calc(7 * -16px + 8px); width: 32px;}
+  from {background-position: calc(1 * -16px + 8px) calc(7 * -16px + 8px); left: -10px;  width: 32px;}
+  to   {background-position: calc(7 * -16px + 8px) calc(7 * -16px + 8px); left: -10px;  width: 32px;}
 }
 @keyframes attackRight {
-  from {background-position: calc(1 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
-  to   {background-position: calc(7 * -16px + 8px) calc(3 * -16px + 8px); width: 32px;}
+  from {background-position: calc(1 * -16px + 8px) calc(3 * -16px + 8px); left: -8px;  width: 32px;}
+  to   {background-position: calc(7 * -16px + 8px) calc(3 * -16px + 8px); left: -8px;  width: 32px;}
 }
 @keyframes attackDown {
-  from {background-position: calc(1 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
-  to   {background-position: calc(7 * -16px + 8px) calc(5 * -16px + 8px); width: 32px;}
+  from {background-position: calc(1 * -16px + 8px) calc(5 * -16px + 8px); left: -9px;  width: 32px;}
+  to   {background-position: calc(7 * -16px + 8px) calc(5 * -16px + 8px); left: -9px;  width: 32px;}
 }
 @keyframes attackUp {
-  from {background-position: calc(1 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
-  to   {background-position: calc(7 * -16px + 8px) calc(1 * -16px + 8px); width: 32px;}
+  from {background-position: calc(1 * -16px + 8px) calc(1 * -16px + 8px); left: -10px;  width: 32px;}
+  to   {background-position: calc(7 * -16px + 8px) calc(1 * -16px + 8px); left: -10px;  width: 32px;}
 }
 /*---- idle ---*/
 @keyframes idleLeft {

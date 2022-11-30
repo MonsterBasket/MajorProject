@@ -39,35 +39,35 @@ function World(){
   }, [])
 
   useEffect(() => {
-    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed, attacking))
+    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed, attacking.current))
   })
 
   useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
 
   function keyDown(e){
-    if (!attacking.current) myKeys.current[e.code] = true;
+    myKeys.current[e.code] = true;
     if (!attacking.current && ["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) lastDirection.current = e.code;
-    if (!attacking && e.code === "Space"){
-      attacking.current = true
-      myKeys.current = {}
-      myKeys.current["Space"] = true;
-      console.log(myKeys)
-      const keyHolder = lastDirection.current;
+    else if(lastDirection.current.substring(0, 5) != "Space"){
+      let keyHolder = lastDirection.current
       lastDirection.current = `Space ${lastDirection.current}`
-      setInterval(() => attacking.current = false, 500) // prevent input for 0.5 seconds
-      setInterval(() => lastDirection.current = keyHolder, 700) // allow animation to play for full 0.7 seconds if no input
+      setTimeout(() => lastDirection.current = keyHolder, 300)
     }
+    console.log(attacking.current)
   }
   function keyUp(e){
     myKeys.current[e.code] = false;
   }
 
-  function gameLoop(now, x, y, velocity, maxSpeed) { //runs every frame before render
+  function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
-    if (deltaTime) {
-      velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed);
+    if (deltaTime) { //skips evaluations if no time has passed since last call (which strangely does happen)
+      if(myKeys.current["Space"] == true){
+        attacking = true;
+        setTimeout((attacking) => attacking = false, 300);
+      }
+      velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed, attacking);
       if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
       if(velocity[1]) setY(prev => prev + velocity[1] * deltaTime);
       if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);

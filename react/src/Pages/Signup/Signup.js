@@ -1,5 +1,7 @@
 import { useRef, useState } from "react";
 import login from "../../utils/login/login"
+import Title from '../../components/Pages/Title'
+
 
 function Signup(){
   const url = "http://localhost:3001/"
@@ -66,10 +68,10 @@ function Signup(){
 
   return <div id="signup">
     <div className="smallHeading">
-    <h3>Monster Basket</h3>
+    <Title />
     </div>
     <div>
-      <h3>Login</h3>
+      <h3>Create Account</h3>
       <div>
         <input type="text" name="username" placeholder="Choose a Username" onChange={handleChange} value={form.username}/><br/>
         <span>{form.usernameError}</span><br/>

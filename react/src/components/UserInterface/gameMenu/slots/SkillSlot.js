@@ -1,6 +1,6 @@
-function ItemSlot(item){
+function SkillSlot(item){
 
   return <div class="itemSlot slot">{item}</div>
 }
 
-export default ItemSlot;
+export default SkillSlot;

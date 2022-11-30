@@ -66,7 +66,7 @@ function detectColliders(currentMap, x, y){
   if(check([[1,0]], right) && ((y + 30) % 48) < 28 && ((x + 10) % 48) > 33) colliders.right = false; // ⬒ - greater than 20 pixels from bottom and within 15 pixels from right
 
 
-  if(!onPos) return colliders //ignore the rest of the code is current block is empty
+  if(!onPos) return colliders //ignore the rest of the code if current block is empty
 
   // escape (if you glitch onto a collider)
   colliders.block = !onPos || !check([[1,1]], onPos)
@@ -88,10 +88,10 @@ function detectColliders(currentMap, x, y){
 
 
   // diagonals
-  colliders.dul = !check([[0,0]], onPos) 
-  colliders.dur = !check([[2,0]], onPos) 
-  colliders.ddl = !check([[0,2]], onPos) 
-  colliders.ddr = !check([[2,2]], onPos) 
+  colliders.dul = !(check([[0,0]], onPos) && (x + 10) % 48 - (48 - ((y + 30) % 48)) < 15)
+  colliders.dur = !(check([[2,0]], onPos) && (x + 10) % 48 - (y + 30) % 48 > -15)
+  colliders.ddl = !(check([[0,2]], onPos) && (x + 10) % 48 - (y + 30) % 48 < 15)
+  colliders.ddr = !(check([[2,2]], onPos) && (x + 10) % 48 - (48 - ((y + 30) % 48)) > -15)
 
 return colliders;
 }

@@ -1,8 +1,12 @@
-#home, #signup{
+#home, #signup, #selectCharacter, #createCharacter{
   color: white;
+  text-align: center;
 }
 #home h1{
-
+  font-size: 5em;
+}
+#signup h1, #selectCharacter h1, #createCharacter h1{
+  font-size: 3em;
 }
 #homeContainer{
 

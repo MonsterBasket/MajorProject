@@ -3,7 +3,7 @@ import './App.css';
 import Hud from "./components/UserInterface/Hud"
 import MapMaker from "./Pages/DevTools/MapMaker"
 import GameController from "./Pages/Game/GameController"
-import Login from "./Pages/Login/Login"
+import Login from "./Pages/Login/Login.js"
 import Signup from "./Pages/Signup/Signup"
 import SelectCharacter from "./Pages/SelectCharacter/SelectCharacter"
 import CreateCharacter from "./Pages/CreateCharacter/CreateCharacter"
