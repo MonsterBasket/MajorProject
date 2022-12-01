@@ -55,7 +55,7 @@ function World(){
     console.log(attacking.current)
   }
   function keyUp(e){
-    myKeys.current[e.code] = false;
+    if(e.code != "Space") myKeys.current[e.code] = false;
   }
 
   function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
@@ -65,7 +65,10 @@ function World(){
     if (deltaTime) { //skips evaluations if no time has passed since last call (which strangely does happen)
       if(myKeys.current["Space"] == true){
         attacking = true;
-        setTimeout((attacking) => attacking = false, 300);
+        setTimeout((attacking) => {
+          attacking = false;
+          myKeys.current["Space"] = false;
+        }, 300);
       }
       velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed, attacking);
       if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
