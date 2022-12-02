@@ -4,6 +4,15 @@ class Item < ApplicationRecord
   validates_presence_of :name, :item_type, :slot
   validate :check_slot, :stack_item
 
+
+
+
+
+
+
+
+
+
   attribute :value, :integer, default: 0
   attribute :quantity, :integer, default: -1  # -1 quantity signifies non-stackable, 0 = put in first available slot
   attribute :can_sell, :boolean, default: true
@@ -26,12 +35,13 @@ class Item < ApplicationRecord
 
   def stack_item
     return if !character
-    return check_item_count if quantity < 1
-    otherItem = character.items.all.find { |item| item.name == name && item.id != id }
-    return check_item_count if !otherItem
-    return if otherItem.updated_at == nil
-    otherItem.update(quantity: otherItem.quantity.to_i + self.quantity.to_i)
-    self.destroy
+    return check_item_count if quantity.to_i < 1
+    other_item = character.items.all.find { |item| item.name == name && item.id != id } # && item.updated_at != nil && item.updated_at < self.updated_at }
+    # binding.pry
+    return check_item_count if !other_item
+    other_item.quantity = other_item.quantity.to_i + quantity
+    other_item.save(validate: false)
+    errors.add(:quantity, "Item merged")
   end
 
   def check_item_count

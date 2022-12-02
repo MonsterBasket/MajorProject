@@ -24,10 +24,6 @@ class CharactersController < ApplicationController
   def show
   end
 
-  def characters
-    @characters = Character.characters.all
-  end
-
   def update
 
     respond_to do |format|
