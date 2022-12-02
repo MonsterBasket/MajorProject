@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
   create_table "characters", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "name", null: false
-    t.string "class", null: false
+    t.string "role", null: false
     t.integer "exp", null: false
     t.integer "level", null: false
     t.integer "health", null: false
@@ -31,7 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
   create_table "items", force: :cascade do |t|
     t.integer "character_id", null: false
     t.string "name", null: false
-    t.string "type", null: false
+    t.string "item_type", null: false
     t.string "slot", null: false
     t.integer "value"
     t.integer "quantity"

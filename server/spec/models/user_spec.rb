@@ -22,7 +22,7 @@ RSpec.describe User, type: :model do
   end
 
   it "cannot have the same username or email as another user" do
-    binding.pry
+    user.valid?
     expect(user2.valid?).to be false
   end
 
@@ -52,8 +52,8 @@ RSpec.describe User, type: :model do
 
   # -----------------------------------------------
   describe 'has_many:' do
-    let(:character1) { Character.create(user: user, name: "characterName", class: "Wizard") }
-    let(:character2) { Character.create(user: user, name: "characterName2", class: "Warrrior") }
+    let(:character1) { Character.create(user: user, name: "characterName", role: "Wizard") }
+    let(:character2) { Character.create(user: user, name: "characterName2", role: "Warrior") }
 
     it "user is still valid with multiple characters" do
       expect(user.valid?).to be true

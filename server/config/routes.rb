@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:create]
-  resources :characters, only: [:create, :update, :show, :index, :destroy]
+  resources :characters, only: [:new, :create, :update, :show, :index, :destroy]
   resources :items, only: [:show, :index, :destroy]
 
   root to: 'application#index'

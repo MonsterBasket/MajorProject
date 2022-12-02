@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.save
         login!
-        format.html { redirect_to select_character_path, alert: 'Account created, welcome to Monster Basket!'}
+        format.json { redirect_to select_character_path, alert: 'Account created, welcome to Monster Basket!'}
       else
         format.html { render :new, status: :bad_request }
       end
@@ -30,7 +30,6 @@ class UsersController < ApplicationController
   end
 
   def update
-
     respond_to do |format|
       @user.email = user_params[:email]
       @user.password = user_params[:password]

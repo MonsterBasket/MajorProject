@@ -2,17 +2,24 @@ class Character < ApplicationRecord
   belongs_to :user
   has_many :items
 
-  validates_presence_of :user, :name, :class
-  validates_uniqueness :name
+  validates_presence_of :user, :name, :role
+  validates_uniqueness_of :name
 
-  attr_accessor :health, :mana, :level, 
   attribute :health, :integer, default: 100
   attribute :mana, :integer, default: 100
   attribute :level, :integer, default: 1
   attribute :exp, :integer, default: 0
 
   def equipped(type)
-    self.items.find(|item| item.type == type && item.slot == type)
+    self.items.all.find { |item| item.item_type == type && item.slot == type }
+  end
+
+  def item_count
+    self.items.all.count { |item| item.slot.to_i.to_s == item.slot && item.slot.to_i > 0 && item.slot.to_i <= 50 }
+  end
+
+  def gold
+    self.items.all.find { |item| item.name == "Gold" }.quantity
   end
 
 end
