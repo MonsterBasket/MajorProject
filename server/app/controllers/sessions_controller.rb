@@ -1,8 +1,8 @@
+require 'pry'
 class SessionsController < ApplicationController
   def create
-    @user = User.find_by(username: params[:username])
-
-    if @user && @user.authenticate(params[:password])
+    @user = User.find_by(username: params[:form][:username])
+    if @user && @user.authenticate(params[:form][:password])
       login!
       render json: {
         logged_in: true,
@@ -11,6 +11,7 @@ class SessionsController < ApplicationController
     else
       render json: { 
         status: 401,
+        message: session_params,
         errors: ['no such user, please try again']
       }
     end
@@ -31,17 +32,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    respond_to do |format|
-      logout!
-      render json: {
-        status: 200,
-        logged_out: true
-      }
-    end
-  end
-  
-  private
-  def session_params
-    params.require(:user).permit(:username, :password)
+    reset_session
+    logout!
+    render json: {
+      status: 200,
+      logged_out: true
+    }
   end
 end

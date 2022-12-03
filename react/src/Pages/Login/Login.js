@@ -22,9 +22,9 @@ function Login({handleLogin, handleLogout}){
     <div  id="homeContainer">
       <h3>Login</h3>
       <div>
-        <input type="text" name="username" placeholder="Username" onChange={handleChange} onKeyDown={e => {if(e.code === "Enter") login()}} value={form.username}/><br/><br/>
-        <input type="password" name="password" placeholder="Password" onChange={handleChange} onKeyDown={e => {if(e.code === "Enter") login()}} value={form.password}/><br/><br/>
-        <button onClick={() => login(form, setForm, handleLogin, handleLogout)}>Login</button><br/>
+        <input type="text" name="username" placeholder="Username" onChange={handleChange} onKeyDown={e => {if(e.code === "Enter") login(form, setForm, handleLogin)}} value={form.username}/><br/><br/>
+        <input type="password" name="password" placeholder="Password" onChange={handleChange} onKeyDown={e => {if(e.code === "Enter") login(form, setForm, handleLogin)}} value={form.password}/><br/><br/>
+        <button onClick={() => login(form, setForm, handleLogin)}>Login</button><br/>
         <span>{form.loginError}</span><br/><br/>
       </div>
       <Link to="/signup"><button>No Account?</button></Link>

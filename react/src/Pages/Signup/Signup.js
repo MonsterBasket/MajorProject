@@ -2,10 +2,10 @@ import { useRef, useState } from "react";
 import axios from 'axios';
 import login from "../../utils/login/login"
 import Title from '../../components/Pages/Title'
-
+const url = "http://localhost:3001/"
 
 function Signup({handleLogin, handleLogout}){
-  const url = "http://localhost:3001/"
+
   const [form, setForm] = useState({
     username:"",
     usernameError:"",
@@ -16,7 +16,6 @@ function Signup({handleLogin, handleLogout}){
     password1Error:"",
     password2Error:""
   })
-  const timer = useRef(0);
 
   const user = {
     username: form.username,
@@ -24,13 +23,15 @@ function Signup({handleLogin, handleLogout}){
     password: form.password,
     password_confirmation: form.password_confirmation
   }
-// axios.post('http://localhost:3001/users', {user}, {withCredentials: true})
 
-  function signup(){ //not even looking at this until I have rails setup
+  function signup(){ 
     if (form.username && form.email && form.password && form.password_confirmation){
       axios.post(`${url}users`, {user}, {withCredentials: true})
-      .then(json => login(form, setForm, handleLogin, handleLogout))
-      .catch(err => console.log(JSON.stringify(err), JSON.stringify(err.message)));
+      .then(json => {
+        login(user, setForm, handleLogin)
+        // this.redirect("/select-character")
+      })
+      .catch(err => console.log(err));
     }
     else {
       alert("please enter all fields correctly")
