@@ -9,7 +9,7 @@ import maps from "../../utils/map/maps";
 import handleInput from "../../utils/player/handleInput";
 
 
-function World(){
+function GameController({character}){
   const [x, setX] = useState(400);
   const [y, setY] = useState(400);
   const velocity = useRef([0,0]);
@@ -52,13 +52,13 @@ function World(){
       lastDirection.current = `Space ${lastDirection.current}`
       setTimeout(() => lastDirection.current = keyHolder, 300)
     }
-    console.log(attacking.current)
   }
   function keyUp(e){
     if(e.code != "Space") myKeys.current[e.code] = false;
   }
 
   function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
+    console.log(character.name)
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
@@ -216,4 +216,4 @@ function World(){
   </div>
 }
 
-export default World;
+export default GameController;

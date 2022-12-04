@@ -14,3 +14,98 @@
 #homeContainer span, #signup span{
   color: red;
 }
+
+#characterSelector{
+  display: grid;
+  position: relative;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  width: 600px;
+  height: 400px;
+  max-height: 400px;
+  left: calc(50% - 300px);
+}
+#characterListLeft{
+  display: grid;
+  border: solid white 2px;
+  grid-template-rows: 1fr 40px;
+  max-height: 400px;
+}
+#characterListRight{
+  border: solid white 2px;
+  display: grid;
+  grid-template-rows: 40px 1fr;
+}
+#characterList{
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  -ms-overflow-style: none; /*IE and Edge*/
+  scrollbar-width: none; /*Firefox*/
+}
+#characterList::-webkit-scrollbar{/*chrome, safari and opera*/
+  display:none;
+}
+#characterList div{
+  height: 40px;
+  background: lightgray;
+  box-shadow: inset 5px 5px 15px white, inset -5px -5px 15px grey;
+  border: solid 2px black;
+  border-bottom: none;
+  color: black;
+  line-height: 40px;
+  transition: all 1s;
+}
+#characterList #createHeader{
+  box-shadow: inset 2px 2px 5px white, inset -2px -2px 5px grey;
+  background: darkgrey;
+}
+#characterList div:active{
+  box-shadow: inset 5px 5px 15px grey, inset -5px -5px 15px white;
+  transition: all 0.05s;
+}
+.nameInput{
+  text-align: center;
+}
+#characterListButtons{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-content: stretch;
+  justify-content: space-between;
+}
+#characterListButtons button, #characterListButtons a{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
+#characterStats{
+  line-height: 40px;
+}
+#characterListImage{
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: bottom;
+}
+#errorDisplay{
+  display: block;
+  position: absolute;
+  background: red;
+  color: white;
+  top: calc(50% - 25px);
+  left: calc(50% - 200px);
+  width: 400px;
+  height: 50px;
+  border-radius: 20px;
+  line-height: 50px;
+  box-shadow: inset white 0 0 5px 1px,rgb(157, 4, 4) 0 0 10px 5px;
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+#errorDisplay.hidden{
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 2s;
+}

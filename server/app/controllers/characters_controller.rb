@@ -1,8 +1,13 @@
 class CharactersController < ApplicationController
-  before_action :set_character, only: %i[show edit update]
+  before_action :set_character, only: %i[show edit update destroy]
 
   def index
     @characters = Character.all
+    if @characters
+      render json: { characters: @characters }
+    else
+      render json: { stats: 500, errors: ['no users found']}
+    end
   end
 
   def new
@@ -11,13 +16,10 @@ class CharactersController < ApplicationController
 
   def create
     @character = Character.new(character_params)
-    binding.pry
-    respond_to do |format|
-      if @character.save
-        format.json { :show, status: :ok, location: @character}
-      else
-        format.json { render :new, status: :bad_request }
-      end
+    if @character.save
+      render json: { status: :created }
+    else
+      render json: { status: 500, errors: @character.errors.full_messages }
     end
   end
 
@@ -37,6 +39,12 @@ class CharactersController < ApplicationController
 
   def edit; end
 
+  def destroy
+    @character.destroy
+    @characters = Character.all
+    render json: { characters: @characters}
+  end
+
   private
 
   def set_character
@@ -45,6 +53,6 @@ class CharactersController < ApplicationController
 
   def character_params
     # params.fetch(:character, {})
-    params.require(:character).permit(:user, :name, :role)
+    params.require(:character).permit(:user_id, :name, :role)
   end
 end
