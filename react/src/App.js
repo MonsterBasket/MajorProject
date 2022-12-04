@@ -29,7 +29,6 @@ function App(){
   }
 
   function handleLogin(data) {
-    console.log(data)
     setLoggedIn(true)
     setUser(data.user)
     navigate("/select-character")
@@ -38,7 +37,7 @@ function App(){
     setLoggedIn(false);
     setUser({});
     axios.post(`${url}logout`)
-    navigate("/login")
+    .then(res => navigate("/login"))
   }
   const loggedInComponents = isLoggedIn ? <>
     <Route path="/select-character" element={<SelectCharacter user={user} handleLogout={handleLogout} />} />

@@ -3232,3 +3232,1085 @@ Processing by SessionsController#is_logged_in? as HTML
 Completed 200 OK in 5ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 795)
 
 
+Started GET "/logged_in" for ::1 at 2022-12-03 18:52:56 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:52:56 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started GET "/logged_in" for ::1 at 2022-12-03 18:53:24 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:53:24 +1100
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started POST "/login" for ::1 at 2022-12-03 18:53:53 +1100
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started POST "/login" for ::1 at 2022-12-03 18:53:57 +1100
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started GET "/logged_in" for ::1 at 2022-12-03 18:54:05 +1100
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started GET "/logged_in" for ::1 at 2022-12-03 18:54:05 +1100
+  
+NoMethodError (undefined method `before_filter' for ApplicationController:Class
+Did you mean?  before_action):
+  
+app/controllers/application_controller.rb:2:in `<class:ApplicationController>'
+app/controllers/application_controller.rb:1:in `<main>'
+app/controllers/sessions_controller.rb:2:in `<main>'
+Started GET "/logged_in" for ::1 at 2022-12-03 18:54:18 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:54:18 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 43ms (Views: 1.4ms | ActiveRecord: 1.5ms | Allocations: 22237)
+
+
+Completed 200 OK in 45ms (Views: 1.0ms | ActiveRecord: 1.6ms | Allocations: 22702)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:55:44 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:55:44 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 1.2ms | Allocations: 4372)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 17ms (Views: 0.6ms | ActiveRecord: 1.8ms | Allocations: 4389)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 18:55:47 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 182)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:55:51 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 867)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:55:51 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 801)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 18:55:54 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 180)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:31 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Completed 200 OK in 12ms (Views: 0.5ms | ActiveRecord: 0.9ms | Allocations: 4815)
+
+
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 14ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 5518)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 18:58:33 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:36 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 809)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:36 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 809)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:42 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 818)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:58:42 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:59:02 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 18:59:02 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 16ms (Views: 0.6ms | ActiveRecord: 0.9ms | Allocations: 5125)
+
+
+Completed 200 OK in 16ms (Views: 0.8ms | ActiveRecord: 0.6ms | Allocations: 5081)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 18:59:05 +1100
+Processing by SessionsController#destroy as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 18:59:56 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 794)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 18:59:57 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 2ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 802)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 19:01:06 +1100
+Processing by SessionsController#destroy as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 19:01:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.7ms | ActiveRecord: 0.2ms | Allocations: 794)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:01:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 794)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 19:05:30 +1100
+Processing by SessionsController#destroy as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 19:05:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 794)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:05:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.2ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:07:17 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:07:17 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 823)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 811)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:08:16 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:08:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 817)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.1ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:08:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 840)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:08:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 807)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:10 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:10 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 812)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 807)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:20 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:20 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 808)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:24 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:24 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 816)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 797)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:30 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:30 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 858)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.1ms | Allocations: 803)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:36 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 19:09:36 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Processing by SessionsController#is_logged_in? as HTML
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Completed 200 OK in 6ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 1444)
+
+
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.4ms | ActiveRecord: 0.5ms | Allocations: 1576)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:11:18 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.3ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 19:11:18 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 799)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 19:13:49 +1100
+Processing by SessionsController#destroy as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 19:15:08 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 810)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 19:15:10 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>true, "session"=>{"withCredentials"=>true}}
+Completed 200 OK in 1999984ms (Views: 1.3ms | Allocations: 16080)
+
+
+Completed 500 Internal Server Error in 1919760ms (Allocations: 9240)
+
+
+  
+Errno::EIO (Input/output error @ io_writev - <STDOUT>):
+  
+app/controllers/application_controller.rb:25:in `logout!'
+app/controllers/sessions_controller.rb:35:in `destroy'
+Completed 200 OK in 2499819ms (Views: 0.7ms | Allocations: 66035)
+
+
+Completed 200 OK in 2884294ms (Views: 1.0ms | Allocations: 99333)
+
+
+Completed 200 OK in 2762975ms (Views: 0.9ms | Allocations: 75678)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:34:20 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 13ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 2424)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:34:21 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 1ms (Views: 0.3ms | ActiveRecord: 0.0ms | Allocations: 192)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 21:34:21 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>true, "session"=>{"withCredentials"=>true}}
+Started POST "/logout" for ::1 at 2022-12-03 21:34:21 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>true, "session"=>{"withCredentials"=>true}}
+Started POST "/login" for ::1 at 2022-12-03 21:34:36 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (1.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "James"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 385ms (Views: 0.6ms | ActiveRecord: 3.6ms | Allocations: 20597)
+
+
+Completed 500 Internal Server Error in 60408ms (ActiveRecord: 0.0ms | Allocations: 30401)
+
+
+Completed 200 OK in 60443ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 37313)
+
+
+  
+Errno::EIO (Input/output error @ io_writev - <STDOUT>):
+  
+app/controllers/application_controller.rb:25:in `logout!'
+app/controllers/sessions_controller.rb:35:in `destroy'
+Started GET "/logged_in" for ::1 at 2022-12-03 21:36:39 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 21:36:39 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 48ms (Views: 1.0ms | ActiveRecord: 1.2ms | Allocations: 22410)
+
+
+Completed 200 OK in 48ms (Views: 0.6ms | ActiveRecord: 0.6ms | Allocations: 22349)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 21:37:01 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>true, "session"=>{"withCredentials"=>true}}
+Started GET "/logged_in" for ::1 at 2022-12-03 21:37:05 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 21:37:05 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 10ms (Views: 0.8ms | ActiveRecord: 0.5ms | Allocations: 1140)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 1236)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 21:37:55 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>true, "session"=>{"withCredentials"=>true}}
+Started GET "/logged_in" for ::1 at 2022-12-03 21:39:13 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 807)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:39:13 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 811)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:40:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 796)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:40:43 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 804)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 21:40:47 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"withCredentials"=>"include", "session"=>{"withCredentials"=>"include"}}
+Started GET "/logged_in" for ::1 at 2022-12-03 21:40:54 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 798)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 21:40:54 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 798)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:07:11 +1100
+Completed 200 OK in 3048169ms (Views: 0.3ms | Allocations: 21406)
+
+
+Completed 200 OK in 3222055ms (Views: 0.3ms | Allocations: 38251)
+
+
+Completed 200 OK in 3277328ms (Views: 0.3ms | Allocations: 56889)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:31:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 14ms (Views: 0.9ms | ActiveRecord: 1.0ms | Allocations: 3964)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 13ms (Views: 0.7ms | ActiveRecord: 1.0ms | Allocations: 4376)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:32:37 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 37ms (Views: 0.7ms | ActiveRecord: 1.2ms | Allocations: 21624)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:32:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 2.0ms | ActiveRecord: 0.3ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:33:34 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 825)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 22:33:42 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 181)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:33:57 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 22:33:57 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 804)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.5ms | Allocations: 812)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 22:34:24 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.5ms | ActiveRecord: 0.0ms | Allocations: 179)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:36:09 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 22:36:09 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (1.0ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16:in `current_user'
+  ↳ app/controllers/application_controller.rb:16:in `current_user'
+Completed 200 OK in 42ms (Views: 0.9ms | ActiveRecord: 2.0ms | Allocations: 5152)
+
+
+Completed 200 OK in 42ms (Views: 0.5ms | ActiveRecord: 1.8ms | Allocations: 5128)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:38:05 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 22:38:05 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16:in `current_user'
+  ↳ app/controllers/application_controller.rb:16:in `current_user'
+Completed 200 OK in 30ms (Views: 0.9ms | ActiveRecord: 3.5ms | Allocations: 5147)
+
+
+Completed 200 OK in 30ms (Views: 1.1ms | ActiveRecord: 1.7ms | Allocations: 5115)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:38:41 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 22:38:41 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:16:in `current_user'
+Completed 200 OK in 44562ms (Views: 0.8ms | ActiveRecord: 1.4ms | Allocations: 20075)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+Started POST "/logout" for ::1 at 2022-12-03 22:39:29 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 2ms (Views: 0.5ms | Allocations: 184)
+
+
+Completed 200 OK in 125832ms (Views: 0.3ms | Allocations: 32656)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 22:41:32 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.5ms | Allocations: 178)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:41:36 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 22:41:36 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 22:41:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 22:41:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Started POST "/login" for ::1 at 2022-12-03 22:42:06 +1100
+Completed 200 OK in 52781ms (Views: 0.5ms | Allocations: 7128)
+
+
+Completed 200 OK in 54150ms (Views: 0.4ms | Allocations: 14668)
+
+
+Completed 200 OK in 58160ms (Views: 0.2ms | Allocations: 22347)
+
+
+Completed 200 OK in 59417ms (Views: 0.2ms | Allocations: 29844)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 22:42:35 +1100
+Started POST "/logout" for ::1 at 2022-12-03 22:42:35 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "James"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 312ms (Views: 0.7ms | ActiveRecord: 1.6ms | Allocations: 4455)
+
+
+Processing by SessionsController#destroy as HTML
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.3ms | Allocations: 208)
+
+
+Completed 200 OK in 1ms (Views: 0.4ms | Allocations: 172)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:44:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Started GET "/logged_in" for ::1 at 2022-12-03 22:44:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 73ms (Views: 0.7ms | ActiveRecord: 1.9ms | Allocations: 7191)
+
+
+Completed 200 OK in 32ms (Views: 0.8ms | ActiveRecord: 0.9ms | Allocations: 5589)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:58:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 12ms (Views: 1.9ms | ActiveRecord: 1.5ms | Allocations: 1086)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 22:58:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.2ms | ActiveRecord: 0.3ms | Allocations: 797)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 23:04:06 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 23:04:06 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.7ms | ActiveRecord: 0.7ms | Allocations: 1029)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 813)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 23:04:47 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 23:04:47 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 0.6ms | Allocations: 816)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.2ms | ActiveRecord: 0.4ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 23:19:22 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Started GET "/logged_in" for ::1 at 2022-12-03 23:19:22 +1100
+Completed 200 OK in 11ms (Views: 1.1ms | ActiveRecord: 0.7ms | Allocations: 1350)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 793)
+
+
+Started POST "/logout" for ::1 at 2022-12-03 23:37:59 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.4ms | Allocations: 172)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-03 23:38:03 +1100
+Started GET "/logged_in" for ::1 at 2022-12-03 23:38:03 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 13ms (Views: 1.4ms | ActiveRecord: 1.0ms | Allocations: 1692)
+
+
+Completed 200 OK in 12ms (Views: 1.1ms | ActiveRecord: 1.0ms | Allocations: 1502)
+
+
+Started POST "/logout" for ::1 at 2022-12-04 00:52:44 +1100
+Processing by SessionsController#destroy as HTML
+Completed 200 OK in 1ms (Views: 0.6ms | Allocations: 172)
+
+
+Started POST "/login" for ::1 at 2022-12-04 00:52:57 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"James", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "James"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:4:in `create'
+Completed 200 OK in 242ms (Views: 0.5ms | ActiveRecord: 0.6ms | Allocations: 1095)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:52:59 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 834)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:52:59 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:53:02 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 00:53:02 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 809)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 803)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:53:09 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 00:53:09 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 824)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:55:04 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 00:55:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 15ms (Views: 7.1ms | ActiveRecord: 0.4ms | Allocations: 834)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.4ms | ActiveRecord: 0.4ms | Allocations: 795)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:56:01 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Started GET "/logged_in" for ::1 at 2022-12-04 00:56:01 +1100
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 1.0ms | ActiveRecord: 0.7ms | Allocations: 1081)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 1.8ms | ActiveRecord: 0.6ms | Allocations: 789)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 00:59:14 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 00:59:14 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.4ms | Allocations: 818)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.6ms | ActiveRecord: 0.2ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:02:21 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 864)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:02:21 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 807)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:09:38 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:09:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 10ms (Views: 2.3ms | ActiveRecord: 1.3ms | Allocations: 999)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:16:57 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.5ms | Allocations: 969)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:16:57 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 821)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:24:16 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:24:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 0.8ms | Allocations: 1012)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.4ms | Allocations: 797)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:27:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 848)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:27:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 1.8ms | ActiveRecord: 0.4ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:36:53 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:36:53 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 20ms (Views: 1.5ms | ActiveRecord: 1.2ms | Allocations: 1694)
+
+
+Completed 200 OK in 15ms (Views: 1.2ms | ActiveRecord: 1.9ms | Allocations: 1501)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:37:18 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:37:18 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 0.7ms | Allocations: 808)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 805)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:40:03 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:40:03 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (1.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 16ms (Views: 1.3ms | ActiveRecord: 1.3ms | Allocations: 1190)
+
+
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 1218)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:40:05 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 1.1ms | ActiveRecord: 0.4ms | Allocations: 827)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:40:05 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 12ms (Views: 2.8ms | ActiveRecord: 0.4ms | Allocations: 801)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:46:03 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:46:03 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.0ms | ActiveRecord: 0.8ms | Allocations: 993)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.2ms | ActiveRecord: 0.8ms | Allocations: 984)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:49:44 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 01:49:44 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 802)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.2ms | Allocations: 793)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:53:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 1.3ms | ActiveRecord: 0.6ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 01:53:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 799)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 10:52:07 +1100
+Started GET "/logged_in" for ::1 at 2022-12-04 10:52:07 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Processing by SessionsController#is_logged_in? as HTML
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+Completed 200 OK in 26ms (Views: 2.5ms | ActiveRecord: 2.7ms | Allocations: 1580)
+
+
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 15ms (Views: 0.9ms | ActiveRecord: 1.6ms | Allocations: 1603)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 10:52:38 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 37ms (Views: 0.6ms | ActiveRecord: 1.0ms | Allocations: 21631)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 10:52:38 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.6ms | ActiveRecord: 0.2ms | Allocations: 809)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:03:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.4ms | ActiveRecord: 1.3ms | Allocations: 970)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:03:04 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 821)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:07:25 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 2.1ms | ActiveRecord: 0.3ms | Allocations: 811)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:07:25 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.1ms | Allocations: 797)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:07:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 821)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-04 11:07:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 8], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 807)
+
+

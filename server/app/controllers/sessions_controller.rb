@@ -11,7 +11,6 @@ class SessionsController < ApplicationController
     else
       render json: { 
         status: 401,
-        message: session_params,
         errors: ['no such user, please try again']
       }
     end
@@ -32,7 +31,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    reset_session
     logout!
     render json: {
       status: 200,

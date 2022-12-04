@@ -6,7 +6,7 @@ import '../Login/home.css';
 
 function SelectCharacter({handleLogout}){
   const navigate = useNavigate();
-  const [character, setCharacter] = useState({})
+  const [character, setPlayerCharacter] = useState({})
 
 
   function handleClick(action){
@@ -22,9 +22,9 @@ function SelectCharacter({handleLogout}){
   }
 
   function buttons(){
-    return [<Link to="/new-character"><button key="newButton">New</button></Link>,
-    <button key="playButton" onClick={() => handleClick("play")}>Play</button>,
-    <button key="deleteButton" onClick={() => handleClick("delete")}>Delete</button>]
+    return [<Link to="/new-character"><button key="newChar">New</button></Link>,
+    <button key="play" onClick={() => handleClick("play")}>Play</button>,
+    <button key="del" onClick={() => handleClick("delete")}>Delete</button>]
   }
 
   function myCharacters(){
@@ -37,8 +37,7 @@ function SelectCharacter({handleLogout}){
         <Title />
   <h2>Select Character</h2>
       {/* select from created characters, buttons to create new, delete selected (with confirm) or play. Image and stats of selected character. */}
-      <CharacterSelector buttons={buttons()}>
-        {myCharacters()}
+      <CharacterSelector buttons={buttons()} characters={myCharacters()} setPlayerCharacter={setPlayerCharacter}>
       </CharacterSelector>
     </div>
 }

@@ -16,6 +16,7 @@
 }
 #characterListRight{
   border: solid white 2px;
+  display: grid;
 }
 #characterList{
   overflow-y: scroll;
