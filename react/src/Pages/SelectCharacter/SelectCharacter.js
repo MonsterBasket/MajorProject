@@ -15,21 +15,55 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   const [characterCreator, setCreator] = useState(false)
   const [imgUrl, setImg] = useState(knight)
   const [errorDisplay, setError] = useState([])
-  const [savedCharacters, setSavedCharacters] = useState([])
+  const [savedCharacters, setSavedCharacters] = useState([{name:"", role:""}])
+  const timer = useRef(0);
 
-  useEffect(() => {getCharacters()}, [])
+  useEffect(getCharacters, [])
 
-  function getCharacters(){
+  function getCharacters(){ //user is not set the first time you create an account - it's also showing other user's characters
     axios.get(`${url}characters`, {params: {user_id: user.id}}, {withCredentials: true})
     .then(res => {
-      if(res.data.characters.length > 0) {
-        setSavedCharacters(res.data.characters)
-        setCharacter(res.data.characters[0])
-        showCharacter(res.data.characters[0])
+      if(res.status == 200) {
+        if(res.data.characters.length == 0) setCreator(true)
+        else{
+          setSavedCharacters(res.data.characters)
+          setCharacter(res.data.characters[0])
+          showCharacter(res.data.characters[0])
+        }
       }
-      else setError(res.data.errors)
+      else {
+        console.log(res)
+        setError(res.data.errors)
+      }
     })
     .catch(err => console.log("Error retrieving characters:", err))
+  }
+
+  function buttons(){
+    if(characterCreator) return <button onClick={createCharacter}>Create Character</button>
+    else
+    return <><button key="newChar" onClick={() => setCreator(true)}>New</button>
+            <button key="play" onClick={() => play(character)}>Play</button>
+            <button key="del" onClick={deleteCharacter}>Delete</button></>
+  }
+
+  function play(character){
+    setPlayCharacter(character)
+    navigate("/")
+  }
+
+  function deleteCharacter(){
+    if (window.confirm(`Are you sure you want to delete ${character.name}`)){
+      axios.delete(`${url}characters/${character.id}`)
+      .then(res => {
+        if(res.data.characters.length == 0) setCreator(true)
+        else{
+          setSavedCharacters(res.data.characters)
+          setCharacter(res.data.characters[0])
+          showCharacter(res.data.characters[0])
+        }
+      })
+    }
   }
 
   function createCharacter(){
@@ -45,54 +79,44 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
     else setError(["Please enter a name"])
   }
 
-  function deleteCharacter(){
-    if (window.confirm(`Are you sure you want to delete ${character.name}`)){
-      axios.delete(`${url}characters/${character.id}`)
-      .then(res => {
-        setSavedCharacters(res.data.characters)
-        setCharacter(res.data.characters[0])
-        showCharacter(res.data.characters[0])
-      })
-    }
-  }
-
-  function play(character){
-    setPlayCharacter(character)
-    navigate("/")
-  }
-
   function showCharacter(character){
-    if(!characterCreator) setCharacter(character)
-    else {
-      setNewCharacter({name: newCharacter.name, role: character.role})
-    }
+    if(character != undefined) {
+      if(!characterCreator) setCharacter(character)
+      else {
+        setNewCharacter({name: newCharacter.name, role: character.role})
+      }
       if(character.role == "Knight") setImg(knight)
       if(character.role == "Mage") setImg(mage)
       if(character.role == "Rogue") setImg(rogue)
-  }
-
-  function buttons(){
-    if(characterCreator) return <button onClick={createCharacter}>Create Character</button>
-    else
-    return <><button key="newChar" onClick={() => setCreator(true)}>New</button>
-            <button key="play" onClick={() => play(character)}>Play</button>
-            <button key="del" onClick={deleteCharacter}>Delete</button></>
+    }
+    else setCreator(true)
   }
 
   function characters(){
-    // fetch characters, return in array
     if(characterCreator) return [
-      {name:"", role:"Knight"},
-      {name:"", role:"Rogue"},
-      {name:"", role:"Mage"}]
-    else if(savedCharacters) return(savedCharacters)
+        {name:"", role:"Knight"}, 
+        {name:"", role:"Rogue"},
+        {name:"", role:"Mage"}]
+    else if(savedCharacters) return savedCharacters
     else return []
+  }
+
+  useEffect(() => showCharacter(characters()[0]), [characterCreator])
+
+  function sanitizeName(e){
+    let name = e.target.value
+      name = name.replace(/[^a-z]/gim,"")
+      if(name != e.target.value) setError(["Name can only have letters"])
+      if(name.length > 0)
+        name = name[0].toUpperCase() + name.substring(1).toLowerCase()
+    setNewCharacter({...newCharacter, name:name.trim()})
   }
 
   function hideErrors(){
     if(errorDisplay.length == 0) return "hidden"
     else {
-      setTimeout(() => setError([]), 2000)
+      clearTimeout(timer.current)
+      timer.current = setTimeout(() => setError([]), 2000)
       return "notHidden"
     }
   }
@@ -107,18 +131,18 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
           {characterCreator ? <div id="createHeader">Create a Character</div> : ""}
           {characters().map((character, index) => <div key={index} onClick={() => showCharacter(character)}>{character.name || character.role}</div>)}
         </div>
-        { characterCreator ? <input type="text" name="name" className="nameInput" placeholder="Character Name" onChange={(e) => setNewCharacter({...newCharacter, name:e.target.value})} value={newCharacter.name}/> : "" }
+        { characterCreator ? <input type="text" name="name" className="nameInput" placeholder="Character Name" onChange={(e) => sanitizeName(e)} value={newCharacter.name}/> : "" }
         <div id="characterListButtons">{buttons()}</div>
       </div>
       <div id="characterListRight">
         <div id="characterStats">
-          {characterCreator ? `${newCharacter.name} - ${newCharacter.role} - Level 1`: `${character.name} - ${character.role} - Level ${character.level}`}
+          {characterCreator ? `${newCharacter.name ? `${newCharacter.name} - ` : ""}${newCharacter.role} - Level 1`: `${character.name} - ${character.role} - Level ${character.level}`}
         </div>
         <div id="characterListImage" style={{backgroundImage: `url(${imgUrl})`}}></div>
       </div>
     {<div id="errorDisplay" className={hideErrors()}>{errorDisplay.map(item => <span key={item}>{item}<br/></span>)}</div>}
     </div>
-    {characterCreator ? <button onClick={() => setCreator(false)}>Back</button> : ""}
+    {characterCreator && savedCharacters.length > 0 ? <button onClick={() => setCreator(false)}>Back</button> : ""}
   </div>
 }
 

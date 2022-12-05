@@ -208,7 +208,7 @@ function GameController({character}){
       {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
         {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
         {mobs(thisPage.current)}
-        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current}/>
+        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role}/>
       <SkyTiler coords={maps(thisPage.current)} />
       {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
     </div>

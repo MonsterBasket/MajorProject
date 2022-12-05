@@ -1,6 +1,9 @@
 :root{
   --playerUrl: url("../../images/main-character.png");
-  --skeletonUrl: url("../../images/skeleton.png")
+  --knightUrl: url("../../images/knight-sprite.png");
+  --rogueUrl: url("../../images/rogue-sprite.png");
+  --mageUrl: url("../../images/mage-sprite.png");
+  --skeletonUrl: url("../../images/skeleton.png");
 }
 .character{
   position: absolute;
@@ -15,11 +18,17 @@
   animation-timing-function: steps(5, end);
   animation-iteration-count: infinite;
 }
-#player{
-  background-image: var(--playerUrl);
-}
 .player{
   background-image: var(--playerUrl);
+}
+.Knight{
+  background-image: var(--knightUrl);
+}
+.Rogue{
+  background-image: var(--rogueUrl);
+}
+.Mage{
+  background-image: var(--mageUrl);
 }
 .skeleton{
   background-image: var(--skeletonUrl);
