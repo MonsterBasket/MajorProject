@@ -2,7 +2,7 @@ class CharactersController < ApplicationController
   before_action :set_character, only: %i[show edit update destroy]
 
   def index
-    @characters = Character.all
+    @characters = Character.all.where("user_id = ?", params[:user_id])
     if @characters
       render json: { characters: @characters }
     else
@@ -27,7 +27,7 @@ class CharactersController < ApplicationController
   end
 
   def update
-
+    # I clearly copied this section from users
     respond_to do |format|
       @character.email = character_params[:email]
       @character.password = character_params[:password]
