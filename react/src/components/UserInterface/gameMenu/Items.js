@@ -3,7 +3,7 @@ import ItemSlot from "./slots/ItemSlot"
 function displayItems(){
   const items = [] //will need to fetch and save this to state
   for (let i = 0; i < 50; i++) {
-    items[i] = <ItemSlot /> //this is clearly wrong, but you get the idea
+    items[i] = <ItemSlot item={items[i]} /> //this is clearly wrong, but you get the idea
   }
 }
 

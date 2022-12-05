@@ -1,6 +1,6 @@
 function QuestItem(item){
 
-  return <div class="questItem">{item}</div>
+  return <div className="questItem">{item}</div>
 }
 
 export default QuestItem;

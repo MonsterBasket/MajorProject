@@ -9,7 +9,7 @@ function Quests(){
 
   return <div id="quests">
     <h2>Quests</h2>
-      <div id="questList"> {/* css grid, 5 rows of 10 */}
+      <div id="questList">
         {displayQuests()}
       </div>
     </div>

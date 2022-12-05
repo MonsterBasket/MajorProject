@@ -1,8 +1,9 @@
 import "./hud.css"
 
-function MenusHud({showItems, showArmour, showSkills, showQuests, hideButtons}){
+// This is the container for the buttons on the right of the screen
+function MenusHud({showItems, showArmour, showSkills, showQuests}){
 
-  return <div id="MenusHud" className={hideButtons}>
+  return <div id="MenusHud">
     <div onClick={showItems} id="itemsBtn" className="menuItem">
       <div id="itemsBtnImg" className="menuBtnImg"></div>
       <div className="menuBtnText">Items (I)</div>

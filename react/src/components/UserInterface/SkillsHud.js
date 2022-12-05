@@ -1,5 +1,6 @@
 import "./hud.css"
 
+// This is the container for the skills buttons at the bottom of the screen
 function SkillsHud({useSkill}){
 
 

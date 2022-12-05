@@ -58,7 +58,6 @@ function GameController({character}){
   }
 
   function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
-    console.log(character.name)
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;

@@ -1,10 +1,9 @@
-:root{
-  --playerUrl: url("../../images/main-character.png");
-  --knightUrl: url("../../images/knight-sprite.png");
-  --rogueUrl: url("../../images/rogue-sprite.png");
-  --mageUrl: url("../../images/mage-sprite.png");
-  --skeletonUrl: url("../../images/skeleton.png");
-}
+.player {   background-image: url("../../images/main-character.png"); }
+.Knight {   background-image: url("../../images/knight-sprite.png"); }
+.Rogue {    background-image: url("../../images/rogue-sprite.png"); }
+.Mage {     background-image: url("../../images/mage-sprite.png"); }
+.skeleton { background-image: url("../../images/skeleton.png"); }
+
 .character{
   position: absolute;
   box-sizing: border-box;
@@ -17,21 +16,6 @@
   animation-duration: 0.7s;
   animation-timing-function: steps(5, end);
   animation-iteration-count: infinite;
-}
-.player{
-  background-image: var(--playerUrl);
-}
-.Knight{
-  background-image: var(--knightUrl);
-}
-.Rogue{
-  background-image: var(--rogueUrl);
-}
-.Mage{
-  background-image: var(--mageUrl);
-}
-.skeleton{
-  background-image: var(--skeletonUrl);
 }
 /*---- walk ---*/
 @keyframes walkLeft {
