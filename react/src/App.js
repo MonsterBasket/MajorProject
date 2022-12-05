@@ -1,5 +1,5 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import axios from 'axios';
 import './App.css';
 import Admin from "./Pages/Admin/Admin";
@@ -16,6 +16,7 @@ function App(){
   const [user, setUser] = useState({})
   const navigate = useNavigate();
   const [character, setPlayCharacter] = useState({})
+  const isLoading = useRef(true)
 
   useEffect(() => loginStatus(), [])
 
@@ -32,14 +33,15 @@ function App(){
     setLoggedIn(true)
     setUser(data.user)
     navigate("/select-character")
+    isLoading.current = false
   }
   function handleLogout(){
     setLoggedIn(false);
     setUser({});
     axios.post(`${url}logout`)
-     navigate("/login")
+    navigate("/login")
   }
-  const loggedInComponents = isLoggedIn ? <>
+  const loggedInComponents = isLoggedIn && user != undefined? <>
     <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
     <Route path="/" element={<>
       <GameController character={character} />
@@ -52,7 +54,7 @@ function App(){
     <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
   </> : ""
 
-    const adminComponents = isLoggedIn ? <> {/*&& user != {} && user.is_admin ? <>*/}
+    const adminComponents = isLoggedIn && user != {} ? <> {/*&& user.is_admin ? <>*/}
     <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
     <Route path="/admin/mapmaker" element={<MapMaker />} />
   </> : ""
@@ -61,9 +63,11 @@ function App(){
   return (
     <div className="App">
       <Routes>
-        {loggedInComponents}
         {noUserComponents}
-        {adminComponents}
+        {isLoading.current ? "" : <>
+          {loggedInComponents}
+          {adminComponents}
+        </>}
       </Routes>
     </div>
   );

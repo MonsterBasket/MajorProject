@@ -1,20 +1,26 @@
-import ItemSlot from "./slots/ItemSlot"
+import "../windows.css"
+import "../hud.css"
 
-function displayItems(){
-  const items = [] //will need to fetch and save this to state
-  for (let i = 0; i < 50; i++) {
-    items[i] = <ItemSlot item={items[i]} /> //this is clearly wrong, but you get the idea
+function Items({items}){
+  
+  function displayItems(items){
+    const slots = [] //will need to fetch and save this to state
+    for (let i = 1; i < 51; i++) {
+      slots[i] = <div key={`slot${i}`} className="itemSlot"></div>
+    }
+    items.map(item => {
+      if(!isNaN(item.slot))
+      slots[+item.slot] = <div key={`slot${item.slot}`} className="itemSlot">{item.name}</div>
+    })
+    return slots
   }
-}
-
-function Items(){
-
-  return <div id="items">
+    
+  return <>
     <h2>Items</h2>
       <div id="itemSlots"> {/* css grid, 5 rows of 10 */}
-        {displayItems()}
+        {displayItems(items)}
       </div>
-    </div>
+    </>
 }
 
 export default Items;

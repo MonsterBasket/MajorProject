@@ -7,62 +7,73 @@ import SkillsHud from "./SkillsHud"
   import Armour from "./gameMenu/Armour"
   import Skills from "./gameMenu/Skills"
   import Quests from "./gameMenu/Quests"
-import { useRef, useState } from "react"
-
+import { useEffect, useState } from "react"
+import axios from "axios"
+const url = "http://localhost:3001/"
+  
 // master container for all the on screen buttons (HUD = Heads Up Display)
-function Hud(){
+function Hud({character}){
   const [hideButtons, setHideButtons] = useState(false);
-  const [show, setShow] = useState(["left", "center", "right", "hidden"])
+  const [pagePos, setPagePos] = useState(["left", "center", "right", "hidden"])
   const [transition, setTransition] = useState("")
-  // show = [0]Items, [1]Armour, [2]Skills, [3]Quests
+  const [items, setItems] = useState([])
 
-function showItems(){
+  useEffect(getItems, [])
+
+  function getItems(){
+    axios.get(`${url}items`, {params: {character_id: character.id}})//, {withCredentials: true})
+    .then(res => {
+      if(res.status == 200) {
+        if(res.data.items.length > 0) {
+          setItems(res.data.items)
+        }
+        else{
+          console.log("fail", res)
+        }
+      }
+      else {
+        console.log(res)
+      }
+    })
+    .catch(err => console.log("Error retrieving characters:", err))
+  }
+
+
+  function show(option){
   setTransition("")
-  setShow(["center", "right", "hidden", "left"])
+  if(option == "items")  setPagePos(["center", "right", "hidden", "left"])
+  if(option == "armour") setPagePos(["left", "center", "right", "hidden"])
+  if(option == "skills") setPagePos(["hidden", "left", "center", "right"])
+  if(option == "quests") setPagePos(["right", "hidden", "left", "center"])
   setHideButtons(true)
-}
-function showArmour(){
-  setTransition("")
-  setShow(["left", "center", "right", "hidden"])
-  setHideButtons(true)
-}
-function showSkills(){
-  setTransition("")
-  setShow(["hidden", "left", "center", "right"])
-  setHideButtons(true)
-}
-function showQuests(){
-  setTransition("")
-  setShow(["right", "hidden", "left", "center"])
-  setHideButtons(true)
-}
-function useSkill(skill){
-  console.log(skill.target.id)
 }
 function moveLeft(){
   setTransition("trans")
-  setShow([show[1], show[2], show[3], show[0]])
+  setPagePos([pagePos[1], pagePos[2], pagePos[3], pagePos[0]])
 }
 function moveRight(){
   setTransition("trans")
-  setShow([show[3], show[0], show[1], show[2]])
+  setPagePos([pagePos[3], pagePos[0], pagePos[1], pagePos[2]])
 }
 function close(){
   setHideButtons(false)
 }
+function useSkill(skill){
+  console.log(skill.target.id)
+}
 
   return <div id="hudContainer">
-    <HealthHud />
+    <HealthHud character={character} />
     {hideButtons ? <>
-      <div className={`itemsWindow ${show[0]} ${transition}`}><Items /><div onClick={close}className="miniCloser" /></div>
-      <div className={`armourWindow ${show[1]} ${transition}`}><Armour /><div onClick={close}className="miniCloser" /></div>
-      <div className={`skillsWindow ${show[2]} ${transition}`}><Skills /><div onClick={close}className="miniCloser" /></div>
-      <div className={`questsWindow ${show[3]} ${transition}`}><Quests /><div onClick={close}className="miniCloser" /></div>
+      <div className={`itemsWindow ${pagePos[0]} ${transition}`}><Items items={items} /><div onClick={close}className="miniCloser">X</div></div>
+      <div className={`armourWindow ${pagePos[1]} ${transition}`}><Armour character={character} /><div onClick={close}className="miniCloser">X</div></div>
+      <div className={`skillsWindow ${pagePos[2]} ${transition}`}><Skills character={character} /><div onClick={close}className="miniCloser">X</div></div>
+      <div className={`questsWindow ${pagePos[3]} ${transition}`}><Quests character={character} /><div onClick={close}className="miniCloser">X</div></div>
       <div onClick={close} id="closer"></div>
       <div onClick={moveLeft} className="left ontop"></div>
       <div onClick={moveRight} className="right ontop"></div>
-    </> : <MenusHud showItems={showItems} showArmour={showArmour} showSkills={showSkills} showQuests={showQuests} />}
-    <SkillsHud useSkill={useSkill}/>
+    </> : <MenusHud showItems={_=>show("items")} showArmour={_=>show("armour")} showSkills={_=>show("skills")} showQuests={_=>show("quests")} />}
+    <SkillsHud useSkill={useSkill} character={character} />
   </div>
 }
 

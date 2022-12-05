@@ -2,7 +2,12 @@ class ItemsController < ApplicationController
   before_action :set_item, only: %i[show edit update]
 
   def index
-    @items = Item.all
+    @items = Item.all.where("character_id = ?", params[:character_id])
+    if @items
+      render json: { items: @items }
+    else
+      render json: { status: 500, errors: ['no users found']}
+    end
   end
 
   def new
@@ -11,25 +16,16 @@ class ItemsController < ApplicationController
 
   def create
     @item = Item.new(item_params)
-    respond_to do |format|
-      if @item.save
-        format.json { :show, status: ok, location: @item }
-      else
-        format.json { render :new, status: :bad_request }
-      end
+    if @item.save
+      render json: { status: :created }
+    else
+      render json: { status: 500, errors: @item.errors.full_messages }
     end
   end
 
   def show; end
   
   def update
-    respond_to do |format|
-      if @item.update item_params
-        format.json { :show, status: ok, location: @item }
-      else
-        format.json  {render :new, status: :bad_request }
-      end
-    end
   end
 
    private
@@ -38,6 +34,6 @@ class ItemsController < ApplicationController
    end
 
   def item_params
-    params.require(:item).permit(:character, :slot, :quantity)
+    params.require(:item).permit(:character_id, :slot, :quantity)
   end
 end

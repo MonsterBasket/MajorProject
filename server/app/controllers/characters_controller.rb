@@ -6,7 +6,7 @@ class CharactersController < ApplicationController
     if @characters
       render json: { characters: @characters }
     else
-      render json: { stats: 500, errors: ['no users found']}
+      render json: { status: 500, errors: ['no users found']}
     end
   end
 
@@ -23,18 +23,15 @@ class CharactersController < ApplicationController
     end
   end
 
-  def show
-  end
+  def show; end
 
   def update
     # I clearly copied this section from users
-    respond_to do |format|
       @character.email = character_params[:email]
       @character.password = character_params[:password]
       @character.save
 
       format.all {redirect_to character_url(@character), alert: "Details saved."}
-    end
   end
 
   def edit; end
@@ -52,7 +49,6 @@ class CharactersController < ApplicationController
   end
 
   def character_params
-    # params.fetch(:character, {})
     params.require(:character).permit(:user_id, :name, :role)
   end
 end
