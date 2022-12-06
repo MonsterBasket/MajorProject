@@ -16,7 +16,7 @@
               inset 15px 15px 30px 10px rgb(223, 161, 161), inset -15px -15px 30px 10px rgb(90, 14, 14);
 }
 .armourWindow{
-  background-color: rgb(120, 120, 169);
+  background-color: rgb(106, 130, 194);
   box-shadow: inset 5px 5px 10px 0 rgb(213, 213, 236), inset -5px -5px 10px 0 rgb(18, 18, 60),
               inset 15px 15px 30px 10px rgb(182, 182, 225), inset -15px -15px 30px 10px rgb(59, 59, 107);
 }
@@ -92,7 +92,85 @@
   margin: 2px;
   cursor: pointer;
 }
-.itemSlot, .armourSlot{
+.itemSlot.withImg, .armourSlot.withImg{
+  background-image: url("../../images/items.png");
+  background-size: 960px 1320px; /* Slot size is 60px, icon size is 48px, that's 1.25 scale.  Image size is 768*1056 */
+}
+.itemSlot{
   border-radius: 5px;
-  box-shadow: inset 5px 5px 5px 0 rgba(139, 89, 89, 0.4), inset -5px -5px 5px rgba(247, 195, 195, 0.4)
+  box-shadow: inset 5px 5px 5px 0 rgba(139, 89, 89, 0.4), inset -5px -5px 5px rgba(247, 195, 195, 0.4);
+}
+.armourSlot{
+  border-radius: 5px;
+  box-shadow: inset 5px 5px 5px 0 rgba(80, 80, 130, 0.4), inset -5px -5px 5px rgb(183, 183, 205, 0.4);
+}
+.armourContainer{
+  position: absolute;
+  width: 80px;
+  overflow: visible;
+}
+.armourContainer h4{
+  margin-top: 10px;
+  margin-bottom: 5px;
+  white-space: nowrap;
+}
+.armourContainer div{
+  position: absolute;
+  left: 10px;
+}
+#statContainer{
+  background-color: rgb(95, 113, 170);
+  border-radius: 20px;
+  position: absolute;
+  width: 350px;
+  right: 70px;
+  height: 420px;
+  box-shadow: inset 5px 5px 5px 0 rgba(56, 75, 121, 0.4), inset -5px -5px 5px rgba(183, 190, 205, 0.4);
+}
+#stats{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 5px;
+}
+.statsLeft{
+  text-align: right;
+}
+.statsRight{
+  text-align: left;
+}
+#head{
+  top: 60px;
+  left: 165px;
+}
+#body{
+  top: 160px;
+  left: 165px;
+}
+#legs{
+  top: 260px;
+  left: 165px;
+}
+#feet{
+  top: 360px;
+  left: 165px;
+}
+#hands{
+  top: 208px;
+  left: 265px;
+}
+#weapon{
+  top: 108px;
+  left: 65px;
+}
+#offHand{
+  top: 208px;
+  left: 65px;
+}
+#ring1{
+  top: 308px;
+  left: 65px;
+}
+#ring2{
+  top: 308px;
+  left: 265px;
 }

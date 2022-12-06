@@ -31,6 +31,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
   create_table "items", force: :cascade do |t|
     t.integer "character_id", null: false
     t.string "name", null: false
+    t.integer "img_pos_x", null: false
+    t.integer "img_pos_y", null: false
     t.string "item_type", null: false
     t.string "slot", null: false
     t.integer "value"
@@ -44,6 +46,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
     t.integer "evasion"
     t.integer "magic_attack"
     t.integer "magic_defence"
+    t.integer "world_page"
+    t.integer "world_pos_x"
+    t.integer "world_pos_y"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["character_id"], name: "index_items_on_character_id"

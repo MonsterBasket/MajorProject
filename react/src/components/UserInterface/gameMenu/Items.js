@@ -10,7 +10,13 @@ function Items({items}){
     }
     items.map(item => {
       if(!isNaN(item.slot))
-      slots[+item.slot] = <div key={`slot${item.slot}`} className="itemSlot">{item.name}</div>
+      slots[+item.slot] = <div 
+        key={`slot${item.slot}`}
+        className="itemSlot withImg"
+        title={item.name}
+        style={{backgroundPosition: `${item.img_pos_x * -60}px ${item.img_pos_y * -60}px`}}
+        >
+        </div>
     })
     return slots
   }

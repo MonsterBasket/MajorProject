@@ -66,7 +66,7 @@ function useSkill(skill){
     <HealthHud character={character} />
     {hideButtons ? <>
       <div className={`itemsWindow ${pagePos[0]} ${transition}`}><Items items={items} /><div onClick={close}className="miniCloser">X</div></div>
-      <div className={`armourWindow ${pagePos[1]} ${transition}`}><Armour character={character} /><div onClick={close}className="miniCloser">X</div></div>
+      <div className={`armourWindow ${pagePos[1]} ${transition}`}><Armour items={items} /><div onClick={close}className="miniCloser">X</div></div>
       <div className={`skillsWindow ${pagePos[2]} ${transition}`}><Skills character={character} /><div onClick={close}className="miniCloser">X</div></div>
       <div className={`questsWindow ${pagePos[3]} ${transition}`}><Quests character={character} /><div onClick={close}className="miniCloser">X</div></div>
       <div onClick={close} id="closer"></div>
