@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe Character, item_type: :model do
   let(:user) { User.create(username: "New User", email: "123@123.com", password: "nope") }
@@ -103,7 +102,6 @@ RSpec.describe Character, item_type: :model do
     it 'stackable items can stack' do
       pie2 = Item.create(character: character, name: "Meat Pie", item_type: "food", slot: 5, quantity: 1)
       # getting "can't modify frozen attributes"
-      binding.pry
       expect(character.items.all.find {|item| item.name == "Meat Pie"}.quantity).to eq(2)
     end
   end

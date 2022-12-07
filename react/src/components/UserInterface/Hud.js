@@ -9,7 +9,7 @@ import SkillsHud from "./SkillsHud"
   import Quests from "./gameMenu/Quests"
 import { useEffect, useState } from "react"
 import axios from "axios"
-const url = "http://localhost:3001/"
+import { serverUrl } from "../../App"
   
 // master container for all the on screen buttons (HUD = Heads Up Display)
 function Hud({character}){
@@ -21,21 +21,21 @@ function Hud({character}){
   useEffect(getItems, [])
 
   function getItems(){
-    axios.get(`${url}items`, {params: {character_id: character.id}})//, {withCredentials: true})
+    axios.get(`${serverUrl}items`, {params: {character_id: character.id}})//, {withCredentials: true})
     .then(res => {
       if(res.status == 200) {
         if(res.data.items.length > 0) {
           setItems(res.data.items)
         }
         else{
-          console.log("fail", res)
+          console.log("No items found")
         }
       }
       else {
         console.log(res)
       }
     })
-    .catch(err => console.log("Error retrieving characters:", err))
+    .catch(err => console.log("Error retrieving items:", err))
   }
 
 

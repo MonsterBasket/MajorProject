@@ -6,7 +6,7 @@ import knight from "../../images/knight.png"
 import rogue from "../../images/rogue.png"
 import mage from "../../images/mage.png"
 import axios from 'axios';
-const url = "http://localhost:3001/"
+import { serverUrl } from '../../App';
 
 function SelectCharacter({user, setPlayCharacter, handleLogout}){
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   useEffect(getCharacters, [])
 
   function getCharacters(){ //user is not set the first time you create an account - it's also showing other user's characters
-    axios.get(`${url}characters`, {params: {user_id: user.id}}, {withCredentials: true})
+    axios.get(`${serverUrl}characters`, {params: {user_id: user.id}}, {withCredentials: true})
     .then(res => {
       if(res.status == 200) {
         if(res.data.characters.length == 0) setCreator(true)
@@ -54,7 +54,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
 
   function deleteCharacter(){
     if (window.confirm(`Are you sure you want to delete ${character.name}`)){
-      axios.delete(`${url}characters/${character.id}`)
+      axios.delete(`${serverUrl}characters/${character.id}`)
       .then(res => {
         if(res.data.characters.length == 0) setCreator(true)
         else{
@@ -69,7 +69,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   function createCharacter(){
     const sendCharacter = {...newCharacter, user_id:user.id}
     if(character != {}){
-    axios.post(`${url}characters`, sendCharacter, {withCredentials: true})
+    axios.post(`${serverUrl}characters`, sendCharacter, {withCredentials: true})
       .then(res => {
         if(res.data.status=="created") play(newCharacter)
         else setError(res.data.errors)

@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
+import { useState } from "react"
 
 function Armour({items}){
   const [armourList, setArmourList] = useState(createArmourList())
-  // useEffect(createArmourList(),[])
 
   function createArmourList(){
     const slots = ["head", "body", "legs", "feet", "hands", "weapon", "offHand", "ring1", "ring2"]
     const gear = {}
-    items.map(item => {
+    items.map(item => { // assigns each equipped item to its relevant slot
       if(item.slot == "weapon2"){
         gear["weapon"] = item;
         gear["offHand"] = "NA"
@@ -16,7 +15,7 @@ function Armour({items}){
         gear[item.slot] = item;
       }
     })
-    slots.map(slot => {
+    slots.map(slot => { // creates divs with or without above items
       if(gear[slot]){
         gear[slot] = <div 
           key={`slot${slot}`}
@@ -26,22 +25,20 @@ function Armour({items}){
           >
         </div>
       }
-      else gear[slot] = <div key={`slot${slot}`} className="armourSlot"></div>
+      else gear[slot] = <div key={`slot${slot}`} className="armourSlot"></div> //empty slot
     })
     return gear;
   }
 
-  function getArmour(slot){
-    return <div className="armourSlot"></div>
-  }
-
   function getStats(stat){
+    // each character role will have base stats + level modifier
+    // loop through armourList and summarise stats
     return 0
   }
 
   function getEffects(){
-    // loop through armourList and summarise effects
-    return <div className="effects">+1 poison damage</div>
+    // loop through armourList and summarise effects - potentially merge or refer to getStats
+    return <div className="effects">+1 poison damage</div> // demo output
   }
 
   return <div id="armour">

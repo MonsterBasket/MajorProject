@@ -1,10 +1,10 @@
-import { useRef, useState } from "react";
+import { useState } from "react";
 import axios from 'axios';
 import login from "../../utils/login/login"
 import Title from '../../components/Pages/Title'
-const url = "http://localhost:3001/"
+import { serverUrl } from "../../App";
 
-function Signup({handleLogin, handleLogout}){
+function Signup({handleLogin}){
 
   const [form, setForm] = useState({
     username:"",
@@ -26,7 +26,7 @@ function Signup({handleLogin, handleLogout}){
 
   function signup(){ 
     if (form.username && form.email && form.password && form.password_confirmation){
-      axios.post(`${url}users`, {user}, {withCredentials: true})
+      axios.post(`${serverUrl}users`, {user}, {withCredentials: true})
       .then(json => {
         login(user, setForm, handleLogin)
         // this.redirect("/select-character")

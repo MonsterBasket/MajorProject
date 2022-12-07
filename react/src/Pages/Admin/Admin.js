@@ -2,15 +2,15 @@ import { Link } from "react-router-dom";
 import axios from 'axios';
 import Title from '../../components/Pages/Title'
 import { useEffect, useState } from "react";
+import { serverUrl } from "../../App";
 
 function Admin({handleLogout}){
-  const url = "http://localhost:3001/"
   const [users, setUsers] = useState([])
 
   useEffect(() => {loadUsers()}, [])
 
   function loadUsers(){
-    axios.get(`${url}users`)
+    axios.get(`${serverUrl}users`)
     .then(res => setUsers(res.data.users))
     .catch(err => console.log(err))
   }

@@ -37,7 +37,6 @@ class Item < ApplicationRecord
     return if !character
     return check_item_count if quantity.to_i < 1
     other_item = character.items.all.find { |item| item.name == name && item.id != id } # && item.updated_at != nil && item.updated_at < self.updated_at }
-    # binding.pry
     return check_item_count if !other_item
     other_item.quantity = other_item.quantity.to_i + quantity
     other_item.save(validate: false)

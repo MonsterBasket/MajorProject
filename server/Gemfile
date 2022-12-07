@@ -52,5 +52,3 @@ group :test do
   gem "rspec-rails"
   gem "capybara"
 end
-
-gem "pg", "~> 1.4"

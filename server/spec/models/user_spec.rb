@@ -1,5 +1,4 @@
 require 'rails_helper'
-require 'pry'
 
 RSpec.describe User, type: :model do
   let(:user) { User.create(username: "New User", email: "123@123.com", password: "nope") }

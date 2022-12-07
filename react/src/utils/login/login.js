@@ -1,10 +1,10 @@
 import axios from 'axios';
-const url = "http://localhost:3001/"
+import { serverUrl } from '../../App';
 
 function login(form, setForm, handleLogin){
   setForm({...form, loginError:""})
   if(form.username && form.password){
-  axios.post(`${url}login`, {form}, {withCredentials: true})
+  axios.post(`${serverUrl}login`, {form}, {withCredentials: true})
     .then(res => {
       if(res.data.logged_in) {
         handleLogin(res)

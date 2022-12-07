@@ -1,4 +1,3 @@
-require 'pry'
 class SessionsController < ApplicationController
   def create
     @user = User.find_by(username: params[:form][:username])
@@ -31,6 +30,7 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    current_user.invalidate_session!
     logout!
     render json: {
       status: 200,

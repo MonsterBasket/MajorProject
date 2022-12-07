@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
 
   def logout!
     session.clear
-    @current_user = nil
+    session[:user_id] = nil
   end
 
   def set_user
