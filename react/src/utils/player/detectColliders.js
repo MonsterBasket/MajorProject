@@ -65,6 +65,11 @@ function detectColliders(currentMap, x, y){
   if(check([[1,0]], left)  && ((y + 30) % 48) < 28 && ((x + 10) % 48) < 15) colliders.left  = false; // ⬒ - greater than 20 pixels from bottom and within 15 pixels from left
   if(check([[1,0]], right) && ((y + 30) % 48) < 28 && ((x + 10) % 48) > 33) colliders.right = false; // ⬒ - greater than 20 pixels from bottom and within 15 pixels from right
 
+  // allow walking off the edge of the screen - if there's no map the last row should be blocked with colliders.
+  if(index < 40) colliders.up = true;
+  if(index % 40 == 0) colliders.left = true;
+  if((index + 1) % 40 == 0) colliders.right = true;
+  if(index >= 880) colliders.down = true;
 
   if(!onPos) return colliders //ignore the rest of the code if current block is empty
 

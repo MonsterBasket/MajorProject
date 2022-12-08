@@ -46,31 +46,9 @@ function App(){
     else navigate("/login")
   }, [user])
 
-  // const loggedInComponents = isLoggedIn ? <>
-  //   <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
-  //   <Route path="/" element={<>
-  //     <GameController character={character} />
-  //     <Hud character={character} />
-  //   </>} />
-  // </> : ""
-
-  // const noUserComponents = !isLoggedIn ? <>
-  //   <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-  //   <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
-  // </> : ""
-
-  // const adminComponents = isLoggedIn ? <> {/*&& user.is_admin ? <>*/}
-    // <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
-    // <Route path="/admin/mapmaker" element={<MapMaker />} />
-  // </> : ""
-
-
   return (
     <div className="App">
       <Routes>
-        {/* {noUserComponents}
-        {loggedInComponents}
-        {adminComponents} */}
         {isLoggedIn ? <>
           <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
           <Route path="/" element={<>
