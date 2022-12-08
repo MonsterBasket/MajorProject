@@ -74,6 +74,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 Known Bugs:
   Performance is rubbish - especially when near a zone
   - Probably have to change to Canvas to fix this
+  - Made some improvements to this by optimising where certain things run.  It's totally usable but I suspect Canvas would improve it further as the frame-drop appears to be from the number of divs being rendered.
 
   <!-- Character animations are occasionally glitchy
   - This seems to be only when changing from one animation from another

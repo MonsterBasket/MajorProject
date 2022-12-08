@@ -9,12 +9,12 @@ import Signup from "./Pages/Signup/Signup"
 import SelectCharacter from "./Pages/SelectCharacter/SelectCharacter"
 import GameController from "./Pages/Game/GameController"
 import Hud from "./components/UserInterface/Hud"
-export const serverUrl = "http://localhost:3001/"
-// export const serverUrl = "http://monster-basket.fly.dev/"
+// export const serverUrl = "http://localhost:3001/"
+export const serverUrl = "https://monster-basket.fly.dev/"
 
 function App(){
-  const [user, setUser] = useState([false,{}])
-  // const [isLoggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState({})
+  const [isLoggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate();
   const [character, setPlayCharacter] = useState({})
 
@@ -30,47 +30,64 @@ function App(){
   }
 
   function handleLogin(data) {
-    setUser([true,data.user])
-    // setLoggedIn(true)
+    setUser(data.data.user)
+    setLoggedIn(true)
   }
   function handleLogout(){
-    axios.post(`${serverUrl}logout`, user[1], {withCredentials: true})
+    axios.post(`${serverUrl}logout`, user, {withCredentials: true})
     .then(() =>{
-      setUser([false,{}]);
-      // setLoggedIn(false);
+      setUser({});
+      setLoggedIn(false);
     })
   }
 
   useEffect(()=> {
-    if (user[0]) navigate("/select-character")
+    if (isLoggedIn) navigate("/select-character")
     else navigate("/login")
-  }, [user[0]])
+  }, [user])
 
-  const loggedInComponents = user[0] ? <>
-    <Route path="/select-character" element={<SelectCharacter user={user[1]} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
-    <Route path="/" element={<>
-      <GameController character={character} />
-      <Hud character={character} />
-    </>} />
-  </> : ""
+  // const loggedInComponents = isLoggedIn ? <>
+  //   <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
+  //   <Route path="/" element={<>
+  //     <GameController character={character} />
+  //     <Hud character={character} />
+  //   </>} />
+  // </> : ""
 
-  const noUserComponents = !user[0] ? <>
-    <Route path="/login" element={<Login handleLogin={handleLogin} />} />
-    <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
-  </> : ""
+  // const noUserComponents = !isLoggedIn ? <>
+  //   <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+  //   <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
+  // </> : ""
 
-  const adminComponents = user[0] ? <> {/*&& user.is_admin ? <>*/}
-    <Route path="/admin" element={<Admin user={user[1]} handleLogout={handleLogout} />} />
-    <Route path="/admin/mapmaker" element={<MapMaker />} />
-  </> : ""
+  // const adminComponents = isLoggedIn ? <> {/*&& user.is_admin ? <>*/}
+    // <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
+    // <Route path="/admin/mapmaker" element={<MapMaker />} />
+  // </> : ""
 
 
   return (
     <div className="App">
       <Routes>
-        {noUserComponents}
+        {/* {noUserComponents}
         {loggedInComponents}
-        {adminComponents}
+        {adminComponents} */}
+        {isLoggedIn ? <>
+          <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
+          <Route path="/" element={<>
+            <GameController character={character} />
+            <Hud character={character} />
+          </>}/>
+          {user.is_admin} ? <>
+            <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
+            <Route path="/admin/mapmaker" element={<MapMaker />} />
+          </>
+        </> : <>
+          <Route path="/login" element={<Login handleLogin={handleLogin} />} />
+          <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
+        </>}
+
+
+
       </Routes>
     </div>
   );

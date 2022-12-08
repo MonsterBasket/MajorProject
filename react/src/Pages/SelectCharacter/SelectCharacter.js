@@ -18,7 +18,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   const [savedCharacters, setSavedCharacters] = useState([{name:"", role:""}])
   const timer = useRef(0);
 
-  useEffect(getCharacters, [])
+  useEffect(() => {if(user) getCharacters()}, [])
 
   function getCharacters(){ //user is not set the first time you create an account - it's also showing other user's characters
     axios.get(`${serverUrl}characters`, {params: {user_id: user.id}}, {withCredentials: true})

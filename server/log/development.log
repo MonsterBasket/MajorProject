@@ -36917,3 +36917,1022 @@ Processing by CharactersController#index as HTML
 Completed 200 OK in 6ms (Views: 4.3ms | ActiveRecord: 0.6ms | Allocations: 1610)
 
 
+Started GET "/logged_in" for ::1 at 2022-12-08 13:16:06 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 11ms (Views: 0.4ms | ActiveRecord: 0.0ms | Allocations: 2425)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:16:06 +1100
+Processing by SessionsController#is_logged_in? as HTML
+Completed 200 OK in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 192)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:19:12 +1100
+  [1m[36mActiveRecord::SchemaMigration Pluck (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 207ms (Views: 0.6ms | ActiveRecord: 0.6ms | Allocations: 22109)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 13:20:29 +1100
+Processing by SessionsController#destroy as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.2ms | Allocations: 857)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:20:35 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 177ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 853)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:29 +1100
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:29 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 874)
+
+
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 806)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:24:29 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:24:29 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.8ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  [1m[36mCharacter Load (0.8ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.9ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  [1m[36mItem Load (0.6ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 106ms (Views: 85.4ms | ActiveRecord: 3.8ms | Allocations: 32175)
+
+
+Completed 200 OK in 97ms (Views: 84.1ms | ActiveRecord: 2.0ms | Allocations: 31230)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:34 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 0.9ms | ActiveRecord: 0.5ms | Allocations: 1035)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:34 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 800)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:24:34 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:24:34 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.6ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+Processing by CharactersController#index as HTML
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  Parameters: {"user_id"=>"1"}
+Completed 200 OK in 12ms (Views: 9.9ms | ActiveRecord: 0.8ms | Allocations: 1872)
+
+
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 7.2ms | ActiveRecord: 0.6ms | Allocations: 1907)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 810)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:24:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 810)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:25:42 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.6ms | ActiveRecord: 0.5ms | Allocations: 868)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:25:42 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.3ms | Allocations: 812)
+
+
+Started GET "/characters" for ::1 at 2022-12-08 13:25:42 +1100
+Started GET "/characters" for ::1 at 2022-12-08 13:25:42 +1100
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.7ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 3.3ms | ActiveRecord: 0.7ms | Allocations: 745)
+
+
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.2ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 2ms (Views: 1.4ms | ActiveRecord: 0.2ms | Allocations: 744)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 13:25:48 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"_json"=>[true, {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}], "session"=>{"_json"=>[true, {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}]}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 2ms (Views: 0.3ms | ActiveRecord: 0.1ms | Allocations: 689)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:25:53 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 191ms (Views: 1.0ms | ActiveRecord: 0.1ms | Allocations: 858)
+
+
+Started GET "/characters" for ::1 at 2022-12-08 13:25:53 +1100
+Started GET "/characters" for ::1 at 2022-12-08 13:25:53 +1100
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 4ms (Views: 3.2ms | ActiveRecord: 0.3ms | Allocations: 771)
+
+
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 3ms (Views: 2.3ms | ActiveRecord: 0.3ms | Allocations: 744)
+
+
+Started GET "/items" for ::1 at 2022-12-08 13:26:04 +1100
+Started GET "/items" for ::1 at 2022-12-08 13:26:04 +1100
+Processing by ItemsController#index as HTML
+Processing by ItemsController#index as HTML
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = NULL)[0m
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = NULL)[0m
+  ↳ app/controllers/items_controller.rb:7:in `index'
+  ↳ app/controllers/items_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.2ms | ActiveRecord: 0.3ms | Allocations: 1562)
+
+
+Completed 200 OK in 4ms (Views: 2.8ms | ActiveRecord: 0.3ms | Allocations: 1299)
+
+
+Started GET "/characters" for ::1 at 2022-12-08 13:26:07 +1100
+Started GET "/characters" for ::1 at 2022-12-08 13:26:07 +1100
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.2ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.2ms | Allocations: 792)
+
+
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 3ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 742)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:16 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 5029)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 13:26:35 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"_json"=>[true], "session"=>{"_json"=>[true]}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.1ms | Allocations: 699)
+
+
+Started POST "/users" for ::1 at 2022-12-08 13:26:45 +1100
+Processing by UsersController#create as HTML
+  Parameters: {"user"=>{"username"=>"Pollito", "email"=>"fgfgfdsgsdf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/users_controller.rb:22:in `create'
+  [1m[36mUser Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Pollito"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:22:in `create'
+  [1m[36mUser Exists? (0.1ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = ? LIMIT ?[0m  [["email", "fgfgfdsgsdf"], ["LIMIT", 1]]
+  ↳ app/controllers/users_controller.rb:22:in `create'
+  [1m[36mUser Create (0.9ms)[0m  [1m[32mINSERT INTO "users" ("username", "email", "password_digest", "session_token", "is_admin", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?)[0m  [["username", "Pollito"], ["email", "fgfgfdsgsdf"], ["password_digest", "[FILTERED]"], ["session_token", "[FILTERED]"], ["is_admin", 0], ["created_at", "2022-12-08 02:26:45.908407"], ["updated_at", "2022-12-08 02:26:45.908407"]]
+  ↳ app/controllers/users_controller.rb:22:in `create'
+  [1m[36mTRANSACTION (7.1ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/users_controller.rb:22:in `create'
+Completed 200 OK in 190ms (Views: 0.3ms | ActiveRecord: 8.4ms | Allocations: 4017)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:26:45 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Pollito", "email"=>"fgfgfdsgsdf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Pollito", "email"=>"fgfgfdsgsdf", "password"=>"[FILTERED]", "password_confirmation"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Pollito"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 181ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 891)
+
+
+Started GET "/characters" for ::1 at 2022-12-08 13:26:46 +1100
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.1ms | ActiveRecord: 0.4ms | Allocations: 930)
+
+
+Started GET "/characters" for ::1 at 2022-12-08 13:26:46 +1100
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.5ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = NULL)[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 4ms (Views: 2.9ms | ActiveRecord: 0.5ms | Allocations: 742)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:53 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 2830)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:56 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 2828)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:56 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 2825)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:57 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 2825)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:57 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 2825)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:57 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 6ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 2825)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:26:57 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Stabby", "role"=>"Knight", "character"=>{"name"=>"Stabby", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.2ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Stabby"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mrollback transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 5ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 2825)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:46 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 832)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:46 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 810)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:51 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 800)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:51 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.5ms | ActiveRecord: 0.5ms | Allocations: 800)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:58 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.2ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:27:58 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.7ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.9ms | ActiveRecord: 0.7ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:03 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 800)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:03 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 800)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:11 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 794)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:11 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 794)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.2ms | ActiveRecord: 0.4ms | Allocations: 802)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:16 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.8ms | ActiveRecord: 0.2ms | Allocations: 802)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:22 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.3ms | ActiveRecord: 0.4ms | Allocations: 1035)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:22 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 806)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:28:35 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 804)
+
+
+Started GET "/characters?user_id=2" for ::1 at 2022-12-08 13:28:46 +1100
+Started GET "/characters?user_id=2" for ::1 at 2022-12-08 13:28:46 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"2"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '2')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 4ms (Views: 2.4ms | ActiveRecord: 0.4ms | Allocations: 789)
+
+
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"2"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '2')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 3ms (Views: 1.8ms | ActiveRecord: 0.3ms | Allocations: 744)
+
+
+Started POST "/characters" for ::1 at 2022-12-08 13:28:53 +1100
+Processing by CharactersController#create as HTML
+  Parameters: {"name"=>"Fdsfds", "role"=>"Knight", "user_id"=>2, "character"=>{"user_id"=>2, "name"=>"Fdsfds", "role"=>"Knight"}}
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[36mbegin transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "characters" WHERE "characters"."name" = ? LIMIT ?[0m  [["name", "Fdsfds"], ["LIMIT", 1]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mCharacter Create (0.4ms)[0m  [1m[32mINSERT INTO "characters" ("user_id", "name", "role", "exp", "level", "health", "mana", "items", "map", "pos_x", "pos_y", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)[0m  [["user_id", 2], ["name", "Fdsfds"], ["role", "Knight"], ["exp", 0], ["level", 1], ["health", 100], ["mana", 100], ["items", nil], ["map", nil], ["pos_x", nil], ["pos_y", nil], ["created_at", "2022-12-08 02:28:53.970511"], ["updated_at", "2022-12-08 02:28:53.970511"]]
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+  [1m[36mTRANSACTION (7.8ms)[0m  [1m[36mcommit transaction[0m
+  ↳ app/controllers/characters_controller.rb:19:in `create'
+Completed 200 OK in 17ms (Views: 0.2ms | ActiveRecord: 8.6ms | Allocations: 3635)
+
+
+Started GET "/items" for ::1 at 2022-12-08 13:28:54 +1100
+Started GET "/items" for ::1 at 2022-12-08 13:28:54 +1100
+Processing by ItemsController#index as HTML
+  [1m[36mItem Load (0.9ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = NULL)[0m
+  ↳ app/controllers/items_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 6.0ms | ActiveRecord: 0.9ms | Allocations: 795)
+
+
+Processing by ItemsController#index as HTML
+  [1m[36mItem Load (1.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = NULL)[0m
+  ↳ app/controllers/items_controller.rb:7:in `index'
+Completed 200 OK in 13ms (Views: 8.8ms | ActiveRecord: 1.4ms | Allocations: 778)
+
+
+Started GET "/characters?user_id=2" for ::1 at 2022-12-08 13:29:01 +1100
+Started GET "/characters?user_id=2" for ::1 at 2022-12-08 13:29:01 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"2"}
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '2')[0m
+  Parameters: {"user_id"=>"2"}
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mCharacter Load (0.2ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '2')[0m
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 2]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 2]]
+Completed 200 OK in 11ms (Views: 9.7ms | ActiveRecord: 0.5ms | Allocations: 2621)
+
+
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 13ms (Views: 11.7ms | ActiveRecord: 0.4ms | Allocations: 2843)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 13:29:06 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>2, "username"=>"Pollito", "email"=>"fgfgfdsgsdf", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-08T02:26:45.908Z", "updated_at"=>"2022-12-08T02:26:45.908Z", "session"=>{"id"=>2, "username"=>"Pollito", "email"=>"fgfgfdsgsdf", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-08T02:26:45.908Z", "updated_at"=>"2022-12-08T02:26:45.908Z"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 691)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:29:12 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 176ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 853)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:29:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.0ms | ActiveRecord: 0.3ms | Allocations: 863)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:29:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.6ms | ActiveRecord: 0.3ms | Allocations: 806)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:29:40 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.7ms | ActiveRecord: 0.3ms | Allocations: 806)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 13:29:40 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.3ms | ActiveRecord: 0.2ms | Allocations: 806)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:29:40 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 8.3ms | ActiveRecord: 0.7ms | Allocations: 1862)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 13:29:40 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.8ms | ActiveRecord: 0.4ms | Allocations: 1611)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 13:29:44 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z", "session"=>{"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 5.4ms | ActiveRecord: 0.2ms | Allocations: 694)
+
+
+Started POST "/login" for ::1 at 2022-12-08 13:29:48 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 176ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 852)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:05:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.8ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 13ms (Views: 1.9ms | ActiveRecord: 2.0ms | Allocations: 1091)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:05:31 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.6ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 9ms (Views: 1.1ms | ActiveRecord: 0.6ms | Allocations: 800)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:05:31 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.6ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 14ms (Views: 11.4ms | ActiveRecord: 0.9ms | Allocations: 1943)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:05:31 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.7ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 9.0ms | ActiveRecord: 1.0ms | Allocations: 1610)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:05:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:05:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 2.1ms | ActiveRecord: 0.2ms | Allocations: 804)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:05:37 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:05:37 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 9ms (Views: 7.8ms | ActiveRecord: 0.6ms | Allocations: 1716)
+
+
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 5.9ms | ActiveRecord: 0.6ms | Allocations: 1610)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 14:05:40 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z", "session"=>{"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.3ms | Allocations: 707)
+
+
+Started POST "/login" for ::1 at 2022-12-08 14:05:46 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 175ms (Views: 0.4ms | ActiveRecord: 0.2ms | Allocations: 883)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 0.9ms | ActiveRecord: 0.4ms | Allocations: 972)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:37 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.2ms | ActiveRecord: 0.2ms | Allocations: 818)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:39 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.1ms | ActiveRecord: 0.2ms | Allocations: 837)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:39 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 803)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:43 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 8ms (Views: 1.6ms | ActiveRecord: 0.2ms | Allocations: 970)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:43 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 808)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.4ms | ActiveRecord: 0.3ms | Allocations: 937)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:09:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 798)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:11:10 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.4ms | ActiveRecord: 0.5ms | Allocations: 804)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:11:10 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 804)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:11:10 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.2ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.3ms | Allocations: 1678)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:11:10 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.3ms | ActiveRecord: 0.6ms | Allocations: 1610)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 14:14:26 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z", "session"=>{"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 3ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 699)
+
+
+Started POST "/login" for ::1 at 2022-12-08 14:14:34 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 177ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 842)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:17:30 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.3ms | ActiveRecord: 0.3ms | Allocations: 802)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:17:30 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.9ms | ActiveRecord: 0.2ms | Allocations: 802)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:17:30 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:17:30 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+Processing by CharactersController#index as HTML
+  [1m[36mCharacter Load (0.7ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  Parameters: {"user_id"=>"1"}
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mCharacter Load (0.2ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+Completed 200 OK in 21ms (Views: 18.0ms | ActiveRecord: 1.0ms | Allocations: 2835)
+
+
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 20ms (Views: 16.6ms | ActiveRecord: 1.2ms | Allocations: 3055)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:17:55 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 5ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 863)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:17:55 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.5ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 12ms (Views: 6.7ms | ActiveRecord: 0.5ms | Allocations: 804)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:17:55 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:17:55 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.5ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 16ms (Views: 12.8ms | ActiveRecord: 0.9ms | Allocations: 1637)
+
+
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 7.9ms | ActiveRecord: 0.6ms | Allocations: 1610)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 14:18:08 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z", "session"=>{"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.3ms | ActiveRecord: 0.3ms | Allocations: 693)
+
+
+Started POST "/login" for ::1 at 2022-12-08 14:18:13 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 182ms (Views: 0.3ms | ActiveRecord: 0.2ms | Allocations: 885)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:18:48 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 14ms (Views: 4.9ms | ActiveRecord: 0.4ms | Allocations: 824)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:18:48 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (4.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 12ms (Views: 1.3ms | ActiveRecord: 4.4ms | Allocations: 802)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:18:50 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 0.8ms | ActiveRecord: 0.3ms | Allocations: 944)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:18:50 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 6ms (Views: 1.1ms | ActiveRecord: 0.3ms | Allocations: 800)
+
+
+Started POST "/login" for ::1 at 2022-12-08 14:18:58 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 179ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 857)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:18:58 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:18:58 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 7ms (Views: 5.2ms | ActiveRecord: 0.5ms | Allocations: 1628)
+
+
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.1ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 4.6ms | ActiveRecord: 0.4ms | Allocations: 1610)
+
+
+Started GET "/items?character_id=1" for ::1 at 2022-12-08 14:19:07 +1100
+Started GET "/items?character_id=1" for ::1 at 2022-12-08 14:19:07 +1100
+Processing by ItemsController#index as HTML
+  Parameters: {"character_id"=>"1"}
+  [1m[36mItem Load (0.4ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = '1')[0m
+Processing by ItemsController#index as HTML
+  ↳ app/controllers/items_controller.rb:7:in `index'
+  Parameters: {"character_id"=>"1"}
+Completed 200 OK in 4ms (Views: 2.7ms | ActiveRecord: 0.4ms | Allocations: 1022)
+
+
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE (character_id = '1')[0m
+  ↳ app/controllers/items_controller.rb:7:in `index'
+Completed 200 OK in 5ms (Views: 4.4ms | ActiveRecord: 0.3ms | Allocations: 1072)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:19:09 +1100
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:19:09 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 8ms (Views: 6.6ms | ActiveRecord: 0.5ms | Allocations: 1715)
+
+
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.3ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 6ms (Views: 5.1ms | ActiveRecord: 0.5ms | Allocations: 1610)
+
+
+Started POST "/logout" for ::1 at 2022-12-08 14:20:56 +1100
+Processing by SessionsController#destroy as HTML
+  Parameters: {"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z", "session"=>{"id"=>1, "username"=>"Monster", "email"=>"Monster", "password_digest"=>"[FILTERED]", "session_token"=>"[FILTERED]", "is_admin"=>false, "created_at"=>"2022-12-07T02:33:25.762Z", "updated_at"=>"2022-12-07T02:33:25.762Z"}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 4ms (Views: 0.4ms | ActiveRecord: 0.1ms | Allocations: 687)
+
+
+Started POST "/login" for ::1 at 2022-12-08 14:21:01 +1100
+Processing by SessionsController#create as HTML
+  Parameters: {"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}, "session"=>{"form"=>{"username"=>"Monster", "password"=>"[FILTERED]", "loginError"=>"", "usernameError"=>"", "passwordError"=>"[FILTERED]"}}}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."username" = ? LIMIT ?[0m  [["username", "Monster"], ["LIMIT", 1]]
+  ↳ app/controllers/sessions_controller.rb:3:in `create'
+Completed 200 OK in 180ms (Views: 0.5ms | ActiveRecord: 0.1ms | Allocations: 853)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:21:01 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.6ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.2ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 11ms (Views: 8.8ms | ActiveRecord: 0.8ms | Allocations: 1695)
+
+
+Started GET "/characters?user_id=1" for ::1 at 2022-12-08 14:21:01 +1100
+Processing by CharactersController#index as HTML
+  Parameters: {"user_id"=>"1"}
+  [1m[36mCharacter Load (0.4ms)[0m  [1m[34mSELECT "characters".* FROM "characters" WHERE (user_id = '1')[0m
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+  [1m[36mItem Load (0.3ms)[0m  [1m[34mSELECT "items".* FROM "items" WHERE "items"."character_id" = ?[0m  [["character_id", 1]]
+  ↳ app/controllers/characters_controller.rb:7:in `index'
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.6ms | Allocations: 1610)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:21:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 7ms (Views: 1.5ms | ActiveRecord: 0.3ms | Allocations: 820)
+
+
+Started GET "/logged_in" for ::1 at 2022-12-08 14:21:45 +1100
+Processing by SessionsController#is_logged_in? as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = ? LIMIT ?[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/application_controller.rb:15:in `current_user'
+Completed 200 OK in 11ms (Views: 0.9ms | ActiveRecord: 0.3ms | Allocations: 810)
+
+
