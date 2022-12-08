@@ -8,6 +8,13 @@
   height: 100%;
   background: black;
 }
+.gameContainer{
+  position: relative;
+  left: 0px;
+  right: 0px;
+  width: 100%;
+  height: 100%;
+}
 .mapGrid{
   position: absolute;
   display: grid;

@@ -1,9 +1,9 @@
 .App {
   text-align: center;
   width: 1920px;
-  max-width: 100%;
+  max-width: min(100%, 1920px);
   height: 1080px;
-  max-height: 100%;
+  max-height: min(100%, 1080px);
   overflow: hidden;
   background-color: black;
 }

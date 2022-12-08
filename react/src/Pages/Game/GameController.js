@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import './map.css';
 import '../../components/Characters/player.css';
+import Hud from "../../components/UserInterface/Hud"
 import WorldTiler from "../../components/Maps/WorldTiler";
 import SkyTiler from "../../components/Maps/SkyTiler";
 import Player from "../../components/Characters/Player";
@@ -77,8 +78,8 @@ function GameController({character}){
   }
 
   const worldMover = { //clamps map position
-    left: `clamp(${window.innerWidth - (mapSize[0])}px, ${-x + window.innerWidth / 2}px, 0px)`,
-    top: `clamp(${window.innerHeight - (mapSize[1])}px, ${-y + window.innerHeight / 2}px, 0px)`
+    left: `clamp(${Math.min(window.innerWidth, 1920) - (mapSize[0])}px, ${-x + Math.min(window.innerWidth, 1920) / 2}px, 0px)`,
+    top: `clamp(${Math.min(window.innerHeight, 1080) - (mapSize[1])}px, ${-y + Math.min(window.innerHeight, 1080) / 2}px, 0px)`
   }
   const pageTurner = {
     left: newPageX,
@@ -201,17 +202,20 @@ function GameController({character}){
     nextPage.current = tempPage;
   }
 
-  return <div className="world" style={worldMover}>
-    <div className="world" style={pageTurner}>
-      <WorldTiler coords={maps(thisPage.current)} />
-      {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-        {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
-        {mobs(thisPage.current)}
-        <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role}/>
-      <SkyTiler coords={maps(thisPage.current)} />
-      {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
+  return <div className="gameContainer">
+    <div className="world" style={worldMover}>
+      <div className="world" style={pageTurner}>
+        <WorldTiler coords={maps(thisPage.current)} />
+        {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
+          {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
+          {mobs(thisPage.current)}
+          <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role}/>
+        <SkyTiler coords={maps(thisPage.current)} />
+        {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
+      </div>
+      {/* <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>velocity: {Math.floor(velocity.current[0])} - {Math.floor(velocity.current[1])}<br/>lastDirection: {lastDirection.current}<br/>Attacking: {`${attacking.current}`}</div> */}
     </div>
-    {/* <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>velocity: {Math.floor(velocity.current[0])} - {Math.floor(velocity.current[1])}<br/>lastDirection: {lastDirection.current}<br/>Attacking: {`${attacking.current}`}</div> */}
+    <Hud character={character} />
   </div>
 }
 
