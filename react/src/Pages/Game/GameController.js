@@ -8,27 +8,40 @@ import Player from "../../components/Characters/Player";
 import mobs from "../../utils/map/mobs";
 import maps from "../../utils/map/maps";
 import handleInput from "../../utils/player/handleInput";
+import savePosition from "../../utils/player/savePosition";
 
 
 function GameController({character}){
+  // character items, to be passed back and forth between character and hud
+  const [items, setItems] = useState([])
+  // character position - initial state is starting position
   const [x, setX] = useState(400);
   const [y, setY] = useState(400);
+  // character speed - increases incrementally and is added onto position above
   const velocity = useRef([0,0]);
-  const [newPageX, setNewPageX] = useState(0);
-  const [newPageY, setNewPageY] = useState(0);
-  const lastDirection = useRef("KeyS"); //sets initial animation to "idleDown"
-  const myKeys = useRef({});
   const maxSpeed = 30;
-  const mapSize = [40 * 48, 23 * 48]; //I'll extract this from individual map details later
-  const [re, refresh] = useState([]);
+  // used for measuring the time between frames to keep a constant character movement speed regardless of frame-rate
   const lastRender = useRef(0);
+  // force re-render when character stops moving, for some reason the last update of x and y reaching 0 does NOT trigger a render
+  const [re, refresh] = useState([]);
+  // this is used determining the direction of idle and attack animations - initial animation is "idleDown"
+  const lastDirection = useRef("KeyS");
+  // stops character movement while attacking and plays animation exactly once.
+  const attacking = useRef(false);
+  // records current keys being pressed, true on keyDown, false on keyUp
+  const myKeys = useRef({});
+  // this is pretty hardbaked in a lot of places, but eventually I hope to make it dynamic so I can have larger or smaller pages
+  const mapSize = [40 * 48, 23 * 48]; 
+  // current map screen - format: w (world) xxyy. The screen to the right is 10102, below is 10201 etc.
   const thisPage = useRef(10101);
+  // these are ALL for loading the next page and moving from one page to the next.
   const nextPage = useRef();
   const pageDirection = useRef("");
   const pageReady = useRef(false);
+  const [newPageX, setNewPageX] = useState(0);
+  const [newPageY, setNewPageY] = useState(0);
   const shift = useRef([0,0]);
   const turning = useRef(false);
-  const attacking = useRef(false);
 
   useEffect(() => {
     window.addEventListener("keydown", keyDown);
@@ -40,15 +53,15 @@ function GameController({character}){
   }, [])
 
   useEffect(() => {
-    requestAnimationFrame((now) => gameLoop(now, x, y, velocity.current, maxSpeed, attacking.current))
+    requestAnimationFrame((now) => gameLoop(now, x, y, maxSpeed))
   })
 
   useEffect(() => {if(!turning.current) pageLoader()}, [x, y])
 
   function keyDown(e){
     myKeys.current[e.code] = true;
-    if (!attacking.current && ["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) lastDirection.current = e.code;
-    else if(lastDirection.current.substring(0, 5) !== "Space"){
+    if (!attacking.current && ["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) lastDirection.current = setLastDirection(e.code);
+    else if(e.code === "Space" && lastDirection.current.substring(0, 5) !== "Space"){
       let keyHolder = lastDirection.current
       lastDirection.current = `Space ${lastDirection.current}`
       setTimeout(() => lastDirection.current = keyHolder, 300)
@@ -58,26 +71,34 @@ function GameController({character}){
     if(e.code !== "Space") myKeys.current[e.code] = false;
   }
 
-  function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
+  function setLastDirection(code){
+    if(code === "KeyW" && !myKeys.current["KeyA"] && !myKeys.current["KeyD"]) return "KeyW"
+    if(code === "KeyS" && !myKeys.current["KeyA"] && !myKeys.current["KeyD"]) return "KeyS"
+    if(code === "KeyA" && !myKeys.current["KeWA"] && !myKeys.current["KeyS"]) return "KeyA"
+    if(code === "KeyD" && !myKeys.current["KeWA"] && !myKeys.current["KeyS"]) return "KeyD"
+    return lastDirection.current;
+  }
+
+  function gameLoop(now, x, y, maxSpeed) { //runs every frame before render
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
     if (deltaTime) { //skips evaluations if no time has passed since last call (which strangely does happen)
       if(myKeys.current["Space"] === true){
-        attacking = true;
-        setTimeout((attacking) => {
-          attacking = false;
+        attacking.current = true;
+        setTimeout(() => {
+          attacking.current = false;
           myKeys.current["Space"] = false;
         }, 300);
       }
-      velocity = handleInput(thisPage.current, myKeys.current, velocity, x, y, maxSpeed, attacking);
-      if(velocity[0]) setX(prev => prev + velocity[0] * deltaTime);
-      if(velocity[1]) setY(prev => prev + velocity[1] * deltaTime);
-      if(Math.abs(velocity[0]) < 0.1 && Math.abs(velocity[1]) < 0.1) refresh([]);
+      velocity.current = handleInput(thisPage.current, myKeys.current, velocity.current, x, y, maxSpeed, attacking.current);
+      if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
+      if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
+      if(Math.abs(velocity.current[0]) < 0.1 && Math.abs(velocity.current[1]) < 0.1) refresh([]);
     }
   }
 
-  const worldMover = { //clamps map position
+  const worldMover = { // keeps player in center of map but clamps its position so you won't see past any edge
     left: `clamp(${Math.min(window.innerWidth, 1920) - (mapSize[0])}px, ${-x + Math.min(window.innerWidth, 1920) / 2}px, 0px)`,
     top: `clamp(${Math.min(window.innerHeight, 1080) - (mapSize[1])}px, ${-y + Math.min(window.innerHeight, 1080) / 2}px, 0px)`
   }
@@ -87,22 +108,22 @@ function GameController({character}){
   }
 
   function pageLoader(){
-    if(!nextPage.current){
+    if(!nextPage.current){ // if next page hasn't been loaded yet, check if player is near the edge of the screen, and load that map
       if(x > mapSize[0] - 100) pageDirection.current = "right";
       else if(x < 100) pageDirection.current = "left";
       else if(y < 100) pageDirection.current = "up";
       else if(y > mapSize[1] - 100) pageDirection.current = "down";
-      if(pageDirection.current) newPage(pageDirection.current)
+      if(pageDirection.current) newPage(pageDirection.current) // go to function that loads page
     }
-    else {
-      if(pageDirection.current === "right"){
+    else { // if page is loaded, check which screen edge player is at and then...
+      if(pageDirection.current === "right"){ // unload the next page if player moves away from screen edge
         if(x < mapSize[0] - 100) {
           pageDirection.current = "";
           nextPage.current = "";
           pageReady.current = false;
           return
         }
-        else if(pageReady.current && x >= mapSize[0]) turnPage()
+        else if(pageReady.current && x >= mapSize[0]) turnPage() // or turn the page if player walks off the edge of the screen
       }
       if(pageDirection.current === "left"){
         if(x > 100) {
@@ -134,11 +155,12 @@ function GameController({character}){
     }
   }
 
-  function newPage(direction = "up", page = ""){
+  function newPage(direction = "up", page = ""){ // optional page parameter allows me to load pages through other means than just walking off the edge of the screen
+    // direction has a default paramater because it's needed if not passing in a predetermined page to load
 
-    if(direction === "left"){
-      nextPage.current = page || parseInt(thisPage.current) - 100;
-      shift.current = [-mapSize[0], 0]
+    if(direction === "left"){ // determine which page to load depending on which edge of the screen the player is at
+      nextPage.current = page || parseInt(thisPage.current) - 100; // pages are numbered as wxxyy coordinates (w = world, and also means low x values don't start with 0).
+      shift.current = [-mapSize[0], 0] // determins where the next page is positioned when it loads
     }
     else if(direction === "right"){
       nextPage.current = page || parseInt(thisPage.current) + 100;
@@ -152,10 +174,11 @@ function GameController({character}){
       nextPage.current = page || parseInt(thisPage.current) + 1;
       shift.current = [0, mapSize[1]]
     }
-    if(maps(nextPage.current)) pageReady.current = true;
+    if(maps(nextPage.current)) pageReady.current = true; // allow turning page if it exists in the maps list.  Colliders should prevent this ever being false.
   }
 
   function turnPage(){
+    // these all determine whether to move the screens up down left or right
     let horizontal = true;
     let multiplier = 1;
     turning.current = true;
@@ -165,41 +188,47 @@ function GameController({character}){
       multiplier = -1;
       horizontal = false;
     }
-
+    // move the page, 17ms x30 is 60fps for half a second.
     for (let i = 0; i < 30; i++) {
       setTimeout(_ => {
         if(horizontal) setNewPageX(prev => prev + (window.innerWidth / 30) * multiplier)
         else setNewPageY(prev => prev + (window.innerHeight / 30) * multiplier)
-        if(i >= 29) return recenterPage()
+        if(i >= 29) return recenterPage() //reposition new and previous pages after the last frame of turning pages
       }, i*17)
     }
   }
 
   function recenterPage(){
     if(pageDirection.current === "left"){
-      pageDirection.current = "right";
-      setX(prev => prev + mapSize[0]);
-      setNewPageX(0);
+      pageDirection.current = "right"; // if you were on the left and exited the screen, you're now on the right of the new screen
+      setX(prev => prev + mapSize[0]); // reset character x or y coordinate onto new screen 
+      setNewPageX(0); // set new page to default position (we're about to swap the new page to the current page after these if/else statements)
+      shift.current = [mapSize[0], 0] // set old page to the left of screen in case player turns straight back around 
       }
     else if(pageDirection.current === "right"){
       pageDirection.current = "left";
       setX(prev => prev - mapSize[0]);
       setNewPageX(0);
+      shift.current = [-mapSize[0], 0]
       }
     else if(pageDirection.current === "up"){
       pageDirection.current = "down";
       setY(prev => prev + mapSize[1]);
       setNewPageY(0);
+      shift.current = [0, mapSize[1]]
       }
     else if(pageDirection.current === "down"){
-      pageDirection.current = "right";
+      pageDirection.current = "up";
       setY(prev => prev - mapSize[1]);
       setNewPageY(0);
+      shift.current = [0, -mapSize[1]]
     }
+    // swap current and new pages around so that if player turns around and goes back there'll be a page for them to see
     turning.current = false
     let tempPage = thisPage.current
     thisPage.current = nextPage.current;
     nextPage.current = tempPage;
+    savePosition(x, y); //save character position to db every time you change screens.
   }
 
   return <div className="gameContainer">
@@ -209,13 +238,13 @@ function GameController({character}){
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
           {pageReady.current ? mobs(nextPage.current, shift.current) : ""}
           {mobs(thisPage.current)}
-          <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role}/>
+          <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
       </div>
       {/* <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>velocity: {Math.floor(velocity.current[0])} - {Math.floor(velocity.current[1])}<br/>lastDirection: {lastDirection.current}<br/>Attacking: {`${attacking.current}`}</div> */}
     </div>
-    <Hud character={character} />
+    <Hud character={character} items={items} setItems={setItems} />
   </div>
 }
 

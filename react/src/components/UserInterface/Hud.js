@@ -12,11 +12,10 @@ import axios from "axios"
 import { serverUrl } from "../../App"
   
 // master container for all the on screen buttons (HUD = Heads Up Display)
-function Hud({character}){
+function Hud({character, items, setItems}){
   const [hideButtons, setHideButtons] = useState(false);
   const [pagePos, setPagePos] = useState(["left", "center", "right", "hidden"])
   const [transition, setTransition] = useState("")
-  const [items, setItems] = useState([])
 
   useEffect(getItems, [])
 

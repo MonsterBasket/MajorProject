@@ -8,8 +8,8 @@ import Login from "./Pages/Login/Login.js"
 import Signup from "./Pages/Signup/Signup"
 import SelectCharacter from "./Pages/SelectCharacter/SelectCharacter"
 import GameController from "./Pages/Game/GameController"
-// export const serverUrl = "http://localhost:3001/"
-export const serverUrl = "https://monster-basket.fly.dev/"
+export const serverUrl = "http://localhost:3001/"
+// export const serverUrl = "https://monster-basket.fly.dev/"
 
 function App(){
   const [user, setUser] = useState({})
