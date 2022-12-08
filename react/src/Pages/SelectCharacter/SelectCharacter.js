@@ -23,8 +23,8 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   function getCharacters(){ //user is not set the first time you create an account - it's also showing other user's characters
     axios.get(`${serverUrl}characters`, {params: {user_id: user.id}}, {withCredentials: true})
     .then(res => {
-      if(res.status == 200) {
-        if(res.data.characters.length == 0) setCreator(true)
+      if(res.status === 200) {
+        if(res.data.characters.length === 0) setCreator(true)
         else{
           setSavedCharacters(res.data.characters)
           setCharacter(res.data.characters[0])
@@ -56,7 +56,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
     if (window.confirm(`Are you sure you want to delete ${character.name}`)){
       axios.delete(`${serverUrl}characters/${character.id}`)
       .then(res => {
-        if(res.data.characters.length == 0) setCreator(true)
+        if(res.data.characters.length === 0) setCreator(true)
         else{
           setSavedCharacters(res.data.characters)
           setCharacter(res.data.characters[0])
@@ -68,10 +68,10 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
 
   function createCharacter(){
     const sendCharacter = {...newCharacter, user_id:user.id}
-    if(character != {}){
+    if(character !== {}){
     axios.post(`${serverUrl}characters`, sendCharacter, {withCredentials: true})
       .then(res => {
-        if(res.data.status=="created") play(newCharacter)
+        if(res.data.status === "created") play(newCharacter)
         else setError(res.data.errors)
       })
       .catch(err => console.log("create character error:", err))
@@ -80,14 +80,14 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   }
 
   function showCharacter(character){
-    if(character != undefined) {
+    if(character !== undefined) {
       if(!characterCreator) setCharacter(character)
       else {
         setNewCharacter({name: newCharacter.name, role: character.role})
       }
-      if(character.role == "Knight") setImg(knight)
-      if(character.role == "Mage") setImg(mage)
-      if(character.role == "Rogue") setImg(rogue)
+      if(character.role === "Knight") setImg(knight)
+      if(character.role === "Mage") setImg(mage)
+      if(character.role === "Rogue") setImg(rogue)
     }
     else setCreator(true)
   }
@@ -106,14 +106,14 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   function sanitizeName(e){
     let name = e.target.value
       name = name.replace(/[^a-z]/gim,"")
-      if(name != e.target.value) setError(["Name can only have letters"])
+      if(name !== e.target.value) setError(["Name can only have letters"])
       if(name.length > 0)
         name = name[0].toUpperCase() + name.substring(1).toLowerCase()
     setNewCharacter({...newCharacter, name:name.trim()})
   }
 
   function hideErrors(){
-    if(errorDisplay.length == 0) return "hidden"
+    if(errorDisplay.length === 0) return "hidden"
     else {
       clearTimeout(timer.current)
       timer.current = setTimeout(() => setError([]), 2000)

@@ -48,14 +48,14 @@ function GameController({character}){
   function keyDown(e){
     myKeys.current[e.code] = true;
     if (!attacking.current && ["KeyA", "KeyD", "KeyS", "KeyW"].includes(e.code)) lastDirection.current = e.code;
-    else if(lastDirection.current.substring(0, 5) != "Space"){
+    else if(lastDirection.current.substring(0, 5) !== "Space"){
       let keyHolder = lastDirection.current
       lastDirection.current = `Space ${lastDirection.current}`
       setTimeout(() => lastDirection.current = keyHolder, 300)
     }
   }
   function keyUp(e){
-    if(e.code != "Space") myKeys.current[e.code] = false;
+    if(e.code !== "Space") myKeys.current[e.code] = false;
   }
 
   function gameLoop(now, x, y, velocity, maxSpeed, attacking) { //runs every frame before render
@@ -63,7 +63,7 @@ function GameController({character}){
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
     if (deltaTime) { //skips evaluations if no time has passed since last call (which strangely does happen)
-      if(myKeys.current["Space"] == true){
+      if(myKeys.current["Space"] === true){
         attacking = true;
         setTimeout((attacking) => {
           attacking = false;

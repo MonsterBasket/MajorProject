@@ -36,7 +36,7 @@ function detectColliders(currentMap, x, y){
   const onPos = map[index]
 
   function check(array, value){
-    return array.some((element) => {if(value) return element[0] == value[0] && element[1] == value[1]})
+    return array.some((element) => {if(value) return element[0] === value[0] && element[1] === value[1]})
   }
 
   // straight blocks
@@ -67,8 +67,8 @@ function detectColliders(currentMap, x, y){
 
   // allow walking off the edge of the screen - if there's no map the last row should be blocked with colliders.
   if(index < 40) colliders.up = true;
-  if(index % 40 == 0) colliders.left = true;
-  if((index + 1) % 40 == 0) colliders.right = true;
+  if(index % 40 === 0) colliders.left = true;
+  if((index + 1) % 40 === 0) colliders.right = true;
   if(index >= 880) colliders.down = true;
 
   if(!onPos) return colliders //ignore the rest of the code if current block is empty
