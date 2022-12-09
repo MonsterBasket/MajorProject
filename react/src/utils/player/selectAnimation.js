@@ -22,17 +22,18 @@ function selectAnimation(pos, velocity, lastDirection){
     else if(lastDirection.slice(-1) === "A") obj.animationName = "idleLeft";
     else if(lastDirection.slice(-1) === "D") obj.animationName = "idleRight";
   }
-
+  let attack = ""
   if(lastDirection.substring(0, 5) === "Space"){
     obj.animationTimingFunction = "steps(3, end)"
     obj.animationDuration = "0.3s"
     obj.animationName = "attack" + obj.animationName.substring(4)
+    attack = obj.animationName
     // if(lastDirection.substring(6) === "KeyW") obj.animationName = "attackUp";
     // else if(lastDirection.substring(6) === "KeyS") obj.animationName = "attackDown";
     // else if(lastDirection.substring(6) === "KeyA") obj.animationName = "attackLeft";
     // else if(lastDirection.substring(6) === "KeyD") obj.animationName = "attackRight";
   }
-    return obj
+    return [obj, attack]
 }
 
 export default selectAnimation;

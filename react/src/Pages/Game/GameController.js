@@ -30,6 +30,8 @@ function GameController({character}){
   const attacking = useRef(false);
   // enemy position for collision detection and health adjustment
   const enemyPos = useRef({});
+  // player's attack position
+  const attackPos = useRef([0,0,0])
   // records current keys being pressed, true on keyDown, false on keyUp
   const myKeys = useRef({});
   // this is pretty hardbaked in a lot of places, but eventually I hope to make it dynamic so I can have larger or smaller pages
@@ -109,8 +111,20 @@ function GameController({character}){
     top: newPageY
   }
 
+  // passed down to enemies who report back their positions each frame.  Character's collision detector loops through them all. - Attack is bundled in as the third array element.
   function retEnemyPos(id, pos){
     enemyPos.current[id] = pos
+  }
+
+  // creating a coordinate on the map with player attack to pass to each enemy's collision detector. Works as above but for enemies, not character.
+  function playerAttack(attack){
+    if(attack.substring(0, 6) === "attack"){
+      if(attack.substring(6) === "Up") attackPos.current = [Math.round(x), Math.round(y) - 30, character.attack]
+      if(attack.substring(6) === "Down") attackPos.current = [Math.round(x), Math.round(y) + 30, character.attack]
+      if(attack.substring(6) === "Left") attackPos.current = [Math.round(x) - 20, Math.round(y), character.attack]
+      if(attack.substring(6) === "Right") attackPos.current = [Math.round(x) + 20, Math.round(y), character.attack]
+    }
+    else attackPos.current = [0,0,0]
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -255,9 +269,9 @@ function GameController({character}){
       <div className="world" style={pageTurner}>
         <WorldTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-          {pageReady.current ? mobs(nextPage.current, retEnemyPos, shift.current) : ""}
-          {mobs(thisPage.current, retEnemyPos)}
-          <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} items={items} setItems={setItems}/>
+          {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, shift.current) : ""}
+          {mobs(thisPage.current, retEnemyPos, attackPos.current)}
+          <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} playerAttack={playerAttack} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
       </div>

@@ -3,11 +3,10 @@ import detectColliders from "./detectColliders";
 function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed, attacking, enemyPos, character){
 
   if(attacking) return [0,0] // completely escape and stop character movement if player is attacking - if I ever implement slippery surfaces this will need to change
-
   let tempVelocity = velocity;
   const access = detectColliders(currentMap, x, y);
 
-  // enemy bumps
+  // character collisions with enemy, enemy collisions with player attack
   if(enemyPos){
     for (const key in enemyPos) {
       if(Math.abs(enemyPos[key][0] - x) < 30 && Math.abs(enemyPos[key][1] - y) < 40){
@@ -15,7 +14,8 @@ function handleInput(currentMap, myKeys, velocity, x, y, maxSpeed, attacking, en
         if(enemyPos[key][0] - x < -10) tempVelocity[0] = 20;
         if(enemyPos[key][1] - y > 20) tempVelocity[1] = -20;
         if(enemyPos[key][1] - y < -20) tempVelocity[1] = 20;
-        character.current_health -= enemyPos[key][2]
+        character.current_health -= enemyPos[key][2] ? enemyPos[key][2] : 10; // hard coding player attack until I've implemented it
+        console.log(character.current_health)
       }
     }
   }

@@ -2,41 +2,50 @@ import { useEffect, useRef, useState } from "react";
 import handleInput from "../../utils/player/handleInput";
 import selectAnimation from "../../utils/player/selectAnimation"
 
-function Walker({id, attack, type, currentMap, posInit, retEnemyPos, patrol, randomPath=false}){
-  const [velocityState, setVel] = useState([0,0])
+function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEnemyPos, patrol, randomPath=false}){
   const target = useRef(posInit);
-  const pos = useRef(posInit);
-  let posX = pos[0];
-  let posY = pos[1]
+  const currentHealth = useRef(health)
+  const [x, setX] = useState(posInit[0]);
+  const [y, setY] = useState(posInit[1]);
   const lastDirection = useRef("KeyS")
-  let pathCounter = 0;
-  let myKeys = [];
-  let lastRender = 0;
+  const pathCounter = useRef(0);
+  const myKeys = useRef([]);
+  const lastRender = useRef(0);
   let maxSpeed = 8;
-  let velocity = [0,0];
-  let cancelTimer = "";
+  const velocity = useRef([0,0]);
+  const stagger = useRef(false)
+  const cancelTimer = useRef("");
 
   useEffect(() => {
-    requestAnimationFrame(gameLoop);
-    makePath();
-  }, [])
+    requestAnimationFrame((now) => gameLoop(now));
+  })
+  useEffect(() => makePath(), [])
 
   function gameLoop(now){
     now *= 0.01;
-    const deltaTime = now - lastRender;
-    lastRender = now;
+    const deltaTime = now - lastRender.current;
+    lastRender.current = now;
     if (deltaTime){
-      handleInput(currentMap, myKeys, velocity, posX, posY, maxSpeed);
-      if(pos[0] != target.current[0] && [pos][1] != target.current[1]) walk()
-      if(velocity[0] || velocity[1]){
-        posX = pos.current[0] + velocity[0] * deltaTime
-        posY = pos.current[1] + velocity[1] * deltaTime
-        pos.current = [posX, posY]
-        retEnemyPos(id, [posX, posY, attack])
+      let healthObj = {current_health: currentHealth.current} // this is to expose health in handleInput in the same format as character.health
+      let tempHealth = currentHealth.current
+      velocity.current = handleInput(currentMap, myKeys.current, velocity.current, x, y, maxSpeed, null, {a:attackPos}, healthObj);
+      if(x != target.current[0] && y != target.current[1] && !stagger.current) walk()
+      if(velocity.current[0] || velocity.current[1]){
+        if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
+        if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
+        retEnemyPos(id, [x, y, attack])
       }
-      setVel(velocity)
+      if(healthObj.current_health != tempHealth) manageHealth(healthObj.current_health)
+
     }
-    requestAnimationFrame(gameLoop);
+  }
+
+  function manageHealth(damage){
+    if(!stagger.current){
+      currentHealth.current = damage;
+      stagger.current = true
+      setTimeout(() => stagger.current = false, 1500)
+    }
   }
 
   function randomTarget(){
@@ -49,55 +58,56 @@ function Walker({id, attack, type, currentMap, posInit, retEnemyPos, patrol, ran
     let nextPathTime = Math.random() * (10000 - 5000) + 5000 //5-10 seconds
     if(randomPath){
       target.current = randomTarget()
-      clearTimeout(cancelTimer)
-      cancelTimer = setTimeout(makePath, nextPathTime)
+      clearTimeout(cancelTimer.current)
+      cancelTimer.current = setTimeout(makePath, nextPathTime)
     }
     else{
-      target.current = patrol[pathCounter]
-      pathCounter++;
-      if(pathCounter >= patrol.length) pathCounter = 0;
+      target.current = patrol[pathCounter.current]
+      pathCounter.current++;
+      if(pathCounter.current >= patrol.length) pathCounter.current = 0;
       if(target.current[2]) nextPathTime = target.current[2] * 1000
-      clearTimeout(cancelTimer)
-      cancelTimer = setTimeout(makePath, nextPathTime)
+      clearTimeout(cancelTimer.current)
+      cancelTimer.current = setTimeout(makePath, nextPathTime)
     }
   }
   
   function walk(){ //simulates keyboard input to walk to targets
-    let horizontal = target.current[0] - pos.current[0]
-    let vertical = target.current[1] - pos.current[1]
+    let horizontal = target.current[0] - x
+    let vertical = target.current[1] - y
     if(horizontal < -maxSpeed){ //using maxSpeed so that they don't overshoot the mark when they're running.
-      myKeys["KeyA"] = true;
+      myKeys.current["KeyA"] = true;
     }
-    else if(myKeys["KeyA"] == true) {
-      myKeys["KeyA"] = false;
+    else if(myKeys.current["KeyA"] == true) {
+      myKeys.current["KeyA"] = false;
       lastDirection.current = "KeyA"
     }
     if(horizontal > maxSpeed){
-      myKeys["KeyD"] = true;
+      myKeys.current["KeyD"] = true;
     }
-    else if(myKeys["KeyD"] == true) {
-      myKeys["KeyD"] = false;
+    else if(myKeys.current["KeyD"] == true) {
+      myKeys.current["KeyD"] = false;
       lastDirection.current = "KeyD"
     }
     if(vertical < -maxSpeed){
-      myKeys["KeyW"] = true;
+      myKeys.current["KeyW"] = true;
     }
-    else if(myKeys["KeyW"] == true) {
-      myKeys["KeyW"] = false;
+    else if(myKeys.current["KeyW"] == true) {
+      myKeys.current["KeyW"] = false;
       lastDirection.current = "KeyW"
     }
     if(vertical > maxSpeed){
-      myKeys["KeyS"] = true;
+      myKeys.current["KeyS"] = true;
     }
-    else if(myKeys["KeyS"] == true) {
-      myKeys["KeyS"] = false;
+    else if(myKeys.current["KeyS"] == true) {
+      myKeys.current["KeyS"] = false;
       lastDirection.current = "KeyS"
     }
   }
 
-  const style = selectAnimation(pos.current, velocityState, lastDirection.current);
+  const [style, attackDirection] = selectAnimation([x,y], velocity.current, lastDirection.current);
+  const mobHealth = currentHealth.current <= 0 ? 0 : currentHealth.current === health ? 0 : (currentHealth.current / health) * 100
 
-  return <div className={`${type} character`} style={style}></div>
+  return <div className={`${type} character`} style={style}><div className="mobHealth" style={{width: `${mobHealth}%`}}></div></div>
 }
 
 export default Walker;

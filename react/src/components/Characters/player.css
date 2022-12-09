@@ -70,3 +70,7 @@
   from {background-position: calc(21 * -16px) calc(1 * -16px + 8px);}
   to   {background-position: calc(26 * -16px) calc(1 * -16px + 8px);}
 }
+.mobHealth{
+  height: 1.5px;
+  background: Red;
+}
