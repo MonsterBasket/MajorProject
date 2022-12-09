@@ -2,12 +2,10 @@ import axios from "axios";
 import { serverUrl } from "../../App";
 
 function savePosition(character, map, x, y){
-  console.log(character, x, y)
-  x = x
   character = {
     id: character.id,
-    health: character.health,
-    mana: character.mana,
+    current_health: character.current_health,
+    current_mana: character.current_mana,
     map: map,
     pos_x: Math.round(x),
     pos_y: Math.round(y)

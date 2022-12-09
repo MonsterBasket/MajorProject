@@ -17,8 +17,10 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
     t.string "role", null: false
     t.integer "exp", null: false
     t.integer "level", null: false
-    t.integer "health", null: false
-    t.integer "mana", null: false
+    t.integer "max_health", null: false
+    t.integer "max_mana", null: false
+    t.integer "current_health"
+    t.integer "current_mana"
     t.integer "items"
     t.integer "map"
     t.integer "pos_x"

@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import handleInput from "../../utils/player/handleInput";
 import selectAnimation from "../../utils/player/selectAnimation"
 
-function Skeleton({type, currentMap, posInit, patrol, randomPath=false}){
+function Walker({id, attack, type, currentMap, posInit, retEnemyPos, patrol, randomPath=false}){
   const [velocityState, setVel] = useState([0,0])
   const target = useRef(posInit);
   const pos = useRef(posInit);
@@ -32,6 +32,7 @@ function Skeleton({type, currentMap, posInit, patrol, randomPath=false}){
         posX = pos.current[0] + velocity[0] * deltaTime
         posY = pos.current[1] + velocity[1] * deltaTime
         pos.current = [posX, posY]
+        retEnemyPos(id, [posX, posY, attack])
       }
       setVel(velocity)
     }
@@ -99,4 +100,4 @@ function Skeleton({type, currentMap, posInit, patrol, randomPath=false}){
   return <div className={`${type} character`} style={style}></div>
 }
 
-export default Skeleton;
+export default Walker;

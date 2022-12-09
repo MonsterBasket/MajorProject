@@ -5,8 +5,10 @@ class Character < ApplicationRecord
   validates_presence_of :user, :name, :role
   validates_uniqueness_of :name
 
-  attribute :health, :integer, default: 100
-  attribute :mana, :integer, default: 100
+  attribute :max_health, :integer, default: 100
+  attribute :max_mana, :integer, default: 100
+  attribute :current_health, :integer, default: 100
+  attribute :current_mana, :integer, default: 100
   attribute :level, :integer, default: 1
   attribute :exp, :integer, default: 0
 
