@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { useBeforeunload } from 'react-beforeunload';
 import './map.css';
 import '../../components/Characters/player.css';
 import Hud from "../../components/UserInterface/Hud"
@@ -10,13 +11,12 @@ import maps from "../../utils/map/maps";
 import handleInput from "../../utils/player/handleInput";
 import savePosition from "../../utils/player/savePosition";
 
-
 function GameController({character}){
   // character items, to be passed back and forth between character and hud
   const [items, setItems] = useState([])
   // character position - initial state is starting position
-  const [x, setX] = useState(400);
-  const [y, setY] = useState(400);
+  const [x, setX] = useState(character.pos_x || 400);
+  const [y, setY] = useState(character.pos_y || 400);
   // character speed - increases incrementally and is added onto position above
   const velocity = useRef([0,0]);
   const maxSpeed = 30;
@@ -33,7 +33,7 @@ function GameController({character}){
   // this is pretty hardbaked in a lot of places, but eventually I hope to make it dynamic so I can have larger or smaller pages
   const mapSize = [40 * 48, 23 * 48]; 
   // current map screen - format: w (world) xxyy. The screen to the right is 10102, below is 10201 etc.
-  const thisPage = useRef(10101);
+  const thisPage = useRef(character.map || 10101);
   // these are ALL for loading the next page and moving from one page to the next.
   const nextPage = useRef();
   const pageDirection = useRef("");
@@ -107,6 +107,9 @@ function GameController({character}){
     top: newPageY
   }
 
+  // ----------------------------------------------------------------------------------------------------
+  // -----------------------  PAGE LOADER AND TURNER FUNCTIONS ------------------------------------------
+  // ----------------------------------------------------------------------------------------------------
   function pageLoader(){
     if(!nextPage.current){ // if next page hasn't been loaded yet, check if player is near the edge of the screen, and load that map
       if(x > mapSize[0] - 100) pageDirection.current = "right";
@@ -199,27 +202,33 @@ function GameController({character}){
   }
 
   function recenterPage(){
+    let newX = x //required for savePosition as setX and setY don't update until after it's called.
+    let newY = y
     if(pageDirection.current === "left"){
       pageDirection.current = "right"; // if you were on the left and exited the screen, you're now on the right of the new screen
       setX(prev => prev + mapSize[0]); // reset character x or y coordinate onto new screen 
+      newX = x + mapSize[0];
       setNewPageX(0); // set new page to default position (we're about to swap the new page to the current page after these if/else statements)
       shift.current = [mapSize[0], 0] // set old page to the left of screen in case player turns straight back around 
       }
     else if(pageDirection.current === "right"){
       pageDirection.current = "left";
       setX(prev => prev - mapSize[0]);
+      newX = x - mapSize[0];
       setNewPageX(0);
       shift.current = [-mapSize[0], 0]
       }
     else if(pageDirection.current === "up"){
       pageDirection.current = "down";
       setY(prev => prev + mapSize[1]);
+      newY = y + mapSize[1];
       setNewPageY(0);
       shift.current = [0, mapSize[1]]
       }
     else if(pageDirection.current === "down"){
       pageDirection.current = "up";
       setY(prev => prev - mapSize[1]);
+      newY = y - mapSize[1];
       setNewPageY(0);
       shift.current = [0, -mapSize[1]]
     }
@@ -228,8 +237,12 @@ function GameController({character}){
     let tempPage = thisPage.current
     thisPage.current = nextPage.current;
     nextPage.current = tempPage;
-    savePosition(x, y); //save character position to db every time you change screens.
+    savePosition(character, thisPage.current, newX, newY); //save character position to db every time you change screens.
   }
+  // ----------------------------------------------------------------------------------------------------
+  // --------------------------------- END OF PAGE LOADER FUNCTIONS -------------------------------------
+  // ----------------------------------------------------------------------------------------------------
+  useBeforeunload(() => savePosition(character, thisPage.current, x, y))
 
   return <div className="gameContainer">
     <div className="world" style={worldMover}>

@@ -25,13 +25,9 @@ class CharactersController < ApplicationController
 
   def show; end
 
-  def update
-    # I clearly copied this section from users
-      @character.email = character_params[:email]
-      @character.password = character_params[:password]
-      @character.save
-
-      format.all {redirect_to character_url(@character), alert: "Details saved."}
+  def save_pos
+    @character = Character.find(params[:character][:id])
+    @character.update(location_params)
   end
 
   def edit; end
@@ -46,6 +42,10 @@ class CharactersController < ApplicationController
 
   def set_character
     @character = Character.find(params[:id])
+  end
+
+  def location_params
+    params.require(:character).permit(:id, :map, :pos_x, :pos_y, :health, :mana)
   end
 
   def character_params

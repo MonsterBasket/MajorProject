@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
 .letterHolder{
   display: inline-block;
   transition: all 1s;
@@ -8,10 +9,12 @@
   transition: all 0.2s;
 }
 .bouncyLetter{
+  font-family: 'Rubik Dirt';
   transition: all 1s;
   color: red;
   display: inline-block;
   cursor: pointer;
+  font-weight: normal;
 }
 .spin{
   transition: all 1s;
