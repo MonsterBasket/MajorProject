@@ -123,7 +123,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
 
   return <div id="selectCharacter">
     <button onClick={handleLogout}>Logout</button>
-    <Title />
+    <Title size={1} />
     <h2>Select Character</h2>
     <div id="characterSelector">
       <div id="characterListLeft">

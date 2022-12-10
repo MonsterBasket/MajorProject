@@ -18,7 +18,7 @@ function Login({handleLogin, handleLogout}){
 
 
   return <div id="home">
-    <Title />
+    <Title size={2} />
     <div  id="homeContainer">
       <h3>Login</h3>
       <div>

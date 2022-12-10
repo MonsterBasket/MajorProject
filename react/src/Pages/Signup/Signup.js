@@ -66,7 +66,7 @@ function Signup({handleLogin}){
 
   return <div id="signup">
     <div className="smallHeading">
-    <Title />
+    <Title size={1} />
     </div>
     <div>
       <h3>Create Account</h3>

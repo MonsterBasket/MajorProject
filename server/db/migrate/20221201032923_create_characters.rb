@@ -14,6 +14,8 @@ class CreateCharacters < ActiveRecord::Migration[7.0]
       t.integer :map
       t.integer :pos_x
       t.integer :pos_y
+      t.integer :respawn_x
+      t.integer :respawn_y
 
       t.timestamps
     end

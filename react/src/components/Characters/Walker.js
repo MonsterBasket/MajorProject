@@ -1,8 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import handleInput from "../../utils/player/handleInput";
-import selectAnimation from "../../utils/player/selectAnimation"
+import selectAnimation from "../../utils/player/selectAnimation";
 
-function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEnemyPos, patrol, randomPath=false}){
+function Walker({id, attack, health, attackPos, playerPos, type, currentMap, posInit, retEnemyPos, patrol, randomPath=false}){
   const target = useRef(posInit);
   const currentHealth = useRef(health)
   const [x, setX] = useState(posInit[0]);
@@ -11,17 +11,23 @@ function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEn
   const pathCounter = useRef(0);
   const myKeys = useRef([]);
   const lastRender = useRef(0);
-  let maxSpeed = 8;
+  const maxSpeed = useRef(4)
   const velocity = useRef([0,0]);
-  const stagger = useRef(false)
+  const stagger = useRef(false);
+  const invincible = useRef(false);
+  const agro = useRef(false);
+  const dead = useRef(false);
   const cancelTimer = useRef("");
 
   useEffect(() => {
-    requestAnimationFrame((now) => gameLoop(now));
+    requestAnimationFrame((now) => {if(!dead.current) gameLoop(now, maxSpeed.current)});
   })
-  useEffect(() => makePath(), [])
+  useEffect(() => {
+    makePath()
+    retEnemyPos(id, x, y, attack)
+  }, [])
 
-  function gameLoop(now){
+  function gameLoop(now, maxSpeed){
     now *= 0.01;
     const deltaTime = now - lastRender.current;
     lastRender.current = now;
@@ -30,21 +36,73 @@ function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEn
       let tempHealth = currentHealth.current
       velocity.current = handleInput(currentMap, myKeys.current, velocity.current, x, y, maxSpeed, null, {a:attackPos}, healthObj);
       if(x != target.current[0] && y != target.current[1] && !stagger.current) walk()
-      if(velocity.current[0] || velocity.current[1]){
+      if(velocity.current[0] || velocity.current[1] && !stagger.current){
         if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
         if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
-        retEnemyPos(id, [x, y, attack])
+        retEnemyPos(id, [x + velocity.current[0], y + velocity.current[1], attack])
       }
       if(healthObj.current_health != tempHealth) manageHealth(healthObj.current_health)
-
+      lookForCharacter(velocity.current)
     }
   }
 
   function manageHealth(damage){
-    if(!stagger.current){
+    myKeys.current = {}
+    if(!invincible.current){
       currentHealth.current = damage;
-      stagger.current = true
-      setTimeout(() => stagger.current = false, 1500)
+      if(currentHealth.current <= 0) return death()
+      invincible.current = true;
+      setTimeout(() => {invincible.current = false}, 250)
+    }
+    if(!stagger.current){
+      stagger.current = true;
+      setTimeout(() => {stagger.current = false}, 1500);
+      agro.current = true;
+      maxSpeed.current = 12;
+    }
+  }
+
+  function death(){
+    setX(posInit[0])
+    setY(posInit[1])
+    currentHealth.current = health
+    target.current = posInit
+    lastDirection.current = "KeyS"
+    pathCounter.current = 0
+    maxSpeed.current = 4
+    velocity.current = [0,0]
+    agro.current = false
+    dead.current = true
+    retEnemyPos(id, 0)
+    clearTimeout(cancelTimer.current)
+    setTimeout(() => {
+      dead.current = false
+      makePath()
+    }, 15000)
+  }
+
+  function lookForCharacter(velocity){
+    if(velocity[0] || velocity[1]){
+      if(velocity[0] > 0 && playerPos[0] - x > 0 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
+      if(velocity[0] < 0 && x - playerPos[0] > 0 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
+      if(velocity[1] > 0 && playerPos[1] - y > 0 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+      if(velocity[1] > 0 && y - playerPos[1] > 0 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+    }
+    else{
+      if(lastDirection.current === "KeyD" && playerPos[0] - x > 0 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
+      if(lastDirection.current === "KeyA" && x - playerPos[0] > 0 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
+      if(lastDirection.current === "KeyS" && playerPos[1] - y > 0 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+      if(lastDirection.current === "KeyW" && y - playerPos[1] > 0 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+    }
+    if(agro.current){
+      if(Math.abs(playerPos[0] - x) > 350 || Math.abs(playerPos[1] - y) > 350) {
+        agro.current = false;
+        maxSpeed.current = 4;
+      }
+      else {
+        target.current = playerPos;
+        maxSpeed.current = 12;
+      }
     }
   }
 
@@ -72,30 +130,31 @@ function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEn
   }
   
   function walk(){ //simulates keyboard input to walk to targets
+    if(stagger.current || dead.current) return
     let horizontal = target.current[0] - x
     let vertical = target.current[1] - y
-    if(horizontal < -maxSpeed){ //using maxSpeed so that they don't overshoot the mark when they're running.
+    if(horizontal < -maxSpeed.current){ //using maxSpeed so that they don't overshoot the mark whether they're walking or running.
       myKeys.current["KeyA"] = true;
     }
     else if(myKeys.current["KeyA"] == true) {
       myKeys.current["KeyA"] = false;
       lastDirection.current = "KeyA"
     }
-    if(horizontal > maxSpeed){
+    if(horizontal > maxSpeed.current){
       myKeys.current["KeyD"] = true;
     }
     else if(myKeys.current["KeyD"] == true) {
       myKeys.current["KeyD"] = false;
       lastDirection.current = "KeyD"
     }
-    if(vertical < -maxSpeed){
+    if(vertical < -maxSpeed.current){
       myKeys.current["KeyW"] = true;
     }
     else if(myKeys.current["KeyW"] == true) {
       myKeys.current["KeyW"] = false;
       lastDirection.current = "KeyW"
     }
-    if(vertical > maxSpeed){
+    if(vertical > maxSpeed.current){
       myKeys.current["KeyS"] = true;
     }
     else if(myKeys.current["KeyS"] == true) {
@@ -107,7 +166,7 @@ function Walker({id, attack, health, attackPos, type, currentMap, posInit, retEn
   const [style, attackDirection] = selectAnimation([x,y], velocity.current, lastDirection.current);
   const mobHealth = currentHealth.current <= 0 ? 0 : currentHealth.current === health ? 0 : (currentHealth.current / health) * 100
 
-  return <div className={`${type} character`} style={style}><div className="mobHealth" style={{width: `${mobHealth}%`}}></div></div>
+  return <>{!dead.current ? <div className={`${type} character`} style={style}><div className="mobHealth" style={{width: `${mobHealth}%`}}></div></div> : ""}</>
 }
 
 export default Walker;

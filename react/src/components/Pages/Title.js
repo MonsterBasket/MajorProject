@@ -1,6 +1,6 @@
 import './title.css';
 
-function Title(){
+function Title({size}){
   let text = "Monster Basket"
 
   function createHeader(word){
@@ -8,7 +8,8 @@ function Title(){
     for (let i = 0; i < word.length; i++) {
       if(word[i] == " ") myString[i] = " "
       else myString[i] = <div key={`titleLetter${i}`} className="letterHolder"
-        style={{top: Math.abs(word.length / 2 - i - 1) * Math.abs(word.length / 2 - i - 1),
+        style={{top: Math.abs(word.length / 2 - i - 1) * Math.abs(word.length / 2 - i - 1) * size,
+               left: (word.length / 2 - i - 1) * size * 2,
                 transform: `rotate(${(word.length / 2 - i - 1) * -0.01}turn)`}}>
         <span className="bouncyLetter spin">{word[i]}</span>
       </div>

@@ -45,7 +45,7 @@ class CharactersController < ApplicationController
   end
 
   def location_params
-    params.require(:character).permit(:id, :map, :pos_x, :pos_y, :current_health, :current_mana)
+    params.require(:character).permit(:id, :map, :pos_x, :pos_y, :respawn_x, :respawn_y, :current_health, :current_mana)
   end
 
   def character_params

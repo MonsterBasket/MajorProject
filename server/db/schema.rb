@@ -25,6 +25,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_12_01_033326) do
     t.integer "map"
     t.integer "pos_x"
     t.integer "pos_y"
+    t.integer "respawn_x"
+    t.integer "respawn_y"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_characters_on_user_id"

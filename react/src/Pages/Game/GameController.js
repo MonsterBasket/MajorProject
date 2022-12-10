@@ -17,6 +17,9 @@ function GameController({character}){
   // character position - initial state is starting position
   const [x, setX] = useState(character.pos_x || 400);
   const [y, setY] = useState(character.pos_y || 400);
+  // setting initial respawn pos on first play
+  character.respawn_x = character.respawn_x || 400;
+  character.respawn_y = character.respawn_y || 400;
   // character speed - increases incrementally and is added onto position above
   const velocity = useRef([0,0]);
   const maxSpeed = 30;
@@ -30,6 +33,8 @@ function GameController({character}){
   const attacking = useRef(false);
   // enemy position for collision detection and health adjustment
   const enemyPos = useRef({});
+  // prevents enemy burning all your hp in one hit
+  const invincible = useRef(false)
   // player's attack position
   const attackPos = useRef([0,0,0])
   // records current keys being pressed, true on keyDown, false on keyUp
@@ -95,10 +100,13 @@ function GameController({character}){
           myKeys.current["Space"] = false;
         }, 300);
       }
-      velocity.current = handleInput(thisPage.current, myKeys.current, velocity.current, x, y, maxSpeed, attacking.current, enemyPos.current, character);
+      const tempHealth = character.current_health
+      const temp = {current_health: tempHealth};
+      velocity.current = handleInput(thisPage.current, myKeys.current, velocity.current, x, y, maxSpeed, attacking.current, enemyPos.current, temp);
       if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
       if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
       if(Math.abs(velocity.current[0]) < 0.1 && Math.abs(velocity.current[1]) < 0.1) refresh([]);
+      if(character.current_health != temp.current_health) manageHealth(temp.current_health)
     }
   }
 
@@ -113,6 +121,7 @@ function GameController({character}){
 
   // passed down to enemies who report back their positions each frame.  Character's collision detector loops through them all. - Attack is bundled in as the third array element.
   function retEnemyPos(id, pos){
+    if(pos === 0) delete enemyPos.id;
     enemyPos.current[id] = pos
   }
 
@@ -125,6 +134,29 @@ function GameController({character}){
       if(attack.substring(6) === "Right") attackPos.current = [Math.round(x) + 20, Math.round(y), character.attack]
     }
     else attackPos.current = [0,0,0]
+  }
+
+  function manageHealth(health){
+    if(invincible.current) return
+    character.current_health = health
+    invincible.current = true;
+    setTimeout(() => invincible.current = false, 300)
+    if(character.current_health <= 0) respawn(true)
+  }
+
+  function respawn(dead){
+    myKeys.current = {}
+    velocity.current = [0,0]
+    setX(character.respawn_x)
+    setY(character.respawn_y)
+    if(dead){
+      character.current_health = character.max_health;
+      // exp -= 5% of exp required to get to next level
+    }
+    else { //allows respawn from falling down pits that I haven't implemented yet.
+      character.current_health -= character.max_health * 0.1;
+      if(character.current_health <= 0) respawn(true)
+    }
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -257,6 +289,8 @@ function GameController({character}){
     let tempPage = thisPage.current
     thisPage.current = nextPage.current;
     nextPage.current = tempPage;
+    character.respawn_x = newX;
+    character.respawn_y = newY;
     savePosition(character, thisPage.current, newX, newY); //save character position to db every time you change screens.
   }
   // ----------------------------------------------------------------------------------------------------
@@ -269,8 +303,8 @@ function GameController({character}){
       <div className="world" style={pageTurner}>
         <WorldTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-          {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, shift.current) : ""}
-          {mobs(thisPage.current, retEnemyPos, attackPos.current)}
+          {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], shift.current) : ""}
+          {mobs(thisPage.current, retEnemyPos, attackPos.current, [x, y])}
           <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} playerAttack={playerAttack} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
