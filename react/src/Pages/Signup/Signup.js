@@ -2,7 +2,9 @@ import { useState } from "react";
 import axios from 'axios';
 import login from "../../utils/login/login"
 import Title from '../../components/Pages/Title'
+import '../Login/home.css';
 import { serverUrl } from "../../App";
+import { Link } from "react-router-dom";
 
 function Signup({handleLogin}){
 
@@ -79,8 +81,9 @@ function Signup({handleLogin}){
         <span>{form.password1Error}</span><br/>
         <input type="password" name="password_confirmation" placeholder="Repeat Password" onChange={handleChange} onKeyDown={e => {if(e.code === "Enter") signup()}} value={form.password_confirmation}></input><br/>
         <span>{form.password2Error}</span><br/>
-        <button onClick={signup}>Sign-Up</button>
+        <button className="bigButton" onClick={signup}>Sign-Up</button><br /><br /><br />
       </div>
+      <Link to="/login"><button className="littleButton">Back to login</button></Link>
     </div>
   </div>
 }

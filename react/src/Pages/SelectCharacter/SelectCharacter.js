@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Title from '../../components/Pages/Title';
 import '../Login/home.css';
 import knight from "../../images/knight.png"
@@ -40,11 +40,11 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   }
 
   function buttons(){
-    if(characterCreator) return <button onClick={createCharacter}>Create Character</button>
+    if(characterCreator) return <button className="createButton" onClick={createCharacter}>Create Character</button>
     else
-    return <><button key="newChar" onClick={() => setCreator(true)}>New</button>
-            <button key="play" onClick={() => play(character)}>Play</button>
-            <button key="del" onClick={deleteCharacter}>Delete</button></>
+    return <><button key="newChar" className="newButton" onClick={() => setCreator(true)}>New</button>
+            <button key="play" className="playButton" onClick={() => play(character)}>Play</button>
+            <button key="del" className="deleteButton" onClick={deleteCharacter}>Delete</button></>
   }
 
   function play(character){
@@ -122,14 +122,15 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
   }
 
   return <div id="selectCharacter">
-    <button onClick={handleLogout}>Logout</button>
+    <button className="logoutButton" onClick={handleLogout}>Logout</button>
+    {!user.is_admin ? <Link to="/admin"><button className="littleButton">Admin Portal</button></Link> : ""}
     <Title size={1} />
     <h2>Select Character</h2>
     <div id="characterSelector">
       <div id="characterListLeft">
         <div id="characterList">
           {characterCreator ? <div id="createHeader">Create a Character</div> : ""}
-          {characters().map((character, index) => <div key={index} onClick={() => showCharacter(character)}>{character.name || character.role}</div>)}
+          {characters().map((character, index) => <div key={index} className={`${character.role}Button`} onClick={() => showCharacter(character)}>{character.name || character.role}</div>)}
         </div>
         { characterCreator ? <input type="text" name="name" className="nameInput" placeholder="Character Name" onChange={(e) => sanitizeName(e)} value={newCharacter.name}/> : "" }
         <div id="characterListButtons">{buttons()}</div>
@@ -141,8 +142,8 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
         <div id="characterListImage" style={{backgroundImage: `url(${imgUrl})`}}></div>
       </div>
     {<div id="errorDisplay" className={hideErrors()}>{errorDisplay.map(item => <span key={item}>{item}<br/></span>)}</div>}
-    </div>
-    {characterCreator && savedCharacters.length > 0 ? <button onClick={() => setCreator(false)}>Back</button> : ""}
+    </div><br />
+    {characterCreator && savedCharacters.length > 0 ? <button className="littleButton" onClick={() => setCreator(false)}>Back</button> : ""}
   </div>
 }
 

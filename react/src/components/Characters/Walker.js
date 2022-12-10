@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import dropItem from "../../utils/items/dropItem";
 import handleInput from "../../utils/player/handleInput";
 import selectAnimation from "../../utils/player/selectAnimation";
 
@@ -63,6 +64,7 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, pos
   }
 
   function death(){
+    dropItem(currentMap, x, y)
     setX(posInit[0])
     setY(posInit[1])
     currentHealth.current = health

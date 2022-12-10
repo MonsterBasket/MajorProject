@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik+Dirt&display=swap');
 #home, #signup, #selectCharacter, #createCharacter{
   color: white;
   text-align: center;
@@ -8,7 +9,10 @@
 #signup h1, #selectCharacter h1, #createCharacter h1{
   font-size: 3em;
 }
-
+h2, h3{
+  font-family: 'Rubik Dirt';
+  font-weight: normal;
+}
 #characterSelector{
   display: grid;
   position: relative;
@@ -43,8 +47,6 @@
 }
 #characterList div{
   height: 40px;
-  background: lightgray;
-  box-shadow: inset 5px 5px 15px white, inset -5px -5px 15px grey;
   border: solid 2px black;
   border-bottom: none;
   color: black;
@@ -52,8 +54,11 @@
   transition: all 1s;
 }
 #characterList #createHeader{
-  box-shadow: inset 2px 2px 5px white, inset -2px -2px 5px grey;
-  background: darkgrey;
+  font-family: 'Rubik Dirt';
+  font-size: 1.7em;
+  background-color: darkgreen;
+  color: rgb(100, 203, 100);
+  box-shadow: inset 0 0 15px lightgreen;
 }
 #characterList div:active{
   box-shadow: inset 5px 5px 15px grey, inset -5px -5px 15px white;
@@ -68,14 +73,71 @@
   flex-wrap: nowrap;
   align-content: stretch;
   justify-content: space-between;
+  height: 40px;
+}
+.KnightButton{
+  background-color: rgb(204, 158, 73);
+  box-shadow: inset 5px 5px 15px rgb(231, 217, 192), inset -5px -5px 15px rgb(99, 70, 16);
+}
+.RogueButton{
+  background-color: rgb(91, 185, 91);  
+  box-shadow: inset 5px 5px 15px rgb(170, 230, 170), inset -5px -5px 15px rgb(10, 80, 10);
+}
+.MageButton{
+  background-color: rgb(231, 90, 90);  
+  box-shadow: inset 5px 5px 15px rgb(230, 187, 187), inset -5px -5px 15px rgb(100, 14, 14);
+}
+.playButton{
+  font-size: 1.7em;
+  background-color: darkgreen;
+  color: rgb(100, 203, 100);
+  box-shadow: inset 0 0 15px lightgreen;
+  border-left: none;
+  border-right: none;
+  width: 50%
+}
+.playButton:hover{
+  box-shadow: inset 0 0 25px lightgreen;
+}
+.newButton{
+  background-color: darkblue;
+  color: lightblue;
+  box-shadow: inset 0 0 10px lightblue;
+  font-size: 1.1em;
+  width: 25%;
+}
+.newButton:hover{
+  box-shadow: inset 0 0 20px lightblue;
+}
+.deleteButton{
+  background-color: darkred;
+  color: pink;
+  box-shadow: inset 0 0 10px pink;
+  font-size: 1.1em;
+  width: 25%;
+}
+.deleteButton:hover{
+  box-shadow: inset 0 0 20px pink;
+}
+.createButton{
+  font-size: 1.5em;
+  background-color: darkgreen;
+  color: rgb(100, 203, 100);
+  box-shadow: inset 0 0 15px lightgreen;
+  flex-grow: 1;
+}
+.createButton:hover{
+  box-shadow: inset 0 0 25px lightgreen;
 }
 #characterListButtons button, #characterListButtons a{
   display: inline-block;
-  width: 100%;
+  font-family: 'Rubik Dirt';
   height: 100%;
   justify-content: center;
+  padding: 0;
 }
 #characterStats{
+  font-family: 'Rubik Dirt';
   line-height: 40px;
 }
 #characterListImage{
@@ -102,4 +164,30 @@
   pointer-events: none;
   opacity: 0;
   transition: opacity 2s;
+}
+.bigButton, .littleButton{
+  font-family: 'Rubik Dirt';
+  border-radius: 10px;
+  background-color: darkgreen;
+  color: rgb(100, 203, 100);
+  box-shadow: inset 0 0 5px, 0px 0px 15px 0 lightgreen;
+  border: none;
+}
+.bigButton{
+  font-size: 1.5em;
+}
+.bigButton:hover, .littleButton:hover{
+  box-shadow: inset 0 0 15px, 0px 0px 25px 0 lightgreen;
+}
+.littleButton{
+  border-radius: 7px;
+}
+.logoutButton{
+  font-family: 'Rubik Dirt';
+  border-radius: 10px;
+  background-color: darkred;
+  color: pink;
+  box-shadow: inset 0 0 5px, 0 0 15px pink;
+  border: none;
+  border-radius: 7px;
 }

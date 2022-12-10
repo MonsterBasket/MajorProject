@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update]
+  before_action :set_user, only: %i[show edit update delete]
 
   def index
     @users = User.all
@@ -49,7 +49,12 @@ class UsersController < ApplicationController
     end
   end
 
-  def edit; end
+  def admin
+    @user = User.find(params[:user][:id])
+    @user.update(admin_params)
+  end
+
+  def destroy; end
 
   private
 
@@ -57,8 +62,11 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
+  def admin_params
+    params.require(:user).permit(:id, :is_admin)
+  end
+
   def user_params
-    # params.fetch(:user, {})
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
 end
