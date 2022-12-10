@@ -10,6 +10,7 @@ import mobs from "../../utils/map/mobs";
 import maps from "../../utils/map/maps";
 import handleInput from "../../utils/player/handleInput";
 import savePosition from "../../utils/player/savePosition";
+import dropItem from "../../utils/items/itemRandomizer";
 
 function GameController({character}){
   // character items, to be passed back and forth between character and hud
@@ -33,6 +34,8 @@ function GameController({character}){
   const attacking = useRef(false);
   // enemy position for collision detection and health adjustment
   const enemyPos = useRef({});
+  // forces DroppedItems component to refresh with new items
+  const [refItems, refreshItems] = useState([])
   // prevents enemy burning all your hp in one hit
   const invincible = useRef(false)
   // player's attack position
@@ -157,6 +160,11 @@ function GameController({character}){
       character.current_health -= character.max_health * 0.1;
       if(character.current_health <= 0) respawn(true)
     }
+  }
+
+  function dropItem(x, y){
+    if(itemRandomizer(map, x, y))
+    refreshItems([])
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -303,8 +311,9 @@ function GameController({character}){
       <div className="world" style={pageTurner}>
         <WorldTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
-          {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], shift.current) : ""}
-          {mobs(thisPage.current, retEnemyPos, attackPos.current, [x, y])}
+          {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], dropItem, shift.current) : ""}
+          {mobs(thisPage.current, retEnemyPos, attackPos.current, [x, y], dropItem)}
+          <DroppedItems page={thisPage.current} refresh={refreshItems}/>
           <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} playerAttack={playerAttack} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
