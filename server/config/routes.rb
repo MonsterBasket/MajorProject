@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   # get 'select_character', to: 'characters#index'
   patch 'location', to: 'characters#save_pos'
   patch 'user/admin', to: 'users#admin'
+  get 'item/dropped', to: 'items#dropped'
   # get 'items/', to: 'characters#equipped'
 end

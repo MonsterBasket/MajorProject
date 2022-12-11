@@ -6,7 +6,7 @@ class ItemsController < ApplicationController
     if @items
       render json: { items: @items }
     else
-      render json: { status: 500, errors: ['no users found']}
+      render json: { status: 500, errors: ['no items found']}
     end
   end
 
@@ -20,6 +20,16 @@ class ItemsController < ApplicationController
       render json: { status: :created }
     else
       render json: { status: 500, errors: @item.errors.full_messages }
+    end
+  end
+
+  def dropped
+    @items = Item.all.where("character_id = ? AND slot = ? AND world_page = ?", params[:character_id], "floor", params[:world_page])
+              .or(Item.all.where("character_id = ? AND slot = ? AND world_page = ?", 0, "floor", params[:world_page]))
+    if @items
+      render json: { items: @items }
+    else
+      render json: { status: 500, errors: ['no items found']}
     end
   end
 

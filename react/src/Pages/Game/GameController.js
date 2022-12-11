@@ -10,7 +10,8 @@ import mobs from "../../utils/map/mobs";
 import maps from "../../utils/map/maps";
 import handleInput from "../../utils/player/handleInput";
 import savePosition from "../../utils/player/savePosition";
-import dropItem from "../../utils/items/itemRandomizer";
+import itemRandomizer from "../../utils/items/itemRandomizer";
+import DroppedItems from "../../components/Maps/DroppedItems";
 
 function GameController({character}){
   // character items, to be passed back and forth between character and hud
@@ -163,7 +164,7 @@ function GameController({character}){
   }
 
   function dropItem(x, y){
-    if(itemRandomizer(map, x, y))
+    itemRandomizer(character, thisPage.current, x, y, items, setItems)
     refreshItems([])
   }
 
@@ -313,7 +314,7 @@ function GameController({character}){
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
           {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], dropItem, shift.current) : ""}
           {mobs(thisPage.current, retEnemyPos, attackPos.current, [x, y], dropItem)}
-          <DroppedItems page={thisPage.current} refresh={refreshItems}/>
+          <DroppedItems page={thisPage.current} playerPos={[x, y]} character={character} items={items} setItems={setItems} refItems={refItems}/>
           <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} playerAttack={playerAttack} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}

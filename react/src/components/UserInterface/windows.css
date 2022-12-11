@@ -96,6 +96,10 @@
   background-image: url("../../images/items.png");
   background-size: 960px 1320px; /* Slot size is 60px, icon size is 48px, that's 1.25 scale.  Image size is 768*1056 */
 }
+.worldItem{
+  background-image: url("../../images/items.png");
+  background-size: 614px 845px; /* same logic as above but going down to 80% size */
+}
 .itemSlot{
   border-radius: 5px;
   box-shadow: inset 5px 5px 5px 0 rgba(139, 89, 89, 0.4), inset -5px -5px 5px rgba(247, 195, 195, 0.4);
