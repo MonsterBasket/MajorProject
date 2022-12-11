@@ -123,7 +123,7 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
 
   return <div id="selectCharacter">
     <button className="logoutButton" onClick={handleLogout}>Logout</button>
-    {!user.is_admin ? <Link to="/admin"><button className="littleButton">Admin Portal</button></Link> : ""}
+    {user.is_admin ? <Link to="/admin"><button className="littleButton">Admin Portal</button></Link> : ""}
     <Title size={1} />
     <h2>Select Character</h2>
     <div id="characterSelector">

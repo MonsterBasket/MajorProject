@@ -81,6 +81,10 @@ function MapMaker(){
       setLayer(3);
       setAddCollider(false);
     }
+    if(e.key === "4"){
+      setLayer(4);
+      setAddCollider(false);
+    }
 
     if(e.key === "`") setShowOpacity(prev => !prev)
   }
@@ -133,11 +137,12 @@ function MapMaker(){
       setColliders(newColliders)
     }
     else{
-      const newArray = (layer === 1) ? coords : (layer === 2) ?  coords2 : coords3;
+      const newArray = (layer === 1) ? coords : (layer === 2) ? coords2 : (layer === 3) ?  coords3 : coords4;
       newArray[index] = deleteTile ? 0 : [previewX, previewY];
       if(layer === 1) setCoords(newArray);
       else if(layer === 2) setCoords2(newArray);
       else if(layer === 3) setCoords3(newArray);
+      else if(layer === 4) setCoords4(newArray);
     }
     refresh([]);
   }
@@ -150,16 +155,18 @@ function MapMaker(){
   }
 
   function copyCoords(){
-    navigator.clipboard.writeText(`    case "XXXX":\n      map = [\n        ${JSON.stringify(coords)},\n        ${JSON.stringify(coords2)},\n        ${JSON.stringify(coords3)},\n        ${JSON.stringify(colliders)}\n      ]\n    break;\n`)
+    navigator.clipboard.writeText(`    case "XXXX":\n      map = [\n        ${JSON.stringify(coords)},\n        ${JSON.stringify(coords2)},\n        ${JSON.stringify(coords3)},\n        ${JSON.stringify(coords4)},\n        ${JSON.stringify(colliders)}\n      ]\n    break;\n`)
   }
   const map = maps("TEST")
   const mapCoords = map[0];
   const mapCoords2 = map[1];
   const mapCoords3 = map[2];
-  const mapColliders = map[3];
+  const mapCoords4 = map[3];
+  const mapColliders = map[4];
   const [coords, setCoords] = useState(mapCoords)
   const [coords2, setCoords2] = useState(mapCoords2)
   const [coords3, setCoords3] = useState(mapCoords3)
+  const [coords4, setCoords4] = useState(mapCoords4)
   const [colliders, setColliders] = useState(mapColliders)
 
 
@@ -168,6 +175,7 @@ function MapMaker(){
       {coords.map((item, index) => <div key={index} className={`childStyle${!showOpacity ? "" : layer === 1 ? " highlight" : " transparent"}`} style={childStyle(item[0], item[1])} onClick={() => changeTile(index)}>
         {coords2[index] === 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer === 2 ? " highlight" : " transparent"}`} style={childStyle(coords2[index][0], coords2[index][1])}></div>}
         {coords3[index] === 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer === 3 ? " highlight" : " transparent"}`} style={childStyle(coords3[index][0], coords3[index][1])}></div>}
+        {coords4[index] === 0 ? "" : <div className={`secondChildStyle${!showOpacity ? "" : layer === 4 ? " highlight" : " transparent"}`} style={childStyle(coords4[index][0], coords4[index][1])}></div>}
         {colliders[index] === 0 ? "" : <div style={colliderStyle(colliders[index][0], colliders[index][1])}></div>}
       </div>)}
     </div>
