@@ -72,9 +72,10 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 ------------------------------------
 
 Known Bugs:
-  Performance is rubbish - especially when near a zone
+  <!-- Performance is rubbish - especially when near a zone
   - Probably have to change to Canvas to fix this
-  - Made some improvements to this by optimising where certain things run.  It's totally usable but I suspect Canvas would improve it further as the frame-drop appears to be from the number of divs being rendered.
+  - Made some improvements to this by optimising where certain things run.  It's totally usable but I suspect Canvas would improve it further as the frame-drop appears to be from the number of divs being rendered. -->
+  - May still be preferable to use Canvas, but the build optimisations fix this dramatically
 
   <!-- Character animations are occasionally glitchy
   - This seems to be only when changing from one animation from another
@@ -88,5 +89,8 @@ Known Bugs:
   <!-- If two adjoining screens both have monsters the positions will be copied from the previous screen -->
   - solved by giving them keys
 
-  I broke the page turner
-  - I don't have time to look at it, but I'm pretty sure it's because there's no tile off the edge of the page, so detectColliders picks it up as being a collider.
+  <!-- I broke the page turner
+  - I don't have time to look at it, but I'm pretty sure it's because there's no tile off the edge of the page, so detectColliders picks it up as being a collider. -->
+
+  Dropped items rerender every frame
+  - This is because player position is being passed as a prop which updates every frame.  I need this to allow player to pickup the item if they run over it.  So this would need a significant change to fix.  It works and doesn't seem to cause performance issues though, so, you know.

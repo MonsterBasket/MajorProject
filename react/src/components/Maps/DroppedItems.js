@@ -26,21 +26,25 @@ function DroppedItems({map, playerPos, items, setItems, character, refItems}){
     setFloorItems(filtered)
   }
 
-return <>{floorItems.map(item => <DroppedItem key={`${item.name}${Date.now()}`} item={item} character={character} playerPos={playerPos} floorItems={floorItems} setFloorItems={setFloorItems} setReprepare={setReprepare}/>)}</>
+return <>{floorItems.map(item => <DroppedItem key={`${item.name}${Date.now()}`} item={item} items={items} character={character} playerPos={playerPos} floorItems={floorItems} setFloorItems={setFloorItems} setReprepare={setReprepare}/>)}</>
 }
 
 
-function DroppedItem({item, character, playerPos, floorItems, setFloorItems, setReprepare}){
+function DroppedItem({item, items, character, playerPos, floorItems, setFloorItems, setReprepare}){
   useEffect(playerPickup, [playerPos[0], playerPos[1]])
 
   function playerPickup(){
-    if(Math.abs(playerPos[0] - item.world_pos_x) < 10 && Math.abs(playerPos[1] - item.world_pos_y) < 10){
-      if(item.character_id == 0){
-        item.character_id = character.id;
-        axios.patch(`${serverUrl}item`, {item}, {withCredentials: true})
+    if(Math.abs(playerPos[0] - item.world_pos_x) < 10 && Math.abs(playerPos[1] - item.world_pos_y) < 20){
+      item.character_id = character.id;
+      for (let i = 1; i < 51; i++) {
+        if(!items.some(loopItem => loopItem.slot == i)){
+        item.slot = i;
+        break
+        }
       }
-      // if (character.item_count < 50) // I'll come back to this
-      item.slot = 0;
+      item.world_pos_x = null;
+      item.world_pos_y = null;
+      axios.post(`${serverUrl}items`, {item}, {withCredentials: true})
       setFloorItems(floorItems.filter(floorItem => floorItem.id != item.id))
       setReprepare([])
     }
@@ -52,7 +56,7 @@ function DroppedItem({item, character, playerPos, floorItems, setFloorItems, set
   style={{
     left: `${item.world_pos_x}px`,
     top: `${item.world_pos_y}px`,
-    backgroundPosition: `${item.img_pos_x * -60}px ${item.img_pos_y * -60}px`
+    backgroundPosition: `${item.img_pos_x * -36}px ${item.img_pos_y * -36}px`
   }}>
 </div>
 }

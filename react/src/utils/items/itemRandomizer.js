@@ -17,7 +17,7 @@ const options = [
 function itemRandomizer(character, map, x, y, items, setItems){
   let item = options[Math.round(Math.random() * options.length)]
   item.character_id = character.id;
-  item.worl_page = map;
+  item.world_page = map;
   item.world_pos_x = x;
   item.world_pos_y = y;
   item.slot = "floor";
