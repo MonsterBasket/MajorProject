@@ -18,6 +18,7 @@
   animation-duration: 0.7s;
   animation-timing-function: steps(5, end);
   animation-iteration-count: infinite;
+  image-rendering: pixelated;
 }
 /*---- walk ---*/
 @keyframes walkLeft {

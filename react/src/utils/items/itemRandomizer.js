@@ -1,3 +1,6 @@
+import axios from "axios";
+import { serverUrl } from "../../App";
+
 const options = [
   {name: "Generic Item",          img_pos_x: 0,  img_pos_y: 10, item_type: "generic"},
   {name: "Gold",                  img_pos_x: 10, img_pos_y: 7,  item_type: "gold", value: 1, quantity: 100},
@@ -14,15 +17,18 @@ const options = [
   {name: "Apple",                 img_pos_x: 3,  img_pos_y: 9,  item_type: "food"}]
 
   //quick and dirty randomizer, but it works
-function itemRandomizer(character, map, x, y, items, setItems){
+function itemRandomizer(character, map, x, y, setItems, refreshItems){
   let item = options[Math.round(Math.random() * options.length)]
   item.character_id = character.id;
   item.world_page = map;
   item.world_pos_x = x;
   item.world_pos_y = y;
   item.slot = "floor";
-
-  setItems(items => [...items, item])
+  axios.post(`${serverUrl}items`, {item}, {withCredentials: true})
+  .then((res) => {
+    setItems(items => [...items, res.data.item])
+    refreshItems([])
+  })
 }
 
 export default itemRandomizer

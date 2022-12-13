@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :users, only: [:create, :show, :index, :destroy] do
-    resource :items, only: [:create, :show, :index, :destroy]
+    resource :items, only: [:create, :update, :show, :index, :destroy]
   end
   resources :characters, only: [:new, :create, :update, :show, :index, :destroy]
   resources :items, only: [:create, :show, :index, :destroy]
@@ -16,6 +16,6 @@ Rails.application.routes.draw do
   # get 'select_character', to: 'characters#index'
   patch 'location', to: 'characters#save_pos'
   patch 'user/admin', to: 'users#admin'
-  get 'item/dropped', to: 'items#dropped'
+  patch 'items', to: 'items#update'
   # get 'items/', to: 'characters#equipped'
 end

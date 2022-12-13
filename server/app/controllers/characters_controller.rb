@@ -17,7 +17,7 @@ class CharactersController < ApplicationController
   def create
     @character = Character.new(character_params)
     if @character.save
-      render json: { status: :created }
+      render json: { status: :created, character: @character }
     else
       render json: { status: 500, errors: @character.errors.full_messages }
     end
@@ -33,6 +33,7 @@ class CharactersController < ApplicationController
   def edit; end
 
   def destroy
+    @character.items.destroy
     @character.destroy
     @characters = Character.all
     render json: { characters: @characters}

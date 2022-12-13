@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  before_action :set_item, only: %i[show edit update]
+  before_action :set_item, only: %i[show edit]
 
   def index
     @items = Item.all.where("character_id = ?", params[:character_id])
@@ -17,25 +17,20 @@ class ItemsController < ApplicationController
   def create
     @item = Item.new(item_params)
     if @item.save
-      render json: { status: :created }
+      render json: { status: :created, item: @item }
     else
       render json: { status: 500, errors: @item.errors.full_messages }
     end
   end
 
-  def dropped
-    @items = Item.all.where("character_id = ? AND slot = ? AND world_page = ?", params[:character_id], "floor", params[:world_page])
-              .or(Item.all.where("character_id = ? AND slot = ? AND world_page = ?", 0, "floor", params[:world_page]))
-    if @items
-      render json: { items: @items }
-    else
-      render json: { status: 500, errors: ['no items found']}
-    end
+  def show
   end
-
-  def show; end
   
   def update
+    @item = Item.find(params[:item][:id])
+    @item.update(item_params)
+    @items = Item.all.where("character_id = ?", @item[:character_id])
+    render json: { items: @items }
   end
 
    private

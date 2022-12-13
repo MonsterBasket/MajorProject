@@ -21,7 +21,7 @@ function detectColliders(currentMap, x, y){
     block: true,
     slow: true
   }
-  const map = maps(currentMap)[3];
+  const map = maps(currentMap)[4];
 
   // finding colliders around player
   const index = (Math.floor((y + 30) / 48) * 40) + Math.ceil((x + 10) / 48) - 1;

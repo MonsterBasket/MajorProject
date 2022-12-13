@@ -144,6 +144,7 @@ h2, h3{
   background-size: contain;
   background-repeat: no-repeat;
   background-position: bottom;
+  image-rendering: pixelated;
 }
 #errorDisplay{
   display: block;

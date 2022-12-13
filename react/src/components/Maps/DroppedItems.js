@@ -3,38 +3,38 @@ import axios from "axios"
 import { useEffect, useState } from "react"
 import { serverUrl } from "../../App"
 
-function DroppedItems({map, playerPos, items, setItems, character, refItems}){
+function DroppedItems({page, playerPos, items, setItems, character, refItems}){
   const [floorItems, setFloorItems] = useState([])
   const [reprepare, setReprepare] = useState([])
     
-  useEffect(() => {
-    axios.get(`${serverUrl}item/dropped`, {params: {character_id: character.id, world_page: map}})
+  useEffect(getItems, [])
+
+  function getItems(){
+    axios.get(`${serverUrl}items`, {params: {character_id: character.id}})
     .then(res => {
       if(res.status == 200){
-        // filters out the new items that are aready in the list and adds the result to items (I hope)
-        const newItems = items.concat(res.data.items.filter(item => items.indexOf(item) < 0))
-          setItems(newItems)
-          prepareItems(newItems);
+          setItems(res.data.items);
+          console.log(items)
+          prepareItems(res.data.items);
       }
     })
-  }, [refItems])
-
-  useEffect(prepareItems, [reprepare])
-
-  function prepareItems(){ 
-    const filtered = items.filter(item => item.slot == "floor")
-    setFloorItems(filtered)
   }
 
-return <>{floorItems.map(item => <DroppedItem key={`${item.name}${Date.now()}`} item={item} items={items} character={character} playerPos={playerPos} floorItems={floorItems} setFloorItems={setFloorItems} setReprepare={setReprepare}/>)}</>
+  useEffect(() => prepareItems(items), [refItems, reprepare])
+
+  function prepareItems(items){ 
+      setFloorItems(items.filter(item => item.slot == "floor" && item.world_page == page))
+  }
+
+return <>{floorItems.map(item => <DroppedItem key={`item${item.id}`} item={item} items={items} character={character} playerPos={playerPos} setReprepare={setReprepare} setItems={setItems}/>)}</>
 }
 
 
-function DroppedItem({item, items, character, playerPos, floorItems, setFloorItems, setReprepare}){
-  useEffect(playerPickup, [playerPos[0], playerPos[1]])
+function DroppedItem({item, items, character, playerPos, setReprepare, setItems}){
+  useEffect(playerPickup, [playerPos.x, playerPos.y])
 
   function playerPickup(){
-    if(Math.abs(playerPos[0] - item.world_pos_x) < 10 && Math.abs(playerPos[1] - item.world_pos_y) < 20){
+    if(Math.abs(playerPos.x - item.world_pos_x) < 20 && Math.abs(playerPos.y - item.world_pos_y) < 30){
       item.character_id = character.id;
       for (let i = 1; i < 51; i++) {
         if(!items.some(loopItem => loopItem.slot == i)){
@@ -44,14 +44,15 @@ function DroppedItem({item, items, character, playerPos, floorItems, setFloorIte
       }
       item.world_pos_x = null;
       item.world_pos_y = null;
-      axios.post(`${serverUrl}items`, {item}, {withCredentials: true})
-      setFloorItems(floorItems.filter(floorItem => floorItem.id != item.id))
+      axios.patch(`${serverUrl}items`, {item}, {withCredentials: true})
+      .then(res => setItems(res.data.items))
+      // setFloorItems(floorItems.filter(floorItem => floorItem.id != item.id))
       setReprepare([])
     }
   }
 
   return <div
-  key={`item${item.id}`} 
+  // key={`item${item.id}`} 
   className="worldItem"
   style={{
     left: `${item.world_pos_x}px`,

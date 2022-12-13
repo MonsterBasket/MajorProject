@@ -59,6 +59,7 @@ function GameController({character}){
   useEffect(() => {
     window.addEventListener("keydown", keyDown);
     window.addEventListener("keyup", keyUp );
+    setTimeout(refreshItems([]), 500)
       return () => {
       window.removeEventListener("keydown", keyDown);
       window.removeEventListener("keyup", keyUp);
@@ -164,8 +165,7 @@ function GameController({character}){
   }
 
   function dropItem(x, y){
-    itemRandomizer(character, thisPage.current, x, y, items, setItems)
-    refreshItems([])
+    itemRandomizer(character, thisPage.current, x, y, setItems, refreshItems)
   }
 
   // ----------------------------------------------------------------------------------------------------
@@ -301,6 +301,7 @@ function GameController({character}){
     character.respawn_x = newX;
     character.respawn_y = newY;
     savePosition(character, thisPage.current, newX, newY); //save character position to db every time you change screens.
+    refreshItems([])
   }
   // ----------------------------------------------------------------------------------------------------
   // --------------------------------- END OF PAGE LOADER FUNCTIONS -------------------------------------
@@ -314,7 +315,7 @@ function GameController({character}){
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
           {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], dropItem, shift.current) : ""}
           {mobs(thisPage.current, retEnemyPos, attackPos.current, [x, y], dropItem)}
-          <DroppedItems page={thisPage.current} playerPos={[x, y]} character={character} items={items} setItems={setItems} refItems={refItems}/>
+          <DroppedItems page={thisPage.current} playerPos={{x:x, y:y}} character={character} items={items} setItems={setItems} refItems={refItems}/>
           <Player pos={[x, y]} velocity={velocity.current} lastDirection={lastDirection.current} role={character.role} playerAttack={playerAttack} items={items} setItems={setItems}/>
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}

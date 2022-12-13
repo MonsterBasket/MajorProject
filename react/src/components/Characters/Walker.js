@@ -24,7 +24,6 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
   })
   useEffect(() => {
     makePath()
-    retEnemyPos(id, x, y, attack)
   }, [])
 
   function gameLoop(now, maxSpeed){
@@ -39,8 +38,8 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
       if(velocity.current[0] || velocity.current[1] && !stagger.current){
         if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
         if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
-        retEnemyPos(id, [x + velocity.current[0], y + velocity.current[1], attack])
       }
+      retEnemyPos(id, [x + velocity.current[0], y + velocity.current[1], attack])
       if(healthObj.current_health != tempHealth) manageHealth(healthObj.current_health)
       lookForCharacter(velocity.current)
     }
@@ -84,16 +83,16 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
 
   function lookForCharacter(velocity){
     if(velocity[0] || velocity[1]){
-      if(velocity[0] > 0 && playerPos[0] - x > 0 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
-      if(velocity[0] < 0 && x - playerPos[0] > 0 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
-      if(velocity[1] > 0 && playerPos[1] - y > 0 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
-      if(velocity[1] > 0 && y - playerPos[1] > 0 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+      if((velocity[0] > 0 && playerPos[0] - x > -20 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) ||
+         (velocity[0] < 0 && x - playerPos[0] > -20 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) ||
+         (velocity[1] > 0 && playerPos[1] - y > -20 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) ||
+         (velocity[1] > 0 && y - playerPos[1] > -20 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150)) getAgro();
     }
     else{
-      if(lastDirection.current === "KeyD" && playerPos[0] - x > 0 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
-      if(lastDirection.current === "KeyA" && x - playerPos[0] > 0 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) agro.current = true;
-      if(lastDirection.current === "KeyS" && playerPos[1] - y > 0 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
-      if(lastDirection.current === "KeyW" && y - playerPos[1] > 0 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150) agro.current = true;
+      if((lastDirection.current === "KeyD" && playerPos[0] - x > -20 && playerPos[0] - x < 200 && Math.abs(playerPos[1] - y) < 150) ||
+         (lastDirection.current === "KeyA" && x - playerPos[0] > -20 && x - playerPos[0] < 200 && Math.abs(playerPos[1] - y) < 150) ||
+         (lastDirection.current === "KeyS" && playerPos[1] - y > -20 && playerPos[1] - y < 200 && Math.abs(playerPos[0] - x) < 150) ||
+         (lastDirection.current === "KeyW" && y - playerPos[1] > -20 && y - playerPos[1] < 200 && Math.abs(playerPos[0] - x) < 150)) getAgro();
     }
     if(agro.current){
       if(Math.abs(playerPos[0] - x) > 350 || Math.abs(playerPos[1] - y) > 350) {
@@ -105,6 +104,10 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
         maxSpeed.current = 12;
       }
     }
+  }
+
+  function getAgro(){
+    setTimeout(agro.current = true, 250)
   }
 
   function randomTarget(){

@@ -1,6 +1,6 @@
 class Character < ApplicationRecord
   belongs_to :user
-  has_many :items
+  has_many :items, :dependent => :delete_all
 
   validates_presence_of :user, :name, :role
   validates_uniqueness_of :name

@@ -32,8 +32,9 @@
   height: 16px;
   z-index: 0;
   font-size: xx-small;
-  transform: scale(3);
+  transform: translateZ(0) scale(3);
   background-image: var(--imgUrl);
+  image-rendering: pixelated;
 }
 .secondChildStyle{
   position: absolute;

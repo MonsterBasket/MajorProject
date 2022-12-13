@@ -71,7 +71,10 @@ function SelectCharacter({user, setPlayCharacter, handleLogout}){
     if(character !== {}){
     axios.post(`${serverUrl}characters`, sendCharacter, {withCredentials: true})
       .then(res => {
-        if(res.data.status === "created") play(newCharacter)
+        if(res.data.status === "created") {
+          play(res.data.character)
+          console.log(res.data.character)
+        }
         else setError(res.data.errors)
       })
       .catch(err => console.log("create character error:", err))
