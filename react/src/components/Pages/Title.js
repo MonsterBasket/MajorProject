@@ -1,10 +1,19 @@
+import { useRef } from 'react';
 import './title.css';
 
 function Title({size}){
   let text = "Monster Basket"
 
+  if(window.screen.availHeight < 600) size = 2;
+
+  const shrink = {
+    fontSize: `${window.screen.availHeight < 600 || window.screen.availWidth < 600 ? size : size * 2.5}em`,
+    margin: window.screen.availHeight < 600 || window.screen.availWidth < 600 ? "auto" : "revert"
+  }
+
   function createHeader(word){
     const myString = [];
+    if(window.screen.availHeight < 600 || window.screen.availWidth < 600) size = size / 2;
     for (let i = 0; i < word.length; i++) {
       if(word[i] == " ") myString[i] = " "
       else myString[i] = <div key={`titleLetter${i}`} className="letterHolder"
@@ -17,7 +26,7 @@ function Title({size}){
     return myString;
   }
 
-  return <h1>
+  return <h1 style={shrink}>
     {createHeader(text)}
     </h1>
 }

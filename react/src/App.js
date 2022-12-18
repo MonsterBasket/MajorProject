@@ -11,7 +11,7 @@ import GameController from "./Pages/Game/GameController"
 export const serverUrl = "http://localhost:3001/"
 // export const serverUrl = "https://monster-basket.fly.dev/"
 
-function App(){
+function App() {
   const [user, setUser] = useState({})
   const [isLoggedIn, setLoggedIn] = useState(false)
   const navigate = useNavigate();
@@ -19,28 +19,28 @@ function App(){
 
   useEffect(() => loginStatus(), [])
 
-  function loginStatus(){
-    axios.get(`${serverUrl}logged_in`, {withCredentials: true})    
-    .then(response => {
-      if (response.data.logged_in) handleLogin(response.data)
-      else handleLogout()
-    })
-    .catch(error => console.log('api errors:', error))
+  function loginStatus() {
+    axios.get(`${serverUrl}logged_in`, { withCredentials: true })
+      .then(response => {
+        if (response.data.logged_in) handleLogin(response.data)
+        else handleLogout()
+      })
+      .catch(error => console.log('api errors:', error))
   }
 
   function handleLogin(data) {
     setUser(data.data.user)
     setLoggedIn(true)
   }
-  function handleLogout(){
-    axios.post(`${serverUrl}logout`, user, {withCredentials: true})
-    .then(() =>{
-      setUser({});
-      setLoggedIn(false);
-    })
+  function handleLogout() {
+    axios.post(`${serverUrl}logout`, user, { withCredentials: true })
+      .then(() => {
+        setUser({});
+        setLoggedIn(false);
+      })
   }
 
-  useEffect(()=> {
+  useEffect(() => {
     if (isLoggedIn) navigate("/select-character")
     else navigate("/login")
   }, [user])
@@ -50,7 +50,7 @@ function App(){
       <Routes>
         {isLoggedIn ? <>
           <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
-          <Route path="/" element={<GameController character={character} />}/>
+          <Route path="/" element={<GameController character={character} />} />
           {user.is_admin} ? <>
             <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
             <Route path="/admin/mapmaker" element={<MapMaker />} />
@@ -59,10 +59,8 @@ function App(){
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
           <Route path="/signup" element={<Signup handleLogin={handleLogin} />} />
         </>}
-
-
-
       </Routes>
+      <div className="portraitCover">Please rotate your device.</div>
     </div>
   );
 }
