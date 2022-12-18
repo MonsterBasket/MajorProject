@@ -320,7 +320,7 @@ function GameController({character}){
         <SkyTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <SkyTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
       </div>
-      {/* <div style={{position: "fixed", left:"0px", top:"0px", zIndex:"3", color: "white"}}>velocity: {Math.floor(velocity.current[0])} - {Math.floor(velocity.current[1])}<br/>lastDirection: {lastDirection.current}<br/>Attacking: {`${attacking.current}`}</div> */}
+      {/* <div style={{position: "fixed", left:"0px", top:"50px", zIndex:"3", color: "white"}}>x: {x}<br /> y: {y}</div> */}
     </div>
     <Hud character={character} items={items} setItems={setItems} />
   </div>

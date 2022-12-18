@@ -30,7 +30,9 @@ function mobs(num, retEnemyPos, attackPos, playerPos, dropItem, shift=[0,0]){
     break;
     case 10201:
       map = <>
-        <Walker key="102011" id="102011" attack={10} health={30} attackPos={attackPos} playerPos={playerPos} type="blueSkeleton" dropItem={dropItem} currentMap={num} posInit={[1000,500]} retEnemyPos={retEnemyPos} patrol={[[100,100],[1800,900]]} randomPath={true}/>
+        <Walker key="102011" id="102011" attack={5} health={20} attackPos={attackPos} playerPos={playerPos} type="skeleton" dropItem={dropItem} currentMap={num} posInit={[500,780]} retEnemyPos={retEnemyPos} patrol={[[500,140,12],[1300,140,12],[1300,780,12],[500,780,12]]}/>
+        <Walker key="102012" id="102012" attack={10} health={30} attackPos={attackPos} playerPos={playerPos} type="blueSkeleton" dropItem={dropItem} currentMap={num} posInit={[1100,700]} retEnemyPos={retEnemyPos} patrol={[[1190,500,3.5],[1100,290,3.5],[700,290,7],[610,500,3.5],[700,700,3.5],[1100,700,7]]}/>
+        <Walker key="102013" id="102013" attack={15} health={40} attackPos={attackPos} playerPos={playerPos} type="redSkeleton" dropItem={dropItem} currentMap={num} posInit={[790,430]} retEnemyPos={retEnemyPos} patrol={[[1020,430,4],[1020,600,4],[790,600,4],[790,430,4]]}/>
       </>
     break;
     case 10301:

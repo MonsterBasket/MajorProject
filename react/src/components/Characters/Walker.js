@@ -23,7 +23,7 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
     requestAnimationFrame((now) => {if(!dead.current) gameLoop(now, maxSpeed.current)});
   })
   useEffect(() => {
-    makePath()
+    if(pathCounter.current == 0) makePath()
   }, [])
 
   function gameLoop(now, maxSpeed){
@@ -34,7 +34,7 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
       let healthObj = {current_health: currentHealth.current} // this is to expose health in handleInput in the same format as character.health
       let tempHealth = currentHealth.current
       velocity.current = handleInput(currentMap, myKeys.current, velocity.current, x, y, maxSpeed, null, {a:attackPos}, healthObj);
-      if(x != target.current[0] && y != target.current[1] && !stagger.current) walk()
+      if((x != target.current[0] || y != target.current[1]) && !stagger.current) walk()
       if(velocity.current[0] || velocity.current[1] && !stagger.current){
         if(velocity.current[0]) setX(prev => prev + velocity.current[0] * deltaTime);
         if(velocity.current[1]) setY(prev => prev + velocity.current[1] * deltaTime);
@@ -137,28 +137,28 @@ function Walker({id, attack, health, attackPos, playerPos, type, currentMap, dro
     if(stagger.current || dead.current) return
     let horizontal = target.current[0] - x
     let vertical = target.current[1] - y
-    if(horizontal < -maxSpeed.current){ //using maxSpeed so that they don't overshoot the mark whether they're walking or running.
+    if(horizontal < -maxSpeed.current * 2){ //using maxSpeed so that they don't overshoot the mark whether they're walking or running.
       myKeys.current["KeyA"] = true;
     }
     else if(myKeys.current["KeyA"] == true) {
       myKeys.current["KeyA"] = false;
       lastDirection.current = "KeyA"
     }
-    if(horizontal > maxSpeed.current){
+    if(horizontal > maxSpeed.current * 2){
       myKeys.current["KeyD"] = true;
     }
     else if(myKeys.current["KeyD"] == true) {
       myKeys.current["KeyD"] = false;
       lastDirection.current = "KeyD"
     }
-    if(vertical < -maxSpeed.current){
+    if(vertical < -maxSpeed.current * 2){
       myKeys.current["KeyW"] = true;
     }
     else if(myKeys.current["KeyW"] == true) {
       myKeys.current["KeyW"] = false;
       lastDirection.current = "KeyW"
     }
-    if(vertical > maxSpeed.current){
+    if(vertical > maxSpeed.current * 2){
       myKeys.current["KeyS"] = true;
     }
     else if(myKeys.current["KeyS"] == true) {
