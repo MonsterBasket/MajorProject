@@ -116,8 +116,12 @@ function GameController({character}){
   }
 
   const worldMover = { // keeps player in center of map but clamps its position so you won't see past any edge
-    left: `clamp(${Math.min(window.innerWidth, 1920) - (mapSize[0])}px, ${-x + Math.min(window.innerWidth, 1920) / 2}px, 0px)`,
-    top: `clamp(${Math.min(window.innerHeight, 1080) - (mapSize[1])}px, ${-y + Math.min(window.innerHeight, 1080) / 2}px, 0px)`
+    left: `clamp(${Math.min(window.innerWidth, 1920) - mapSize[0]}px, ${-x + Math.min(window.innerWidth, 1920) / 2}px, 0px)`,
+    top: `clamp(${Math.min(window.innerHeight, 1080) - mapSize[1]}px, ${-y + Math.min(window.innerHeight, 1080) / 2}px, 0px)`
+  }
+  const mobileWorldMover = { // keeps player in center of map but clamps its position so you won't see past any edge
+    left: `clamp(${(window.innerWidth - mapSize[0]) * 0.732}px, ${(-x + (window.innerWidth / 2)) * 0.7 + (window.innerWidth * -0.225)}px, ${(mapSize[0] * -0.126)}px)`,
+    top: `clamp(${(window.innerHeight - mapSize[1]) * 0.732}px, ${(-y + (window.innerHeight / 2)) * 0.7 + (window.innerHeight * -0.225)}px, ${(mapSize[1] * -0.126)}px)`
   }
   const pageTurner = {
     left: newPageX,
@@ -244,9 +248,9 @@ function GameController({character}){
   function turnPage(){
     // these all determine whether to move the screens up down left or right
     let horizontal = true;
-    let multiplier = 1;
+    let multiplier = 1 * 0.75;
     turning.current = true;
-    if(pageDirection.current === "right") multiplier = -1;
+    if(pageDirection.current === "right") multiplier = -1 * 0.75;
     else if(pageDirection.current === "up") horizontal = false;
     else if(pageDirection.current === "down"){
       multiplier = -1;
@@ -309,8 +313,8 @@ function GameController({character}){
   useBeforeunload(() => savePosition(character, thisPage.current, x, y))
 
   return <div className="gameContainer">
-    <div className="world" style={worldMover}>
-      <div className="world" style={pageTurner}>
+    <div className="world" style={window.innerHeight < 600 ? mobileWorldMover : worldMover}>
+      <div className="world2" style={pageTurner}>
         <WorldTiler coords={maps(thisPage.current)} />
         {pageReady.current ? <WorldTiler coords={maps(nextPage.current)} shift={shift.current} /> : ""}
           {pageReady.current ? mobs(nextPage.current, retEnemyPos, attackPos.current, [x, y], dropItem, shift.current) : ""}

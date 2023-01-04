@@ -97,50 +97,12 @@ body {
     position: absolute;
     display: inline;
     bottom: 5px;
-    left: calc(50% - 22.5px)
+    left: calc(50% - 22.5px);
   }
-  .bottomWorld{
-    transform: scale(0.75)
+  .world2{
+    transform: scale(0.7) translate(30%, 30%);
+  }
+  div.childStyle{
+    transform: translateZ(0) scale(3.1);
   }
 }
-/* @media screen and (max-width: 600px) {
-  h1{
-    text-align: left;
-    transform:rotate(-90deg);
-    transform-origin: left;
-    position: absolute;
-    bottom: 10%;
-    left: 5%;
-  }
-  h2{
-    font-size: 1em;
-  }
-  h3{
-    font-size: 0.8em;
-  }
-  #characterSelector{
-    margin-top: -9%;
-    transform: scale(0.7);
-  }
-  #SkillsHud{
-    transform: scale(0.7);
-    transform-origin: bottom;
-  }
-  #HealthHud{
-    transform: scale(0.7);
-    transform-origin: top left;
-  }
-  #MenusHud{
-    transform: scale(0.7);
-    transform-origin: right;
-  }
-  .center, .left, .right, .hidden{
-    transform: scale(0.5);
-  }
-  .left{
-    transform-origin: right;
-  }
-  .right{
-    transform-origin: left;
-  }
-} */
