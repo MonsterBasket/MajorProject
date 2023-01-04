@@ -92,5 +92,5 @@ Known Bugs:
   <!-- I broke the page turner
   - I don't have time to look at it, but I'm pretty sure it's because there's no tile off the edge of the page, so detectColliders picks it up as being a collider. -->
 
-  Dropped items rerender every frame
-  - This is because player position is being passed as a prop which updates every frame.  I need this to allow player to pickup the item if they run over it.  So this would need a significant change to fix.  It works and doesn't seem to cause performance issues though, so, you know.
+  <!-- Dropped items rerender every frame
+  - This is because player position is being passed as a prop which updates every frame.  I need this to allow player to pickup the item if they run over it.  So this would need a significant change to fix.  It works and doesn't seem to cause performance issues though, so, you know. -->
