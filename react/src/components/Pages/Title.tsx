@@ -1,7 +1,6 @@
-import { useRef } from 'react';
 import './title.css';
 
-function Title({size}){
+function Title({ size }: { size: number }){
   let text = "Monster Basket"
 
   if(window.screen.availHeight < 600) size = 2;
@@ -11,7 +10,7 @@ function Title({size}){
     margin: window.screen.availHeight < 600 || window.screen.availWidth < 600 ? "auto" : "revert"
   }
 
-  function createHeader(word){
+  function createHeader(word: string){
     const myString = [];
     if(window.screen.availHeight < 600 || window.screen.availWidth < 600) size = size / 2;
     for (let i = 0; i < word.length; i++) {

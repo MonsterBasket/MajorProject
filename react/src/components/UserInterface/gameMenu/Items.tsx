@@ -1,10 +1,14 @@
 import "../windows.css"
 import "../hud.css"
 
-function Items({items}){
-  
-  function displayItems(items){
-    const slots = [] //will need to fetch and save this to state
+interface ItemsProps {
+  items: any[];
+}
+
+const Items: React.FC<ItemsProps> = ({items}) => {
+
+  function displayItems(items: any[]){
+    const slots: React.ReactNode[] = [] //will need to fetch and save this to state
     for (let i = 1; i < 51; i++) {
       slots[i] = <div key={`slot${i}`} className="itemSlot"></div>
     }

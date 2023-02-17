@@ -14,7 +14,6 @@ function DroppedItems({ page, playerPos, items, setItems, character, refItems })
       .then(res => {
         if (res.status == 200) {
           setItems(res.data.items);
-          console.log(items)
           prepareItems(res.data.items);
         }
       })
