@@ -147,6 +147,7 @@ function SelectCharacter({ user, setPlayCharacter, handleLogout }) {
       {<div id="errorDisplay" className={hideErrors()}>{errorDisplay.map(item => <span key={item}>{item}<br /></span>)}</div>}
     </div>
     {characterCreator && savedCharacters.length > 0 ? <button className="littleButton back" onClick={() => setCreator(false)}>Back</button> : ""}
+    <Link to="/admin/mapmaker"><button>Map Editor</button></Link>
   </div>
 }
 

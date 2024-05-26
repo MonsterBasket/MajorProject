@@ -50,9 +50,9 @@ function App() {
         {isLoggedIn ? <>
           <Route path="/select-character" element={<SelectCharacter user={user} setPlayCharacter={setPlayCharacter} handleLogout={handleLogout} />} />
           <Route path="/" element={<GameController character={character} />} />
+          <Route path="/admin/mapmaker" element={<MapMaker />} />
           {user.is_admin} ? <>
             <Route path="/admin" element={<Admin user={user} handleLogout={handleLogout} />} />
-            <Route path="/admin/mapmaker" element={<MapMaker />} />
           </> : {""}
         </> : <>
           <Route path="/login" element={<Login handleLogin={handleLogin} />} />
