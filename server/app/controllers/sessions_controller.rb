@@ -9,8 +9,8 @@ class SessionsController < ApplicationController
       }
     else
       render json: { 
-        status: 401,
-        errors: ['no such user, please try again']
+        message: 'no such user, please try again',
+        status: :unauthorized
       }
     end
   end
@@ -33,8 +33,13 @@ class SessionsController < ApplicationController
     current_user.invalidate_session!
     logout!
     render json: {
-      status: 200,
+      status: :ok,
       logged_out: true
     }
   end
+
+  # private
+  # def set_cache_buster
+  #   response.headers["Access-Control-Allow-Origin"] = "https://monsterbasket.com.au"
+  # end
 end

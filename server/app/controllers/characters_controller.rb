@@ -52,4 +52,8 @@ class CharactersController < ApplicationController
   def character_params
     params.require(:character).permit(:user_id, :name, :role)
   end
+
+  # def set_cache_buster
+  #   response.headers["Access-Control-Allow-Origin"] = "https://monsterbasket.com.au"
+  # end
 end

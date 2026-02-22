@@ -69,4 +69,9 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:username, :email, :password, :password_confirmation)
   end
+
+  # def set_cache_buster
+  #   response.headers["Access-Control-Allow-Origin"] = "https://monsterbasket.com.au"
+  # end
+
 end
